@@ -1,0 +1,983 @@
+
+#liste-urgence #search-liste-urgence {
+    margin: 5px 0;
+}
+#liste-urgence #search-liste-urgence form {
+    margin: 0 auto;
+    width: 750px;
+}
+#liste-urgence #search-liste-urgence form div.bg-search {
+    background-color: #fcfcfc;
+    padding: 10px 15px;
+}
+#liste-urgence #search-liste-urgence form div.params label {
+    background-color: #f4f4f4;
+    border: 1px solid #d3d3d3;
+    float: left;
+    font-weight: 200;
+    height: 25px;
+    margin-left: -1px;
+    margin-right: -1px;
+    padding: 1px 5px;
+}
+#liste-urgence #search-liste-urgence form div.params input, #liste-urgence #search-liste-urgence form div.params select {
+    display: inline;
+    float: left;
+    font-size: 14px;
+    height: 25px;
+    margin: 0;
+    max-width: 24%;
+    padding: 2px 10px;
+}
+#liste-urgence #search-liste-urgence form div.params input[type="checkbox"], #liste-urgence #search-liste-urgence form div.params select[type="checkbox"] {
+    margin: 3px 10px 3px 5px;
+}
+#liste-urgence #search-liste-urgence form div.params select {
+    max-width: 196px;
+}
+#liste-urgence #search-liste-urgence form div.params div.one input {
+    max-width: 150px;
+}
+#liste-urgence #search-liste-urgence form div.params div.one select {
+    max-width: 287px;
+}
+#liste-urgence #search-liste-urgence form div.params div.two select {
+    max-width: 291px;
+}
+#liste-urgence #search-liste-urgence form div.params div.three label {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: medium none;
+    float: left;
+    padding: 5px 0 0;
+}
+#liste-urgence #stats div p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+#liste-urgence #stats div div {
+    padding: 5px 0;
+}
+#liste-urgence #stats div div.infos {
+    background-color: #fcfcfc;
+    border: 1px solid #f2f2f2;
+    display: table;
+    margin: 0 auto;
+    padding: 5px 27px;
+    position: relative;
+}
+#liste-urgence #stats div div.infos ul li {
+    font-size: 13px;
+    list-style-type: disc;
+}
+#liste-urgence #stats div div.infos ul li ul {
+    margin: 0 0 0 25px;
+}
+#liste-urgence #stats div div.infos div.stats-loader {
+    padding: 0;
+}
+#liste-urgence #stats div div.infos div.stats-loader .bg-loader {
+    background-color: #fafafa;
+    height: 100%;
+    margin: 0 0 0 -27px;
+    opacity: 0.7;
+    padding: 0;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+}
+#liste-urgence #stats div div.infos div.stats-loader .loader {
+    bottom: -1px;
+    left: 50%;
+    margin-left: -75px;
+    padding: 0;
+    position: absolute;
+    z-index: 3;
+}
+
+/*consultations*/
+
+#liste-consultation #search-liste-consultation{
+    margin:5px 0
+}
+
+#liste-consultation #search-liste-consultation form{
+    width:750px;
+    margin:0 auto
+}
+
+#liste-consultation #search-liste-consultation form div.bg-search{
+    padding:10px 15px;
+    background-color:#fcfcfc
+}
+
+#liste-consultation #search-liste-consultation form div.params label{
+    font-weight:200;
+    background-color:#f4f4f4;
+    padding:1px 5px;
+    border:1px solid #d3d3d3;
+    float:left;
+    height:25px;
+    margin-right:-1px;
+    margin-left:-1px
+}
+
+#liste-consultation #search-liste-consultation form div.params input,#liste-consultation #search-liste-consultation form div.params select{
+    padding:2px 10px;
+    display:inline;
+    max-width:24%;
+    font-size:14px;
+    margin:0;
+    height:25px;
+    float:left
+}
+
+#liste-consultation #search-liste-consultation form div.params input[type='checkbox'],#liste-consultation #search-liste-consultation form div.params select[type='checkbox']{
+    margin:3px 10px 3px 5px
+}
+
+#liste-consultation #search-liste-consultation form div.params select{
+    max-width:196px;
+    max-width:175px\9
+}
+
+#liste-consultation #search-liste-consultation form div.params div.one input{
+    max-width:150px;
+    max-width:118px\9
+}
+
+#liste-consultation #search-liste-consultation form div.params div.one select{
+    max-width:287px;
+    max-width:285px\9
+}
+
+#liste-consultation #search-liste-consultation form div.params div.two select{
+    max-width:291px;
+    max-width:269px\9
+}
+
+#liste-consultation #search-liste-consultation form div.params div.three label{
+    background:none;
+    border:none;
+    float:left;
+    padding:5px 0 0 0
+}
+
+#liste-consultation #search-liste-consultation div.page-loader{
+    position:absolute;
+    left:0;
+    margin-top:-7px;
+    right:0;
+    font-size:12px;
+    display:none
+}
+
+#liste-consultation #search-liste-consultation div.page-loader div.bg{
+    display:inline;
+    background-color:#f7f7f7;
+    padding:1px 5px;
+    border:1px solid #eaeaea
+}
+
+#liste-consultation #search-liste-consultation div.page-loader div.bg img{
+    width:12px;
+    margin-top:-2px
+}
+
+#liste-consultation #stats div p{
+    margin:5px 0;
+    font-size:14px
+}
+
+#liste-consultation #stats div div{
+    padding:5px 0
+}
+
+#liste-consultation #stats div div.infos{
+    position:relative;
+    display:table;
+    margin:0 auto;
+    background-color:#fcfcfc;
+    padding:5px 27px;
+    border:1px solid #f2f2f2
+}
+
+#liste-consultation #stats div div.infos ul li{
+    list-style-type:disc;
+    font-size:13px
+}
+
+#liste-consultation #stats div div.infos ul li ul{
+    margin:0 0 0 25px
+}
+
+#liste-consultation #stats div div.infos div.stats-loader{
+    padding:0
+}
+
+#liste-consultation #stats div div.infos div.stats-loader .bg-loader{
+    padding:0;
+    position:absolute;
+    z-index:2;
+    top:0;
+    margin:0 0 0 -27px;
+    text-align:center;
+    background-color:#fafafa;
+    width:100%;
+    height:100%;
+    opacity:.7
+}
+
+#liste-consultation #stats div div.infos div.stats-loader .loader{
+    position:absolute;
+    bottom:-1px;
+    padding:0;
+    z-index:3;
+    left:50%;
+    margin-left:-75px
+}
+
+#liste-consultation #stats div div.infos div.stats-loader .loader p{
+    background-color:#fff;
+    display:block;
+    width:100%;
+    padding:0 5px;
+    border:1px solid #ececec;
+    font-size:15px;
+    color:#000;
+    border-bottom:0;
+    margin:0
+}
+
+#liste-consultation #stats div div.infos button{
+    padding:0;
+    position:absolute;
+    right:5px;
+    top:3px;
+    font-size:12px;
+    z-index:1
+}
+
+#liste-consultation table{
+    width:100%
+}
+
+#liste-consultation table thead tr{
+    height:40px
+}
+
+#liste-consultation table thead tr th{
+    padding:8px 5px;
+    color:#337ab7;
+    font-size:13px
+}
+
+#liste-consultation table thead tr th.actes{
+    position:relative
+}
+
+#liste-consultation table thead tr th.actes div.export{
+    position:absolute;
+    top:50%;
+    right:5px;
+    margin:-18px 0 0 0
+}
+
+#liste-consultation table thead tr th.actes div.export img{
+    width:21px
+}
+
+#liste-consultation table thead tr th>img{
+    width:8px
+}
+
+#liste-consultation table thead tr th span.link{
+    cursor:pointer
+}
+
+#liste-consultation table thead tr th span.link:hover{
+    text-decoration:underline
+}
+
+#liste-consultation table tbody tr td{
+    font-size:13px
+}
+
+#liste-consultation table tbody tr td.acte{
+    width:320px;
+    word-break:break-word
+}
+
+#liste-consultation table tbody tr td.acte.na-acte-red{
+    background-color:#e74c3c;
+    color:#fff
+}
+
+#liste-consultation table tbody tr td.acte.na-acte-red span{
+    font-weight:100
+}
+
+#liste-consultation table tbody tr td.acte.na-acte-orange{
+    background-color:#e67e22;
+    color:#fff
+}
+
+#liste-consultation table tbody tr td.acte.na-acte-orange span{
+    font-weight:100
+}
+
+#liste-consultation table tbody tr td.acte span{
+    font-weight:600
+}
+
+#liste-consultation table tbody tr td div span{
+    width:10px;
+    display:inline-block;
+    height:10px
+}
+
+#liste-consultation table tbody tr td div span.has-dmi{
+    background-color:#479d47
+}
+
+#liste-consultation table tbody tr td div span.hasn-dmi{
+    background-color:#e74c3c
+}
+
+#liste-consultation table tbody tr div.change{
+    padding:3px 0;
+    width:auto;
+    text-align:center
+}
+
+#liste-consultation table tbody tr div.change img{
+    width:20px;
+    cursor:pointer
+}
+
+#liste-consultation-popup div.header div.border{
+    margin-top:10px;
+    border:2px solid #d8edff;
+    width:100%;
+    padding:0 0 10px 0;
+    background-color:#fdfdfd
+}
+
+#liste-consultation-popup div.header div.border h4{
+    color:#d86422
+}
+#liste_consultation th
+{
+    background-color: #6194C3;
+}
+
+/*bmr-liste-eoh*/
+
+#bmr-liste-eoh #search-bmr-liste-eoh{
+    margin:5px 0
+}
+
+#bmr-liste-eoh #search-bmr-liste-eoh form{
+    width:850px;
+    margin:0 auto
+}
+
+#bmr-liste-eoh #search-bmr-liste-eoh form div.bg-search{
+    padding:10px 15px;
+    background-color:#fcfcfc
+}
+
+#bmr-liste-eoh #search-bmr-liste-eoh form div.params label{
+    font-weight:200;
+    background-color:#f4f4f4;
+    padding:1px 5px;
+    border:1px solid #d3d3d3;
+    float:left;
+    height:25px;
+    margin-right:-1px;
+    margin-left:-1px
+}
+
+#bmr-liste-eoh #search-bmr-liste-eoh form div.params input,#bmr-liste-eoh #search-bmr-liste-eoh form div.params select{
+    padding:2px 10px;
+    display:inline;
+    max-width:24%;
+    font-size:14px;
+    margin:0;
+    height:25px;
+    float:left
+}
+
+#bmr-liste-eoh #search-bmr-liste-eoh form div.params input[type='checkbox'],#bmr-liste-eoh #search-bmr-liste-eoh form div.params select[type='checkbox']{
+    margin:3px 10px 3px 5px
+}
+
+#bmr-liste-eoh #search-bmr-liste-eoh form div.params select{
+    max-width:196px;
+    max-width:175px\9
+}
+
+#bmr-liste-eoh #search-bmr-liste-eoh form div.params div.one input{
+    max-width:150px;
+    max-width:118px\9
+}
+
+#bmr-liste-eoh #search-bmr-liste-eoh form div.params div.one select{
+    max-width:287px;
+    max-width:285px\9
+}
+
+#bmr-liste-eoh #search-bmr-liste-eoh form div.params div.two select{
+    max-width:291px;
+    max-width:269px\9
+}
+
+#bmr-liste-eoh #search-bmr-liste-eoh form div.params div.three label{
+    background:none;
+    border:none;
+    float:left;
+    padding:5px 0 0 0
+}
+
+#bmr-liste-eoh #search-bmr-liste-eoh div.page-loader{
+    position:absolute;
+    left:0;
+    margin-top:-7px;
+    right:0;
+    font-size:12px;
+    display:none
+}
+
+#bmr-liste-eoh #search-bmr-liste-eoh div.page-loader div.bg{
+    display:inline;
+    background-color:#f7f7f7;
+    padding:1px 5px;
+    border:1px solid #eaeaea
+}
+
+#bmr-liste-eoh #search-bmr-liste-eoh div.page-loader div.bg img{
+    width:12px;
+    margin-top:-2px
+}
+
+#bmr-liste-eoh #stats div p{
+    margin:5px 0;
+    font-size:14px
+}
+
+#bmr-liste-eoh #stats div div{
+    padding:5px 0
+}
+
+#bmr-liste-eoh #stats div div.infos{
+    position:relative;
+    display:table;
+    margin:0 auto;
+    background-color:#fcfcfc;
+    padding:5px 27px;
+    border:1px solid #f2f2f2
+}
+
+#bmr-liste-eoh #stats div div.infos ul li{
+    list-style-type:disc;
+    font-size:13px
+}
+
+#bmr-liste-eoh #stats div div.infos ul li ul{
+    margin:0 0 0 25px
+}
+
+#bmr-liste-eoh #stats div div.infos div.stats-loader{
+    padding:0
+}
+
+#bmr-liste-eoh #stats div div.infos div.stats-loader .bg-loader{
+    padding:0;
+    position:absolute;
+    z-index:2;
+    top:0;
+    margin:0 0 0 -27px;
+    text-align:center;
+    background-color:#fafafa;
+    width:100%;
+    height:100%;
+    opacity:.7
+}
+
+#bmr-liste-eoh #stats div div.infos div.stats-loader .loader{
+    position:absolute;
+    bottom:-1px;
+    padding:0;
+    z-index:3;
+    left:50%;
+    margin-left:-75px
+}
+
+#bmr-liste-eoh #stats div div.infos div.stats-loader .loader p{
+    background-color:#fff;
+    display:block;
+    width:100%;
+    padding:0 5px;
+    border:1px solid #ececec;
+    font-size:15px;
+    color:#000;
+    border-bottom:0;
+    margin:0
+}
+
+#bmr-liste-eoh #stats div div.infos button{
+    padding:0;
+    position:absolute;
+    right:5px;
+    top:3px;
+    font-size:12px;
+    z-index:1
+}
+
+#bmr-liste-eoh table{
+    width:100%
+}
+
+#bmr-liste-eoh table thead tr{
+    height:40px
+}
+
+#bmr-liste-eoh table thead tr th{
+    padding:8px 5px;
+    color:#337ab7;
+    font-size:13px
+}
+
+#bmr-liste-eoh table thead tr th.actes{
+    position:relative
+}
+
+#bmr-liste-eoh table thead tr th.actes div.export{
+    position:absolute;
+    top:50%;
+    right:5px;
+    margin:-18px 0 0 0
+}
+
+#bmr-liste-eoh table thead tr th.actes div.export img{
+    width:21px
+}
+
+#bmr-liste-eoh table thead tr th>img{
+    width:8px
+}
+
+#bmr-liste-eoh table thead tr th span.link{
+    cursor:pointer
+}
+
+#bmr-liste-eoh table thead tr th span.link:hover{
+    text-decoration:underline
+}
+
+#bmr-liste-eoh table tbody tr td{
+    font-size:13px
+}
+
+#bmr-liste-eoh table tbody tr td.acte{
+    width:320px;
+    word-break:break-word
+}
+
+#bmr-liste-eoh table tbody tr td.acte.na-acte-red{
+    background-color:#e74c3c;
+    color:#fff
+}
+
+#bmr-liste-eoh table tbody tr td.acte.na-acte-red span{
+    font-weight:100
+}
+
+#bmr-liste-eoh table tbody tr td.acte.na-acte-orange{
+    background-color:#e67e22;
+    color:#fff
+}
+
+#bmr-liste-eoh table tbody tr td.acte.na-acte-orange span{
+    font-weight:100
+}
+
+#bmr-liste-eoh table tbody tr td.acte span{
+    font-weight:600
+}
+
+#bmr-liste-eoh table tbody tr td div span{
+    width:10px;
+    display:inline-block;
+    height:10px
+}
+
+#bmr-liste-eoh table tbody tr td div span.has-dmi{
+    background-color:#479d47
+}
+
+#bmr-liste-eoh table tbody tr td div span.hasn-dmi{
+    background-color:#e74c3c
+}
+
+#bmr-liste-eoh table tbody tr div.change{
+    padding:3px 0;
+    width:auto;
+    text-align:center
+}
+
+#bmr-liste-eoh table tbody tr div.change img{
+    width:20px;
+    cursor:pointer
+}
+
+#bmr-liste-eoh-popup div.header div.border{
+    margin-top:10px;
+    border:2px solid #d8edff;
+    width:100%;
+    padding:0 0 10px 0;
+    background-color:#fdfdfd
+}
+
+#bmr-liste-eoh-popup div.header div.border h4{
+    color:#d86422
+}
+#bmr_liste_eoh th
+{
+    background-color: #6194C3;
+}
+
+/*rapport-activite*/
+/*consultations*/
+
+#rapport-activite #search-rapport-activite{
+    margin:5px 0
+}
+
+#rapport-activite #search-rapport-activite form{
+    width:750px;
+    margin:0 auto
+}
+
+#rapport-activite #search-rapport-activite form div.bg-search{
+    padding:10px 15px;
+    background-color:#fcfcfc
+}
+
+#rapport-activite #search-rapport-activite form div.params label{
+    font-weight:200;
+    background-color:#f4f4f4;
+    padding:1px 5px;
+    border:1px solid #d3d3d3;
+    float:left;
+    height:25px;
+    margin-right:-1px;
+    margin-left:-1px
+}
+
+#rapport-activite #search-rapport-activite form div.params input,#rapport-activite #search-rapport-activite form div.params select{
+    padding:2px 10px;
+    display:inline;
+    max-width:24%;
+    font-size:14px;
+    margin:0;
+    height:25px;
+    float:left
+}
+
+#rapport-activite #search-rapport-activite form div.params input[type='checkbox'],#rapport-activite #search-rapport-activite form div.params select[type='checkbox']{
+    margin:3px 10px 3px 5px
+}
+
+#rapport-activite #search-rapport-activite form div.params select{
+    max-width:196px;
+    max-width:175px\9
+}
+
+#rapport-activite #search-rapport-activite form div.params div.one input{
+    max-width:150px;
+    max-width:118px\9
+}
+
+#rapport-activite #search-rapport-activite form div.params div.one select{
+    max-width:287px;
+    max-width:285px\9
+}
+
+#rapport-activite #search-rapport-activite form div.params div.two select{
+    max-width:291px;
+    max-width:269px\9
+}
+
+#rapport-activite #search-rapport-activite form div.params div.three label{
+    background:none;
+    border:none;
+    float:left;
+    padding:5px 0 0 0
+}
+
+#rapport-activite #search-rapport-activite div.page-loader{
+    position:absolute;
+    left:0;
+    margin-top:-7px;
+    right:0;
+    font-size:12px;
+    display:none
+}
+
+#rapport-activite #search-rapport-activite div.page-loader div.bg{
+    display:inline;
+    background-color:#f7f7f7;
+    padding:1px 5px;
+    border:1px solid #eaeaea
+}
+
+#rapport-activite #search-rapport-activite div.page-loader div.bg img{
+    width:12px;
+    margin-top:-2px
+}
+
+#rapport-activite #stats div p{
+    margin:5px 0;
+    font-size:14px
+}
+
+#rapport-activite #stats div div{
+    padding:5px 0
+}
+
+#rapport-activite #stats div div.infos{
+    position:relative;
+    display:table;
+    margin:0 auto;
+    background-color:#fcfcfc;
+    padding:5px 27px;
+    border:1px solid #f2f2f2
+}
+
+#rapport-activite #stats div div.infos ul li{
+    list-style-type:disc;
+    font-size:13px
+}
+
+#rapport-activite #stats div div.infos ul li ul{
+    margin:0 0 0 25px
+}
+
+#rapport-activite #stats div div.infos div.stats-loader{
+    padding:0
+}
+
+#rapport-activite #stats div div.infos div.stats-loader .bg-loader{
+    padding:0;
+    position:absolute;
+    z-index:2;
+    top:0;
+    margin:0 0 0 -27px;
+    text-align:center;
+    background-color:#fafafa;
+    width:100%;
+    height:100%;
+    opacity:.7
+}
+
+#rapport-activite #stats div div.infos div.stats-loader .loader{
+    position:absolute;
+    bottom:-1px;
+    padding:0;
+    z-index:3;
+    left:50%;
+    margin-left:-75px
+}
+
+#rapport-activite #stats div div.infos div.stats-loader .loader p{
+    background-color:#fff;
+    display:block;
+    width:100%;
+    padding:0 5px;
+    border:1px solid #ececec;
+    font-size:15px;
+    color:#000;
+    border-bottom:0;
+    margin:0
+}
+
+#rapport-activite #stats div div.infos button{
+    padding:0;
+    position:absolute;
+    right:5px;
+    top:3px;
+    font-size:12px;
+    z-index:1
+}
+
+#rapport-activite table{
+    width:100%
+}
+
+#rapport-activite table thead tr{
+    height:40px
+}
+
+#rapport-activite table thead tr th{
+    padding:8px 5px;
+    color:#337ab7;
+    font-size:13px
+}
+
+#rapport-activite table thead tr th.actes{
+    position:relative
+}
+
+#rapport-activite table thead tr th.actes div.export{
+    position:absolute;
+    top:50%;
+    right:5px;
+    margin:-18px 0 0 0
+}
+
+#rapport-activite table thead tr th.actes div.export img{
+    width:21px
+}
+
+#rapport-activite table thead tr th>img{
+    width:8px
+}
+
+#rapport-activite table thead tr th span.link{
+    cursor:pointer
+}
+
+#rapport-activite table thead tr th span.link:hover{
+    text-decoration:underline
+}
+
+#rapport-activite table tbody tr td{
+    font-size:13px
+}
+
+#rapport-activite table tbody tr td.acte{
+    width:320px;
+    word-break:break-word
+}
+
+#rapport-activite table tbody tr td.acte.na-acte-red{
+    background-color:#e74c3c;
+    color:#fff
+}
+
+#rapport-activite table tbody tr td.acte.na-acte-red span{
+    font-weight:100
+}
+
+#rapport-activite table tbody tr td.acte.na-acte-orange{
+    background-color:#e67e22;
+    color:#fff
+}
+
+#rapport-activite table tbody tr td.acte.na-acte-orange span{
+    font-weight:100
+}
+
+#rapport-activite table tbody tr td.acte span{
+    font-weight:600
+}
+
+#rapport-activite table tbody tr td div span{
+    width:10px;
+    display:inline-block;
+    height:10px
+}
+
+#rapport-activite table tbody tr td div span.has-dmi{
+    background-color:#479d47
+}
+
+#rapport-activite table tbody tr td div span.hasn-dmi{
+    background-color:#e74c3c
+}
+
+#rapport-activite table tbody tr div.change{
+    padding:3px 0;
+    width:auto;
+    text-align:center
+}
+
+#rapport-activite table tbody tr div.change img{
+    width:20px;
+    cursor:pointer
+}
+
+#rapport-activite-popup div.header div.border{
+    margin-top:10px;
+    border:2px solid #d8edff;
+    width:100%;
+    padding:0 0 10px 0;
+    background-color:#fdfdfd
+}
+
+#rapport-activite-popup div.header div.border h4{
+    color:#d86422
+}
+#liste_consultation th
+{
+    background-color: #6194C3;
+}
+table tr{
+    cursor: pointer;   
+}
+table.liste_nextcons thead tr th
+{
+    background-color: #EC971F !important;
+    color: black !important;
+}
+.option-consultation label{
+    color: inherit;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    font-size: 18px;
+    margin-right: 5px;
+} 
+.option-consultation a.link-historique-bacterio,.link-sejours{ 
+    margin-left: 10px;
+} 
+a.remove-h4-style h4{
+    margin: 0;
+    color: black;
+}
+table.borderless{ 
+    width: 700px; 
+}
+.borderless td, .borderless th {
+    border: none !important;
+    vertical-align: middle !important;
+    text-align: left;
+} 
+
+span.delete {
+    padding-left:25px;
+    display:inline-block;
+    width:10px;
+    background:url("../images/delete_c.jpg") no-repeat top left;
+    height:10px;
+
+}
+
+div.border-radius-5 a {
+    border-radius: 3px !important;
+}
+
+div.row.pad-left{
+    padding-left: 2%;
+}
+
+div.row.bilan{
+
+    background-color: #f4f4f4; 
+    margin-left: -1px;
+    margin-right: -1px;
+    padding: 5px;
+
+}

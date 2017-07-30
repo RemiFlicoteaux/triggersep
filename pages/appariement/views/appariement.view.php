@@ -11,7 +11,7 @@
                         <div ><h3> Détails de l'étude <?php echo $nom_etude ?></h3></div>
 
                         <ul class="nav">
-                            <li ><a data-toggle="tab" class="<?= ($pg == 1) ? '' : 'active'; ?>" href="#details-etude">Détails de l’étude</a></li>
+                            <li ><a data-toggle="tab" class="<?= ($pg != 1) ? 'active' : '' ; ?>" href="#details-etude">Détails de l’étude</a></li>
                             <li class="<?= $class_insertion_variables ? 'active' : ''; ?>"><a data-toggle="tab" href="#insertion-variables-etude">Variables de l'étude</a></li>
                             <li class="<?= ($class_insertion_variables || $class_insertion_data || $pg == 1) ? 'active' : ''; ?>"><a data-toggle="tab" href="#appariemnt-variable">Appariement catalogue / variables études</a></li>
                             <li class="<?= $class_insertion_data ? 'active' : ''; ?>"><a data-toggle="tab" href="#insertion-data-etude">Insertion des données</a></li>
@@ -23,7 +23,7 @@
 
 
                             <!-- DETAILS ETUDE -->
-                            <div class="tab-pane fade <?= ($pg == 1) ? '' : 'in active'; ?>" id='details-etude'>
+                            <div class="tab-pane fade in <?= ($pg != 1) ? 'active' : '';  ?>" id='details-etude'>
                                 <!-- MODULE LECTURE DE FICHIER -->
                                 <?php
                                 if (!empty($etude)):
@@ -71,7 +71,7 @@
                                 ?>
                             </div>
                             <!-- MODULE APPARIEMENT VARIABLES -->
-                            <div class="<?= ($class_insertion_variables || $class_insertion_data || $pg == 1) ? 'tab-pane fade' : 'tab-pane fade in'; ?>" id='appariemnt-variable'>
+                            <div class="tab-pane fade  <?= ($class_insertion_variables || $class_insertion_data || $pg == 1) ? 'in active' : null; ?>" id='appariemnt-variable'>
 
                                 <!-- MODULE LECTURE DE FICHIER -->
                                 <?php

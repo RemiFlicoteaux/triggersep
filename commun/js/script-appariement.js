@@ -145,7 +145,9 @@ jQuery(document).ready(function () {
             var _temps = $(this).attr('temps');
             var _id_etude = $(this).attr('id_etude');
             var _id_var_cat = txtbox.attr('id');
-
+            
+            txtbox.val('');
+           
             $.getJSON('./?p=ajax_insert_var_ref', {
                 id_var_catalogue: _id_var_cat,
                 id_var_etude: _id_var_etude,
@@ -329,7 +331,8 @@ jQuery(document).ready(function () {
             message
                     .fadeOut(100)
                     .fadeIn(300);
-            location.reload();
+            
+            location.href = (window.location.href.replace('&pg=1', '') + '&pg=1');
         });
     });
 

@@ -40,7 +40,7 @@ $liste_etudes = ORM::for_table('etudes')
  * Lecture du Fichier Excel et enregistrement des données dans la base Mysql
  * Affichage des données dans un tableau
  */
-if (isset($_POST['Envoyer'])) {
+if (isset($_POST['Inserer'])) {
     $id_etude = $_POST['id_etude'];
     $historique_data = ORM::for_table('historique_data')->where('id_etude', $id_etude)->find_one();
     if (strlen($historique_data['fichier']) > 1 && $_POST['etude']) {

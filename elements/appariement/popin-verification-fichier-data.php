@@ -18,7 +18,7 @@
                             </div>
                         <?php else: ?>
                             <div class="alert alert-danger" role="alert">
-                                Aucun variable reconnu trouvé
+                                Aucune variable reconnue trouvée
                             </div>
                         <?php endif; ?>  
                         <?php if ($missing_variables): ?>

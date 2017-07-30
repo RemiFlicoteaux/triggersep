@@ -18,13 +18,8 @@
                          <div class="col-md-6"><input id="nom_etude" name="nom_etude" class="form-control" type="text" placeholder="Nom de l'étude" ></div>
                     </div>
                     <div class="form-group">
-<<<<<<< HEAD
-                        <label class="col-sm-3 control-label"><strong>Déscription</strong></label>
-                       <div class="col-md-12"> <textarea id="description" name="description" class="form-control" type="text" placeholder="Description" style="min-width:580px;max-width: 580px;"></textarea></div>
-=======
                         <label class="col-sm-3 control-label"><strong>Description</strong></label>
                        <div class="col-md-12"> <textarea id="description" name="description" class="form-control" placeholder="Description" style="min-width:580px;max-width: 580px;"></textarea></div>
->>>>>>> 27976f6... #fix spell
                     </div>
                 </div>
                 <div id="message" class="message">

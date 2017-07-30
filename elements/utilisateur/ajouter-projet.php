@@ -8,7 +8,7 @@
                         <input id="nom_projet" name="nom_projet" class="form-control" type="text" placeholder="Nom du Projet" >
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-4 control-label"><strong>Déscription : </strong></label>
+                        <label class="col-sm-4 control-label"><strong>Description : </strong></label>
                         <textarea id="description" name="description" class="form-control" type="text" placeholder="Description" style="max-width: 564px;"></textarea>
                     </div>      
                 </div>

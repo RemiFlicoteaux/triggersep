@@ -15,7 +15,7 @@ header('x-ua-compatible: ie=edge');
  * 
  * @const APPLICATION_NAME
  */
-define('APPLICATION_NAME', 'NOM_DE_LAPPLICATION');
+define('APPLICATION_NAME', 'DB-REPOSITORY');
 
 /**
  * mode developpement :

@@ -56,6 +56,8 @@ $(document).ready(function () {
                   message
                       .fadeOut(100)
                       .fadeIn(300);
+                location.reload();
+
               } else {
 
                   location.reload();

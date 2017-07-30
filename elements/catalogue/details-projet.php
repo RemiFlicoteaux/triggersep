@@ -9,7 +9,7 @@
       </li>
       <li>
         <span>
-          Déscription : <b class=""> <?=$data_projet['description']; ?> </b>
+          Description : <b class=""> <?=$data_projet['description']; ?> </b>
         </span>
       </li>
       <li>

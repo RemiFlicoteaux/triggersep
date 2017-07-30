@@ -85,7 +85,7 @@
                 <br><br>
               <div class="col-md-12">
                    <div class="col-md-2">
-                     <label for="cles">Date de répétion :</label></div>
+                     <label for="cles">Date de répétition :</label></div>
                      <select id='indicateur_repetition' >
                        <option>Selectionez un variable</option>
                        <?php foreach ($variables_etude as $variables) :?>

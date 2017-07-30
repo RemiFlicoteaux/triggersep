@@ -100,7 +100,7 @@ if (strlen($_GET['file_name']) > 1 && isset($_GET['nom_etude']) && isset($_GET['
                 if ((!empty($parametre[$nomcol]['temps']) && $date) || ($indicateur && $date)) {
                   
                    if($indicateur){
-                   		if(strlen($indicateur)>=4){
+                   		if(strlen($indicateur) >= 4){
                    			
                    			$date_ind= DateTime::createFromFormat(isset($format_date->format)?$format_date->format:'d/m/Y', $indicateur);
                    			$date_j0 = $date->format('Y-m-d');
@@ -121,8 +121,8 @@ if (strlen($_GET['file_name']) > 1 && isset($_GET['nom_etude']) && isset($_GET['
 
                			$j = '+' . trim($parametre[$nomcol]['temps'], 'J') . ' day';
                    		$tab['temps'] = $parametre[$nomcol]['temps'];
-              			$date->modify($j);
-		                $date_j = $date->format('Y-m-d');
+              			$date -> modify($j);
+		                $date_j = $date -> format('Y-m-d');
 		                $tab['date'] = $date_j;
                		}
                 }
@@ -141,7 +141,7 @@ if (strlen($_GET['file_name']) > 1 && isset($_GET['nom_etude']) && isset($_GET['
       fclose($handle);
     }
     $cn = new MongoClient();
-    $db = $cn->selectDB("bd_patients");
+    $db = $cn -> selectDB("bd_patients");
     $collection = $db->selectCollection('Patients');
     foreach($table as $key) {
       $doc_existe = $collection->findOne(array(
@@ -149,7 +149,7 @@ if (strlen($_GET['file_name']) > 1 && isset($_GET['nom_etude']) && isset($_GET['
       ));
       //dump($key);
       if ($doc_existe) {
-        $collection->update(array(
+        $collection -> update(array(
           "_id" => $key['_id']
         ) , $key);
       }
@@ -157,7 +157,7 @@ if (strlen($_GET['file_name']) > 1 && isset($_GET['nom_etude']) && isset($_GET['
         $collection->insert($key);
       }
     }
-  $b_ajax['results']=array('nbr_lignes_inserees'=>$nbr_lignes_inserees,'nbr_lignes_rejetees'=>$nbr_lignes_rejetees);
+  $b_ajax['results'] = array('nbr_lignes_inserees' => $nbr_lignes_inserees,'nbr_lignes_rejetees' => $nbr_lignes_rejetees);
 }else{
 
     $b_ajax['message'] = "Erreur d'insertion :";

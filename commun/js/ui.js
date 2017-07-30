@@ -173,7 +173,7 @@ jQuery(document).ready(function () {
             close: function () {
                 if (reload) {
                     
-                    window.location.replace ('./?p=synthese');
+                    window.location.replace ('./?p=catalogue');
                 }
                 message.hide();
                 body.css({overflow: 'inherit'});
@@ -220,8 +220,8 @@ jQuery(document).ready(function () {
     var ajouter_projet_opener = $('#ajouter-projet-opener');
     var ajouter_projet = $('#ajouter-projet');
     var form_ajouter_projet = ajouter_projet.find('form');
-    var message = $('#ajouter-projet #message');
-    var alert = message.find('.alert');
+    var message2 = $('#ajouter-projet #message');
+    var alert = message2.find('.alert');
     var reload = false;
     var body = $("body");
 
@@ -241,16 +241,16 @@ jQuery(document).ready(function () {
                     
                     window.location = window.location.href.replace(/&s=1/, '');
                 }
-                message.hide();
+                message2.hide();
                 body.css({overflow: 'inherit'});
             },
             buttons: {
                 "Valider": function () {
                     var data = form_ajouter_projet.serialize();
                     $.getJSON('./?p=ajax_ajouter_projet', {data: data}, function (data) {
-                        message.hide();
+                        message2.hide();
                         if (data.error === false) {
-                            data.message += '<br> Veuillez fermer cette fenêtre pour appliquer la modification.';
+                            data.message2 += '<br> Veuillez fermer cette fenêtre pour appliquer la modification.';
                             alert.removeClass('alert-danger alert-warning');
                             alert.addClass('alert-success');
                             reload = true;
@@ -259,16 +259,16 @@ jQuery(document).ready(function () {
                             alert.addClass('alert-danger');
                             reload = false;
                         }
-                        message
+                        message2
                                 .fadeIn(300)
                                 .find('span.message')
-                                .html(data.message);
+                                .html(data.message2);
                     })
                             .error(function () {
                                 alert.removeClass('alert-success alert-danger');
                                 alert.addClass('alert-warning');
                                 reload = false;
-                                message
+                                message2
                                         .fadeIn(300)
                                         .find('span.message')
                                         .text('Une erreur s\'est produite merci de réessayer');

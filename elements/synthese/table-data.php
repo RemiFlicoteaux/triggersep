@@ -3,23 +3,25 @@
 
    
  <?php if($table_data){
-$nb_var_ref=count($catalogue);
-print('<tr class="info"><th ><a href="./?'.
+$nb_var_ref=count($catalogue);?>
+  <tr class="info"><th ><a href="./?<?=
           make_query_string([
-            "p" => "catalogue",
-          ]).'" class="data-patients">variables de référence('.$nb_var_ref.')</a></th>');
-    
+            'p' => 'catalogue',
+          ])?>" class="data-patients" >variables de référence(<?=$nb_var_ref;?>)</a></th>
+    <th>Description</th>
+    <?php
     if($etudes){
-    for($i=0;$i<count($etudes);$i++){
-    print('<th ><a href="./?'.
+    for($i=0;$i<count($etudes);$i++){ ?>
+    <th ><a href="./?<?=
           make_query_string([
-            "p" => "appariement",
-            "nom_etude"=>$etudes[$i]['nom_etude'],
-          ]).'" class="data-patients" target="_self">'.$etudes[$i]['nom_etude'].'</a></th>');
-  	}
-  }
-  print('<th>Total</th>');
-   print('</tr>');}?>
+            'p' => 'appariement',
+            'nom_etude' => $etudes[$i]['nom_etude'],
+          ])?>" class="data-patients" target="_self"><?=$etudes[$i]['nom_etude']?></a></th>
+  <?php	}
+  } ?>
+  <th>Total</th>
+   </tr>
+   <?php } ?>
   
 
 </thead>
@@ -28,7 +30,7 @@ print('<tr class="info"><th ><a href="./?'.
     if($nbr_variables){
       $som=0;
       print('<tr>');
-      print('<td style="font-weight: bold;">Nombre Des Variables etudes:</td>');
+      print('<td style="font-weight: bold;">Nombre Des Variables etudes:</td><td></td>');
       for ($j=0; $j <count($nbr_variables) ; $j++) { 
         print('<td style="font-weight: bold;">'.$nbr_variables[$j].'</td>');
         $som+=$nbr_variables[$j];
@@ -39,7 +41,7 @@ print('<tr class="info"><th ><a href="./?'.
     $som_nbr_patients=0;
     if($nbr_patients){
       print('<tr>');
-      print('<td style="font-weight: bold;">Nombre Des Patients Par Etude :</td>');
+      print('<td style="font-weight: bold;">Nombre Des Patients Par Etude :</td><td></td>');
       for ($j=0; $j <count($nbr_patients) ; $j++) {
         print('<td style="font-weight: bold;">'.$nbr_patients[$j].'</td>');
         $som_nbr_patients+=$nbr_patients[$j];
@@ -51,7 +53,7 @@ print('<tr class="info"><th ><a href="./?'.
     if($_SESSION['utilisateur']['profile']==='ADMIN'):
       if($etudes){
          print('<tr>');
-        print('<td style="font-weight: bold;">Cliquer sur Exporter pour exporter les donneés:</td>');
+        print('<td style="font-weight: bold;">Cliquer sur Exporter pour exporter les donneés:</td><td></td>');
         for($i=0;$i<count($etudes);$i++){
           
           print('<td style="font-weight: bold;"><a data-toggle="modal" data-target="#MyModal" data-id="'.$etudes[$i]['id'].'" data-whatever="'.$etudes[$i]["nom_etude"].'">Exporter</a></td>');
@@ -69,6 +71,9 @@ if(count($etudes)>=1):
 		  <td width="10%">
 			<?= $catalogue[$i]['nom_variable']; ?>
 		  </td>
+      <td width="10%">
+      <?= $catalogue[$i]['description']; ?>
+      </td>
       <?php
 
       for ($j=0; $j <count($etudes) ; $j++) { 

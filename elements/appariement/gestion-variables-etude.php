@@ -1,4 +1,4 @@
-<a href="#" class="glyphicon glyphicon-plus" role="button" data-toggle="modal" data-target="#ajout-variable-modal" style="display:none;">Ajouter un variable</a>
+<a href="#" role="button" data-toggle="modal" data-target="#ajout-variable-modal" style="display:none;">Nouvelle variable</a>
 <?php if($variables_etude) : ?>
 <table id="data-table-gestion-variables" class="table table-responsive table-hover table-condensed" >
 <thead>
@@ -6,7 +6,7 @@
     <th class="sorting_asc">Variable</th>
     <th >Description</th> 
     <th >Type</th>
-    <th>répétition</th> 
+    <th>Répétition</th> 
     <!--<th>Modif/Supp</th> -->
   </tr>
 </thead>

@@ -9,12 +9,12 @@
       </li>
       <li>
         <span>
-          Déscription : <b class=""> <?=$data_projet['description']; ?> </b>
+          Description : <b class=""> <?=$data_projet['description']; ?> </b>
         </span>
       </li>
       <li>
         <span>
-          Fichiers liées au projet : <b class=""></b>
+          Fichiers liés au projet : <b class=""></b>
         </span>
       </li>
       <li>
@@ -29,7 +29,7 @@
       </li>
       <li>
         <span>
-          Crée par : <b class=""> <?=$data_projet['createur']; ?></b>
+          Créé par : <b class=""> <?=$data_projet['createur']; ?></b>
         </span>
       </li>
     </ul>

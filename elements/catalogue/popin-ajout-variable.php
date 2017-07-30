@@ -19,7 +19,7 @@
                         </div>
                         <div class="modal-footer">
                             <div>
-                                <button id="valide" type="button" class="btn btn-primary">Validé</button>
+                                <button id="valide" type="button" class="btn btn-primary">Valider</button>
                                 <button id="close" type="button" class="btn btn-danger" onclick="">Annuler</button>
                             </div>
                        </div>

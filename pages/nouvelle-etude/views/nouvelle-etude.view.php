@@ -4,7 +4,7 @@
             <div align="center">
                 <div id="div-ajout-msg">
                     <div class="title">
-                      <strong>Informations De l'etude</strong>
+                      <strong>Informations De l'étude</strong>
                       <hr />
                     </div>
                 </div>
@@ -14,12 +14,12 @@
                         <input id="id_etude" name="id_etude" class="form-control" type="text" style="display: none;">
                     </div>
                     <div class="form-group" >
-                        <div class="col-md-12"><label class="col-md-3 control-label"><strong>Nom de l'etude</strong></label></div>
-                         <div class="col-md-6"><input id="nom_etude" name="nom_etude" class="form-control" type="text" placeholder="Nom de l'etude" ></div>
+                        <div class="col-md-12"><label class="col-md-3 control-label"><strong>Nom de l'étude</strong></label></div>
+                         <div class="col-md-6"><input id="nom_etude" name="nom_etude" class="form-control" type="text" placeholder="Nom de l'étude" ></div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label"><strong>Déscription</strong></label>
-                       <div class="col-md-12"> <textarea id="description" name="description" class="form-control" type="text" placeholder="Description" style="min-width:580px;max-width: 580px;"></textarea></div>
+                        <label class="col-sm-3 control-label"><strong>Description</strong></label>
+                       <div class="col-md-12"> <textarea id="description" name="description" class="form-control" placeholder="Description" style="min-width:580px;max-width: 580px;"></textarea></div>
                     </div>
                 </div>
                 <div id="message" class="message">

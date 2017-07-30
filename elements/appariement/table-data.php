@@ -14,7 +14,9 @@
     <th ></th>
     <th >Libellé</th>
     <th >Unité</th>
+    <?php if($b_format_fichier==1):?>
     <th >Répétition</th> 
+  <?php endif; ?>
     
   </tr>
 </thead>
@@ -63,6 +65,7 @@
 
              <td id="unite<?=$data['id_var_cat'];?>">
             </td>
+            <?php if($b_format_fichier==1):?>
             <td id="temp<?=$data['id_var_cat'];?>" class="temps" style="widht:3%" >
                 <?php foreach ($data['temps'] as $variable_id => $temps) : ?>
                     <?php if($libelle):?>
@@ -71,6 +74,7 @@
                endforeach; ?>
 
             </td>
+          <?php endif; ?>
            </tr>	
     <?php 
     endforeach;

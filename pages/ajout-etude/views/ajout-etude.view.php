@@ -10,11 +10,11 @@
                                 <span id="text-ajout-msg">Nouvelle etude</span>
                             </div>
                             <input id="id_etude" name="id_etude" class="form-control" type="text" style="display: none;">
-                            <input id="nom_etude" name="nom_etude" class="form-control" type="text" placeholder="Nom de l'etude">
+                            <input id="nom_etude" name="nom_etude" class="form-control" type="text" placeholder="Nom de l'étude">
                             <input id="description" name="description" class="form-control" type="text" placeholder="Description">
                             <div class="row">
                               <div class="col-md-12">
-                                <label >Format Fichier des donneés de l'etude :</label>
+                                <label >Format Fichier des donneés de l'étude :</label>
                                 <label style="margin-left: 0%"><input type="radio" name="format_fichier" value="1" checked><a href="<?=PATH_DATA.'format_fichier/format1.xlsx';?>"> Format 1</a></label> 
                                 <label style="margin-left: 0%"><input type="radio" name="format_fichier" value="2"><a href="<?=PATH_DATA.'format_fichier/format2.xlsx';?>"> Format 2</a></label>
                                 <label style="margin-left: 0%"><input type="radio" name="format_fichier" value="3"><a href="<?=PATH_DATA.'format_fichier/format3.xlsx';?>">Format3</a></label> 

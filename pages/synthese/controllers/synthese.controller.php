@@ -7,13 +7,13 @@
  */
 $infos['message'] = '';
 $infos['type'] = null;
-$form_affichage = null;
 $table_data = array();
 $table = array();
 $Patients = array();
 $catalogue = array();
 $etudes = array();
-$nom_etude = null; - $id_etude = null;
+$nom_etude = null; 
+$id_etude = null;
 $nbr_variables = null;
 $nbr_patients = null;
 $liste_etudes = ORM::for_table('etudes')->select('id')->select('nom_etude')->where('id_projet', $b_id_projet)->distinct()->find_array();

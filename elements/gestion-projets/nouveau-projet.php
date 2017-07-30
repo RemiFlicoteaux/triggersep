@@ -16,12 +16,12 @@
                                     <input id="id_projet" name="id_projet" class="form-control" type="text" value="<?=isset($id_projet)?$id_projet:'';?>" style="display: none;">
                                 </div>
                                 <div class="form-group" >
-                                    <label class="col-sm-4 control-label"><strong>Nom du Projet : </strong></label>
+                                    <label class="col-sm-4 control-label"><strong>Nom du Projet: </strong></label>
                                     <input id="nom_projet" name="nom_projet" class="form-control" type="text" placeholder="Nom du Projet" >
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label"><strong>Déscription : </strong></label>
-                                    <textarea id="description" name="description" class="form-control" type="text" placeholder="Description" style="max-width: 564px;"></textarea>
+                                    <label class="col-sm-4 control-label"><strong>Description: </strong></label>
+                                    <textarea id="description" name="description" class="form-control" placeholder="Description" style="max-width: 564px;"></textarea>
                                 </div>      
                             </div>
                             <div id="message" class="message">

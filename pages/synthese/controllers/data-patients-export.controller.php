@@ -128,33 +128,27 @@ if($format_export==='Export_ligne')
                exit(0);
 }else
   {
-    
-           $req_main = ORM::for_table('')
+    $req_main = ORM::for_table('')
                 ->raw_query("SELECT cat.id,var.temps,CONCAT( cat.nom_variable, var.temps) as var_ref
                             FROM catalogue cat, `variables` var
                             WHERE id_var_catalogue = cat.id and id_etude='".$etudes[$i]['id']."' and id_projet='$b_id_projet'
                             GROUP BY cat.id,var_ref");
            $var_rows=$req_main->find_array(); 
-    // ouvrir le fichier et ecrire la ligne titre
 
     ob_clean();
-     $csv_rows_raw[0]='Patients';
-     $csv_rows_raw[1]='Nom_etude';       
-     
-      
-       
-    
+     $csv_rows_raw[1]='Nom_etude'; 
       
     for($i=0;$i<count($etudes);$i++){
-        
+  
         $Ref=[];
       for ($j=0;$j<count($var_rows);$j++)$Ref[$var_rows[$j]['var_ref']]='';  
         //recuperer les variables de l'etude i
               $req_main = ORM::for_table('')
                 ->raw_query(" SELECT variable, concat( cat.nom_variable, var.temps ) AS ref
                                 FROM variables var, catalogue cat
-                                WHERE id_var_catalogue = cat.id and id_etude='".$etudes[$i]['id']."' and id_projet='". $b_id_projet."'");
+                                WHERE var.id_var_catalogue = cat.id and var.id_etude='".$etudes[$i]['id']."' and cat.id_projet='". $b_id_projet."'");
            $var_et=$req_main->find_array(); 
+           //dump($var_et,true);
             for ($j=0;$j<count($var_et);$j++)$Ref[$var_et[$j]['ref']]=$var_et[$j]['variable'];  
       
         $j=2;
@@ -184,7 +178,6 @@ if($format_export==='Export_ligne')
          if(!empty($data)):  
           foreach ($data as $vars)
             {     
-             array_push($tab_data_export,$vars['_id']); 
              array_push($tab_data_export,$etudes[$i]['nom_etude']);
 
               foreach($Ref as $key => $var){

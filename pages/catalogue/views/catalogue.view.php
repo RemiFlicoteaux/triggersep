@@ -9,7 +9,7 @@
           
             <ul class="nav">
                 <li ><a data-toggle="tab" href="#details-projet">Détails du projet</a></li>
-                <li class="active"><a data-toggle="tab" href="#gestion-catalogue">Gestion des Variables Catalogues</a></li>
+                <li class="active"><a data-toggle="tab" href="#gestion-catalogue">Gestion des variables du catalogue</a></li>
             </ul>
         </div> 
         <div class="panel-body">

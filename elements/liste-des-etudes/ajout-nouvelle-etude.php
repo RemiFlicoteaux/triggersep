@@ -7,21 +7,21 @@
                         <div class="modal-body">
                             <div id="div-ajout-msg">
                                 <div class="title">
-                                  <strong>Informations De l'etude</strong>
+                                  <strong>Descriptif de l'étude</strong>
                                   <hr />
                                 </div>
                             </div>
                             <div class="informations-etude">
                                 <div class="form-group">
-                                    <input id="id_projet" name="id_projet" class="form-control" type="text" value='<?=$id_projet;?>' style="display: none;">
-                                    <input id="id_etude" name="id_etude" class="form-control" type="text" style="display: none;">
+                                    <input id="_id_projet" name="id_projet" class="form-control" type="text" value='<?=$id_projet;?>' style="display: none;">
+                                    <input id="_id_etude" name="id_etude" class="form-control" type="text" style="display: none;">
                                 </div>
                                 <div class="form-group" >
-                                    <label class="col-sm-4 control-label"><strong>Nom de l'etude : </strong></label>
-                                    <input id="nom_etude" name="nom_etude" class="form-control" type="text" placeholder="Nom de l'etude" >
+                                    <label style="text-align:left" class="col-sm-4 control-label"><strong>Nom de l'étude : </strong></label>
+                                    <input id="nom_etude" name="nom_etude" class="form-control" type="text" placeholder="Nom de l'étude" >
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label"><strong>Déscription : </strong></label>
+                                    <label  style="text-align:left" class="col-sm-4 control-label"><strong>Description : </strong></label>
                                     <textarea id="description" name="description" class="form-control" type="text" placeholder="Description" style="max-width: 564px;"></textarea>
                                 </div>      
                             </div>
@@ -30,7 +30,7 @@
                             </div>
                             <div class="modal-footer">
                                 <div>
-                                    <button id="valide" type="button" class="btn btn-primary">Validé</button>
+                                    <button id="valide" type="button" class="btn btn-success">Valider</button>
                                     <button id="close" type="button" class="btn btn-danger" onclick="">Annuler</button>
                                 </div>
                            </div>

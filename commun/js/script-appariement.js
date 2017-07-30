@@ -4,7 +4,7 @@
  * @author : AOUEY Yesser <yesser87@gmail.com>
  * @date : 14 septembre 2015
  */
-jQuery(document).ready(function() {
+jQuery(document).ready(function () {
 
     /**
      * 
@@ -16,7 +16,7 @@ jQuery(document).ready(function() {
     var txtbox;
     var prevbox;
 
-    $('tr').on('click', 'span', function() {
+    $('tr').on('click', 'span', function () {
 
         if ($(this).attr('id_var_ref')) {
             var _id_var_catalogue = $(this).attr('id_var_ref');
@@ -28,7 +28,7 @@ jQuery(document).ready(function() {
                 id_etude: _id_etude,
                 id_var_etude: _id_var_etude,
                 operation: 'delete'
-            }, function(data) {
+            }, function (data) {
 
                 state = !data.error;
                 if (state !== true) {
@@ -58,14 +58,14 @@ jQuery(document).ready(function() {
      *
      */
 
-    $('.temps').on('keyup', 'input', function() {
+    $('.temps').on('keyup', 'input', function () {
 
         var _temps = $(this).val();
         var _id = $(this).attr('idvar');
         $.getJSON('./?p=ajax_update_temps', {
             temps: _temps,
             id_var_etude: _id
-        }, function(data) {
+        }, function (data) {
 
             state = !data.error;
             if (state !== true) {
@@ -82,14 +82,14 @@ jQuery(document).ready(function() {
      *
      */
 
-    $('#format_date').on('keyup', function() {
+    $('#format_date').on('keyup', function () {
 
         var _format = $(this).val();
         var _id = $(this).attr('id_etude');
         $.getJSON('./?p=ajax_update_format_date', {
             format: _format,
             id_etude: _id
-        }, function(data) {
+        }, function (data) {
 
             state = !data.error;
             if (state !== true) {
@@ -111,17 +111,17 @@ jQuery(document).ready(function() {
      *
      */
 
-    $('.classinput').focusin(function() {
+    $('.classinput').focusin(function () {
 
         prevbox = $(this);
         txtbox = $(this);
         $.getJSON(txtbox.attr('data-link'), {
             term: '__'
-        }, function(data) {
+        }, function (data) {
             $('#select').remove();
             $('#signstopconcepts-collapse').html('<select id="select" style="width: 280px;" size="30" multiple="multiple" ></select>');
             //alert(data.toSource());
-            $.map(data.results, function(item) {
+            $.map(data.results, function (item) {
 
                 $('#select').append('<option id="' + item.id + '" id_etude="' + item.id_etude + '" libelle="' + item.libelle + '" temps="' + item.temps + '" value="' + item.variable + '" >' + item.variable + ' : (' + item.libelle + ')</option>');
 
@@ -135,7 +135,7 @@ jQuery(document).ready(function() {
     });
 
 
-    $('.panel').on('click', '#select :selected', function() {
+    $('.panel').on('click', '#select :selected', function () {
 
         if ($(this).val() !== null && txtbox.attr('id')) {
 
@@ -145,13 +145,15 @@ jQuery(document).ready(function() {
             var _temps = $(this).attr('temps');
             var _id_etude = $(this).attr('id_etude');
             var _id_var_cat = txtbox.attr('id');
-
+            
+            txtbox.val('');
+           
             $.getJSON('./?p=ajax_insert_var_ref', {
                 id_var_catalogue: _id_var_cat,
                 id_var_etude: _id_var_etude,
                 id_etude: _id_etude,
                 operation: 'insert'
-            }, function(data) {
+            }, function (data) {
 
                 state = !data.error;
                 if (state !== true) {
@@ -179,7 +181,7 @@ jQuery(document).ready(function() {
     // data-patients
     var links_popup = $('.data-patients');
     var popup = null;
-    links_popup.click(function(e) {
+    links_popup.click(function (e) {
         var popup_url = $(this).attr('href');
         e.preventDefault();
         if (popup === null || popup.closed) {
@@ -197,7 +199,7 @@ jQuery(document).ready(function() {
      *
      */
     var div_new_etude = $("#ajout-etude-modal");
-    $("#nouvelle_etude").change(function() {
+    $("#nouvelle_etude").change(function () {
 
         if ($(this).val() === 'NOUVELLE ETUDE') {
             document.getElementById("ajout-etude-modal").style.display = 'block';
@@ -220,16 +222,16 @@ jQuery(document).ready(function() {
         enableCaseInsensitiveFiltering: true,
         buttonContainer: '<div id="select-multiple-cles" />',
         filterPlaceholder: 'Rechercher',
-        buttonTitle: function() {
+        buttonTitle: function () {
             return null;
         },
-        onChange: function(element, checked) {
+        onChange: function (element, checked) {
             var current_value = element.val();
             var all_selected_cles = [];
             var detached_elements = [];
             var message = $('.appariement .message');
 
-            $('ul.multiselect-container li').each(function() {
+            $('ul.multiselect-container li').each(function () {
                 var t = $(this);
                 var input = t.find('input');
                 var input_value = input.val();
@@ -240,46 +242,48 @@ jQuery(document).ready(function() {
                         $.getJSON('./?p=ajax_insert_variable_cle', {
                             operation: 'insert',
                             id_variable: element.attr('id')
-                        }, function(data) {
+                        }, function (data) {
 
                             if (data.error === false) {
                                 message.children()
-                                    .removeClass('alert-danger')
-                                    .addClass('alert-success');
+                                        .removeClass('alert-danger')
+                                        .addClass('alert-success');
+                                location.reload();
                             } else {
                                 message.children()
-                                    .removeClass('alert-success')
-                                    .addClass('alert-danger');
+                                        .removeClass('alert-success')
+                                        .addClass('alert-danger');
                             }
                             message.children()
-                                .find('span.message')
-                                .text(data.message);
+                                    .find('span.message')
+                                    .text(data.message);
                             message
-                                .fadeOut(100)
-                                .fadeIn(300);
+                                    .fadeOut(100)
+                                    .fadeIn(300);
                         });
                         t.addClass('active');
                     } else {
                         $.getJSON('./?p=ajax_insert_variable_cle', {
                             operation: 'delete',
                             id_variable: element.attr('id')
-                        }, function(data) {
+                        }, function (data) {
 
                             if (data.error === false) {
                                 message.children()
-                                    .removeClass('alert-danger')
-                                    .addClass('alert-success');
+                                        .removeClass('alert-danger')
+                                        .addClass('alert-success');
+                                location.reload();
                             } else {
                                 message.children()
-                                    .removeClass('alert-success')
-                                    .addClass('alert-danger');
+                                        .removeClass('alert-success')
+                                        .addClass('alert-danger');
                             }
                             message.children()
-                                .find('span.message')
-                                .text(data.message);
+                                    .find('span.message')
+                                    .text(data.message);
                             message
-                                .fadeOut(100)
-                                .fadeIn(300);
+                                    .fadeOut(100)
+                                    .fadeIn(300);
                         });
                         t.removeClass('active');
                         all_selected_cles.pop(input_value);
@@ -292,7 +296,7 @@ jQuery(document).ready(function() {
                 }
             });
         },
-        buttonText: function(options) {
+        buttonText: function (options) {
             if (options.length === 0) {
                 return 'Choisir un ou plusieurs cles';
             } else {
@@ -306,27 +310,29 @@ jQuery(document).ready(function() {
 
     var id_patient = $('#id_patient');
     var _current_id = $('#id_patient').find('option:selected').attr('id');
-    id_patient.on('change', function() {
+    id_patient.on('change', function () {
         var message = $('.appariement .message');
         $.getJSON('./?p=ajax_insert_variable_id_patient', {
             id_var: $(this).find('option:selected').attr('id')
-        }, function(data) {
+        }, function (data) {
 
             if (data.error === false) {
                 message.children()
-                    .removeClass('alert-danger')
-                    .addClass('alert-success');
+                        .removeClass('alert-danger')
+                        .addClass('alert-success');
             } else {
                 message.children()
-                    .removeClass('alert-success')
-                    .addClass('alert-danger');
+                        .removeClass('alert-success')
+                        .addClass('alert-danger');
             }
             message.children()
-                .find('span.message')
-                .text(data.message);
+                    .find('span.message')
+                    .text(data.message);
             message
-                .fadeOut(100)
-                .fadeIn(300);
+                    .fadeOut(100)
+                    .fadeIn(300);
+            
+            location.href = (window.location.href.replace('&pg=1', '') + '&pg=1');
         });
     });
 
@@ -334,27 +340,28 @@ jQuery(document).ready(function() {
 
     var id_variable_j0 = $('#date_j0');
 
-    id_variable_j0.on('change', function() {
+    id_variable_j0.on('change', function () {
         var message = $('.appariement .message');
         $.getJSON('./?p=ajax_insert_variable_datej0', {
             id_var: $(this).find('option:selected').attr('id')
-        }, function(data) {
+        }, function (data) {
 
             if (data.error === false) {
                 message.children()
-                    .removeClass('alert-danger')
-                    .addClass('alert-success');
+                        .removeClass('alert-danger')
+                        .addClass('alert-success');
             } else {
                 message.children()
-                    .removeClass('alert-success')
-                    .addClass('alert-danger');
+                        .removeClass('alert-success')
+                        .addClass('alert-danger');
             }
             message.children()
-                .find('span.message')
-                .text(data.message);
+                    .find('span.message')
+                    .text(data.message);
             message
-                .fadeOut(100)
-                .fadeIn(300);
+                    .fadeOut(100)
+                    .fadeIn(300);
+            location.reload();
         });
 
     });
@@ -363,27 +370,28 @@ jQuery(document).ready(function() {
 
     var id_variable_indicateur = $('#indicateur_repetition');
 
-    id_variable_indicateur.on('change', function() {
+    id_variable_indicateur.on('change', function () {
         var message = $('.appariement .message');
         $.getJSON('./?p=ajax_insert_indicateur_repetition', {
             id_var: $(this).find('option:selected').attr('id')
-        }, function(data) {
+        }, function (data) {
 
             if (data.error === false) {
                 message.children()
-                    .removeClass('alert-danger')
-                    .addClass('alert-success');
+                        .removeClass('alert-danger')
+                        .addClass('alert-success');
             } else {
                 message.children()
-                    .removeClass('alert-success')
-                    .addClass('alert-danger');
+                        .removeClass('alert-success')
+                        .addClass('alert-danger');
             }
             message.children()
-                .find('span.message')
-                .text(data.message);
+                    .find('span.message')
+                    .text(data.message);
             message
-                .fadeOut(100)
-                .fadeIn(300);
+                    .fadeOut(100)
+                    .fadeIn(300);
+            location.reload();
         });
 
     });
@@ -392,14 +400,14 @@ jQuery(document).ready(function() {
 
 
     // s format fichier des données
-        $("input[name=format_fichier]:radio").click(function() {
+    $("input[name=format_fichier]:radio").click(function () {
 
         var _format = $(this).val();
         var _id_etude = $(this).attr('id_etude');
         $.getJSON('./?p=ajax_update_format', {
             format: _format,
-            id_etude : _id_etude 
-        }, function(data) {
+            id_etude: _id_etude
+        }, function (data) {
 
             if (data.error === false) {
                 location.reload();
@@ -408,11 +416,11 @@ jQuery(document).ready(function() {
 
             }
         });
-        });
+    });
     //e format fichier des données
 });
 
-function popin_fichier_variables(div, b_traitement, _format_fichier_data,_nom_etude) {
+function popin_fichier_variables(div, b_traitement, _format_fichier_data, _nom_etude) {
 
     var message = $('#popin .message');
     var msg_traitement = 'msg-traitement';
@@ -424,27 +432,27 @@ function popin_fichier_variables(div, b_traitement, _format_fichier_data,_nom_et
         modal: true
     });
     var myButtons = {
-        "Insertion et Mis à jour des variables": function() {
+        "Insertion et Mise à jour": function () {
             var _file_name = $("#file_name").val();
 
             $.getJSON('./?p=ajax_insert_update_variables_etude', {
-                boutton: 'delete',
+                boutton: 'update',
                 file_name: _file_name,
                 format_fichier_data: _format_fichier_data
-            }, function(data) {
+            }, function (data) {
 
                 if (data.error === false) {
                     message.children()
-                        .removeClass('alert-danger')
-                        .addClass('alert-success');
+                            .removeClass('alert-danger')
+                            .addClass('alert-success');
                 } else {
                     message.children()
-                        .removeClass('alert-success')
-                        .addClass('alert-danger');
+                            .removeClass('alert-success')
+                            .addClass('alert-danger');
                 }
                 var myButtons = {
-                    Fermer: function() {
-                        window.location.replace ("./?p=appariement&nom_etude="+nom_etude+"&pg=1");
+                    Fermer: function () {
+                        window.location.replace("./?p=appariement&nom_etude=" + nom_etude);
                         $(this).dialog("close");
                         //$(location).attr('href', './?p=appariement')
                     }
@@ -452,23 +460,56 @@ function popin_fichier_variables(div, b_traitement, _format_fichier_data,_nom_et
                 $("#" + div).dialog('option', 'buttons', myButtons);
                 document.getElementById(msg_traitement).style.display = 'none';
                 message.children()
-                    .find('span.message')
-                    .text(data.message);
+                        .find('span.message')
+                        .html(data.message);
                 message
-                    .fadeOut(100)
-                    .fadeIn(300);
+                        .fadeOut(100)
+                        .fadeIn(300);
             });
         },
-        Annuler: function() {
-            window.location.replace ("./?p=appariement&nom_etude="+nom_etude+"&pg=1");
+        "Suppression et Insertion": function () {
+            var _file_name = $("#file_name").val();
+
+            $.getJSON('./?p=ajax_insert_update_variables_etude', {
+                boutton: 'delete',
+                file_name: _file_name,
+                format_fichier_data: _format_fichier_data
+            }, function (data) {
+
+                if (data.error === false) {
+                    message.children()
+                            .removeClass('alert-danger')
+                            .addClass('alert-success');
+                } else {
+                    message.children()
+                            .removeClass('alert-success')
+                            .addClass('alert-danger');
+                }
+                var myButtons = {
+                    Fermer: function () {
+                        window.location.replace("./?p=appariement&nom_etude=" + nom_etude);
+                    }
+                };
+                $("#" + div).dialog('option', 'buttons', myButtons);
+                document.getElementById(msg_traitement).style.display = 'none';
+                message.children()
+                        .find('span.message')
+                        .html(data.message);
+                message
+                        .fadeOut(100)
+                        .fadeIn(300);
+            });
+        },
+        Annuler: function () {
+            window.location.replace("./?p=appariement&nom_etude=" + nom_etude);
             //$(this).dialog("close");
         }
     };
 
     if (b_traitement === 0) {
         var myButtons = {
-            Fermer: function() {
-                window.location.replace ("./?p=appariement&nom_etude="+nom_etude+"&pg=1");
+            Fermer: function () {
+                window.location.replace("./?p=appariement&nom_etude=" + nom_etude);
                 $(this).dialog("close");
                 //$(location).attr('href', './?p=gestion_variables')
             }
@@ -491,7 +532,7 @@ function popin_fichier_data(div, b_traitement, _format_fichier_data) {
         modal: true
     });
     var myButtons = {
-        "Inserer et Mettre à jour les données": function() {
+        "Inserer et Mettre à jour les données": function () {
             var _file_name = $("#file_name").val();
             var _id_projet = $("#id_projet").val();
             var _nom_etude = $("#nom_etude").val();
@@ -503,35 +544,35 @@ function popin_fichier_data(div, b_traitement, _format_fichier_data) {
                 id_projet: _id_projet,
                 //separateur: _separateur,
                 encodage: _encodage
-            }, function(data) {
+            }, function (data) {
 
                 if (data.error === false) {
                     /*message_success.children()
-                        .removeClass('alert-danger')
-                        .addClass('alert-success');*/
+                     .removeClass('alert-danger')
+                     .addClass('alert-success');*/
                     message_success.children()
-                        .find('span.message')
-                        .text('Nombres des lignes inserées : ' + data.results.nbr_lignes_inserees);
+                            .find('span.message')
+                            .html('Nombres des lignes inserées : ' + data.results.nbr_lignes_inserees);
                     message_danger.children()
-                        .find('span.message')
-                        .text('Nombres des lignes rejetées : ' + data.results.nbr_lignes_rejetees);
+                            .find('span.message')
+                            .html('Nombres des lignes rejetées : ' + data.results.nbr_lignes_rejetees);
                     message_success
-                        .fadeOut(100)
-                        .fadeIn(300);
+                            .fadeOut(100)
+                            .fadeIn(300);
                     message_danger
-                        .fadeOut(100)
-                        .fadeIn(300);
+                            .fadeOut(100)
+                            .fadeIn(300);
                 } else {
                     message_success.children()
-                        .removeClass('alert-success')
-                        .addClass('alert-danger');
+                            .removeClass('alert-success')
+                            .addClass('alert-danger');
                     message_success.children()
-                        .find('span.message')
-                        .text(data.message);
+                            .find('span.message')
+                            .html(data.message);
                 }
                 var myButtons = {
-                    Fermer: function() {
-                        window.location.replace ("./?p=appariement&nom_etude="+_nom_etude+"&pg=1");
+                    Fermer: function () {
+                        window.location.replace("./?p=appariement&nom_etude=" + _nom_etude);
                         $(this).dialog("close");
                         //$(location).attr('href', './?p=appariement')
                     }
@@ -541,16 +582,17 @@ function popin_fichier_data(div, b_traitement, _format_fichier_data) {
 
             });
         },
-        Annuler: function() {
-            window.location.replace ("./?p=appariement&nom_etude="+_nom_etude+"&pg=1");
+        Annuler: function () {
+            window.location.replace("./?p=appariement&nom_etude=" + _nom_etude);
             $(this).dialog("close");
         }
     };
 
     if (b_traitement === 0) {
         var myButtons = {
-            Fermer: function() {
-                window.location.replace ("./?p=appariement&nom_etude="+nom_etude+"&pg=1");
+            Fermer: function () {
+                var _nom_etude = $("#nom_etude").val();
+                window.location.replace("./?p=appariement&nom_etude=" + _nom_etude);
                 $(this).dialog("close");
                 //$(location).attr('href', './?p=gestion_variables')
             }

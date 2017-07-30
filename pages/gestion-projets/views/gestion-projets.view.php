@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col-md-12">
         <div>
-          <button id="ajout-nouveau-projet" data-target="#ajout-projet-modal" data-toggle="modal" role="button" href='#' class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>Ajouter nouveau projet</button>
+          <button id="ajout-nouveau-projet" data-target="#ajout-projet-modal" data-toggle="modal" role="button" href='#' class="btn btn-primary">Ajouter nouveau projet</button>
         </div>
         <div class="title">
           <strong>Liste des Projets</strong>

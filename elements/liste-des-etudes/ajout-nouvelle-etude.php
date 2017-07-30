@@ -17,8 +17,13 @@
                                     <input id="id_etude" name="id_etude" class="form-control" type="text" style="display: none;">
                                 </div>
                                 <div class="form-group" >
+<<<<<<< HEAD
                                     <label class="col-sm-4 control-label"><strong>Nom de l'etude : </strong></label>
                                     <input id="nom_etude" name="nom_etude" class="form-control" type="text" placeholder="Nom de l'etude" >
+=======
+                                    <label style="text-align:left" class="col-sm-4 control-label"><strong>Nom de l'étude : </strong></label>
+                                    <input id="nom_etude" name="nom_etude" class="form-control" type="text" placeholder="Nom de l'étude" >
+>>>>>>> 27976f6... #fix spell
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label"><strong>Déscription : </strong></label>

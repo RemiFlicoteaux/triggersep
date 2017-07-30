@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <a href="#" class="glyphicon glyphicon-plus" role="button" data-toggle="modal" data-target="#ajout-variable-modal" style="display:none;">Ajouter un variable</a>
+=======
+<a href="#" role="button" data-toggle="modal" data-target="#ajout-variable-modal" style="display:none;">Nouvelle variable</a>
+>>>>>>> 27976f6... #fix spell
 <?php if($variables_etude) : ?>
 <table id="data-table-gestion-variables" class="table table-responsive table-hover table-condensed" >
 <thead>

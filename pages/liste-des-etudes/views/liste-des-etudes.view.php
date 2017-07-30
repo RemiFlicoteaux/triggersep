@@ -6,18 +6,22 @@
     <div class="row">
       <div class="col-md-12">
         <div>
+<<<<<<< HEAD
           <button id="nouvelle_etude" data-target="#ajout-etude-modal" data-toggle="modal" role="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>Ajouter Nouvelle Etude</button>
         </div>
         <div class="title">
           <strong>Liste des etudes</strong>
           <hr />
+=======
+          <button id="nouvelle_etude" data-target="#ajout-etude-modal" data-toggle="modal" role="button" class="btn btn-primary">Ajouter une nouvelle étude</button>
+>>>>>>> 27976f6... #fix spell
         </div>
         <div class="border">
           <table id="data-table-etudes" class="display table table-condensed table-responsive table-striped table-hover" cellspacing="0" width="100%">
             <thead>
               <tr>
-                <th hidden>Numéro de l'etude</th>
-                <th>Nom d'etude</th>
+                <th hidden>Numéro de l'étude</th>
+                <th>Nom d'étude</th>
                 <th>Description</th>
                 <th>Format</th>
                 <th>Nombre des variables</th>

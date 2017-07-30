@@ -2,7 +2,7 @@
         <div id="div" class="panel panel-primary" resizable="both"  draggable="true" style="position: fixed;top:20%;right: 0%;height:0px;width: 302px;">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a class="accordion-toggle" href="#signstopconcepts-collapse" data-toggle="collapse">Variables de l'etude</a>
+                    <a class="accordion-toggle" href="#signstopconcepts-collapse" data-toggle="collapse">Variables de l'étude</a>
                 </h4>
             </div>
             <div id="signstopconcepts-collapse" class="signstopconcepts-collapse panel-collapse collapse in">

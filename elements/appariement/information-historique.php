@@ -3,7 +3,7 @@
     <ul>
       <li>
         <span>
-          Nom de l'etude : <b class=""><?= $b_etude['nom_etude']; ?> </b>
+          Nom de l'étude : <b class=""><?= $b_etude['nom_etude']; ?> </b>
         </span>
       </li>
       <li>
@@ -30,12 +30,12 @@
       </li>
       <li>
         <span>
-          Nom de Fichier : <b class=""> <?= $b_etude['nom_de_fichier']; ?> </b>
+          Nom du Fichier : <b class=""> <?= $b_etude['nom_de_fichier']; ?> </b>
         </span>
       </li>
       <li>
         <span>
-          Nom de créateur : <b class=""><?= $b_etude['login']; ?> </b>
+          Nom du créateur : <b class=""><?= $b_etude['login']; ?> </b>
         </span>
       </li>
     </ul>

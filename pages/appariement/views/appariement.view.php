@@ -100,7 +100,7 @@
                 <!-- LISTE DE VARIABLES ETUDE -->
                 <?php element($b_page . '/liste-variables-etude', ['table_variables' => $table_variables, ]);
                 else: 
-                    $infos['message']="Vous devez effectuer l’étape précédente <br> Veuillez inserer les variables de l'etudes"; ?>
+                    $infos['message']="Vous devez effectuer l’étape précédente <br> Veuillez insérer les variables de l'étude."; ?>
                     <div><?php display_template_message('alert', $infos['message'],'danger'); ?></div> 
             <?php endif;?>
             </div>

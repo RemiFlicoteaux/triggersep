@@ -68,7 +68,7 @@ $(document).ready(function() {
             });
 
         } else {
-            alert("Le nom de l'etude est obligatoire");
+            alert("Le champ 'nom de l'étude' est obligatoire.");
         }
 
     });

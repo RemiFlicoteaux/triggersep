@@ -3,7 +3,7 @@
     <ul>
       <li>
         <span>
-          Nom de l'etude : <b class=""><?= $b_etude['nom_etude']; ?> </b>
+          Nom de l'étude : <b class=""><?= $b_etude['nom_etude']; ?> </b>
         </span>
       </li>
       <li>
@@ -30,12 +30,12 @@
       </li>
       <li>
         <span>
-          Nom de Fichier : <b class=""> <?= $b_historique_data['fichier']; ?> </b>
+          Nom du fichier : <b class=""> <?= $b_historique_data['fichier']; ?> </b>
         </span>
       </li>
       <li>
         <span>
-          Nom de créateur : <b class=""><?= $b_historique_data['login']; ?> </b>
+          Nom du créateur : <b class=""><?= $b_historique_data['login']; ?> </b>
         </span>
       </li>
     </ul>

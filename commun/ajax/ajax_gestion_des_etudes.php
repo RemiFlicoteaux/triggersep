@@ -37,7 +37,7 @@ if ((isset($_GET['form_data']) && false === empty($_GET['form_data']) ) || $_GET
 		}else{
 			error :
 			    $b_ajax['error'] = true;
-			    $b_ajax['message'] = "Nom d'etude existe déja. Merci de le modifier";
+			    $b_ajax['message'] = "Une étude portant le même nom a déja été ajoutée.";
 		}
 	}elseif($operation === 'update' && isset($form_data['id_etude'])){
 		$id = $form_data['id_etude'];

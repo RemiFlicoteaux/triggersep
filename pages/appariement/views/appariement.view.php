@@ -11,10 +11,10 @@
                         <div ><h3> Détails de l'étude <?php echo $nom_etude ?></h3></div>
 
                         <ul class="nav">
-                            <li class="<?= $get_etape == 1 ? 'active' : null; ?>"><a href="./?<?= make_query_string(['etape' => 1]); ?>">Détails de l’étude</a></li>
-                            <li class="<?= $get_etape == 2 ? 'active' : null; ?>"><a href="./?<?= make_query_string(['etape' => 2]); ?>">Variables de l'étude</a></li>
-                            <li class="<?= $get_etape == 3 ? 'active' : null; ?>"><a href="./?<?= make_query_string(['etape' => 3]); ?>">Appariement catalogue / variables études</a></li>
-                            <li class="<?= $get_etape == 4 ? 'active' : null; ?>"><a href="./?<?= make_query_string(['etape' => 4]); ?>">Insertion des données</a></li>
+                            <li class="<?= $allowed_step[1] ? ($get_etape == 1 ? 'active' : null) : 'disabled'; ?>"><a href="./?<?= make_query_string(['etape' => 1]); ?>">Détails de l’étude</a></li>
+                            <li class="<?= $allowed_step[2] ? ($get_etape == 2 ? 'active' : null) : 'disabled'; ?>"><a href="./?<?= make_query_string(['etape' => 2]); ?>">Variables de l'étude</a></li>
+                            <li class="<?= $allowed_step[3] ? ($get_etape == 3 ? 'active' : null) : 'disabled'; ?>"><a href="./?<?= make_query_string(['etape' => 3]); ?>">Appariement catalogue / variables études</a></li>
+                            <li class="<?= $allowed_step[4] ? ($get_etape == 4 ? 'active' : null) : 'disabled'; ?>"><a href="./?<?= make_query_string(['etape' => 4]); ?>">Insertion des données</a></li>
                         </ul>
 
                     </div> 

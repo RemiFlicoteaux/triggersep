@@ -39,14 +39,19 @@ $liste_etudes = ORM::for_table('etudes')
         ->distinct()
         ->find_array();
 $get_etape = isset($get_etape) && false === empty($get_etape) ? $get_etape : 1;
-
+$allowed_step = [
+    1 => true,
+    2 => true,
+    3 => false,
+    4 => false
+];
 
 
 /**
  * Lecture du Fichier Excel et enregistrement des données dans la base Mysql
  * Affichage des données dans un tableau
  */
-if (isset($_POST['Inserer'])) {
+if (isset($_POST['Inserer']) && $allowed_step[$get_etape]) {
     $id_etude = $_POST['id_etude'];
     $historique_data = ORM::for_table('historique_data')->where('id_etude', $id_etude)->find_one();
     if (strlen($historique_data['fichier']) > 1 && $_POST['etude']) {
@@ -99,6 +104,8 @@ if (isset($_GET['nom_etude']) || (isset($_POST['Upload']) || isset($_POST['Envoy
         $id_etude = $etude["id"];
         $historique_data = ORM::for_table('historique_data')->where('id_etude', $id_etude)->find_one();
         $variables_etude = ORM::for_table('variables')->where('id_etude', $id_etude)->find_array();
+        $allowed_step[3] = (false === empty($variables_etude));
+        $allowed_step[4] = (false === empty($var_id_patient));
         $format_fichier_data = $etude["format"];
         $req_main = ORM::for_table('catalogue')->table_alias('cat')->left_outer_join('variables', "var.id_var_catalogue = cat.id AND var.id_etude='" . $id_etude . "'", 'var');
         $req_main->select_many_expr("cat.id as id_var_cat,
@@ -136,7 +143,7 @@ if (isset($_GET['nom_etude']) || (isset($_POST['Upload']) || isset($_POST['Envoy
     }
 }
 
-if (isset($_POST['file_variables'])) {
+if (isset($_POST['file_variables']) && $allowed_step[$get_etape]) {
     $_nom_etude = $_POST['etude'];
     $file = $_FILES['file']['name'];
     $class_insertion_variables = 'tab-pane fade in active';
@@ -181,7 +188,7 @@ if (isset($_POST['file_variables'])) {
     //header("Location: " . "?p=appariement&nom_etude=$nom_etude");
 }
 
-if (isset($_POST['file_data'])) {
+if (isset($_POST['file_data']) && $allowed_step[$get_etape]) {
     if (strlen($_FILES['file_data']['name']) > 1) {
         $extension = pathinfo(PATH_DATA . $_FILES['file_data']['name'], PATHINFO_EXTENSION);
         if (strtoupper($extension) === 'CSV') {
@@ -254,3 +261,6 @@ if (isset($_POST['file_data'])) {
     }
 }
 
+if(false === $allowed_step[$get_etape]){
+    header('Location: ./?'. make_query_string(['etape' => 1]));
+}

@@ -29,7 +29,7 @@ if (isset($_GET['file_name'])) {
 
         if ($etude) {
 
-
+            //pourquoi cette requete alors qu'elle vient d'etre faite 10 lignes au dessus ?
             $etude = ORM::for_table('etudes')->where('nom_etude', $nom_etude)->where('id_projet', $b_id_projet)->find_one();
             $etude->nom_etude = $nom_etude;
             $etude->nom_de_fichier = $nom_fichier;

@@ -332,7 +332,7 @@ jQuery(document).ready(function () {
                     .fadeOut(100)
                     .fadeIn(300);
             
-            location.href = (window.location.href.replace('&pg=1', '') + '&pg=1');
+            location.reload();
         });
     });
 

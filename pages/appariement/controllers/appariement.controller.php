@@ -6,6 +6,9 @@
  * @author : AOUEY Yesser <yesser87@gmail.com>
  * @date : 14 Sept 2015
  */
+extract($_GET, EXTR_PREFIX_ALL, 'get');
+
+
 $infos['message'] = '';
 $infos['type'] = null;
 $table_data = [];
@@ -35,6 +38,9 @@ $liste_etudes = ORM::for_table('etudes')
         ->where('id_projet', $b_id_projet)
         ->distinct()
         ->find_array();
+$get_etape = isset($get_etape) && false === empty($get_etape) ? $get_etape : 1;
+
+
 
 /**
  * Lecture du Fichier Excel et enregistrement des données dans la base Mysql
@@ -78,10 +84,17 @@ if (isset($_POST['Inserer'])) {
         }
     }
 }
+
 if (isset($_GET['nom_etude']) || (isset($_POST['Upload']) || isset($_POST['Envoyer'])) || (isset($_POST['file_variables'])) || (isset($_POST['file_data']))) {
     $nom_etude = isset($_GET['nom_etude']) ? $_GET['nom_etude'] : $_POST['etude'];
     if (strlen($nom_etude) > 1) {
-        $etude = ORM::for_table('etudes')->where('nom_etude', $nom_etude)->where('id_projet', $b_id_projet)->find_one();
+        $etude = ORM::for_table('etudes')
+                ->select('*')
+                ->select_expr('DATE_FORMAT(date_creation, "%d/%m/%Y %H:%i:%s") AS date_creation')
+                ->select_expr('DATE_FORMAT(date_modification, "%d/%m/%Y %H:%i:%s") AS date_modification')
+                ->where('nom_etude', $nom_etude)
+                ->where('id_projet', $b_id_projet)
+                ->find_one();
         $var_id_patient = ORM::for_table('variables')->where('cle', 'ID_PATIENT')->where('nom_etude', $nom_etude)->find_one();
         $id_etude = $etude["id"];
         $historique_data = ORM::for_table('historique_data')->where('id_etude', $id_etude)->find_one();
@@ -100,10 +113,10 @@ if (isset($_GET['nom_etude']) || (isset($_POST['Upload']) || isset($_POST['Envoy
          var.type,
          var.id_var_catalogue");
         $data_etude = $req_main->where('id_projet', $b_id_projet)->find_array();
-        $table_variables = ORM::for_table('variables')->raw_query('SELECT * FROM variables WHERE variables.id_etude="' . $id_etude . '" AND variables.id_var_catalogue is NULL ORDER BY variable ASC')->find_array();
+        $table_variables = ORM::for_table($b_table_variables)
+                ->raw_query('SELECT * FROM variables WHERE variables.id_etude="' . $id_etude . '" AND variables.id_var_catalogue is NULL ORDER BY variable ASC')
+                ->find_array();
         $format_date = ORM::for_table('format_date')->where('id', $id_etude)->find_one();
-
-        // tableau formaté pour éviter les problèmes d'affichage
 
         $id = null;
         foreach ($data_etude as $key => $data) {
@@ -122,6 +135,7 @@ if (isset($_GET['nom_etude']) || (isset($_POST['Upload']) || isset($_POST['Envoy
         }
     }
 }
+
 if (isset($_POST['file_variables'])) {
     $_nom_etude = $_POST['etude'];
     $file = $_FILES['file']['name'];
@@ -166,6 +180,7 @@ if (isset($_POST['file_variables'])) {
     $variables_etude = ORM::for_table('variables')->where('nom_etude', $nom_etude)->find_array();
     //header("Location: " . "?p=appariement&nom_etude=$nom_etude");
 }
+
 if (isset($_POST['file_data'])) {
     if (strlen($_FILES['file_data']['name']) > 1) {
         $extension = pathinfo(PATH_DATA . $_FILES['file_data']['name'], PATHINFO_EXTENSION);

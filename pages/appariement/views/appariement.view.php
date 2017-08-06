@@ -11,23 +11,24 @@
                         <div ><h3> Détails de l'étude <?php echo $nom_etude ?></h3></div>
 
                         <ul class="nav">
-                            <li ><a data-toggle="tab" class="<?= ($pg != 1) ? 'active' : '' ; ?>" href="#details-etude">Détails de l’étude</a></li>
-                            <li class="<?= $class_insertion_variables ? 'active' : ''; ?>"><a data-toggle="tab" href="#insertion-variables-etude">Variables de l'étude</a></li>
-                            <li class="<?= ($class_insertion_variables || $class_insertion_data || $pg == 1) ? 'active' : ''; ?>"><a data-toggle="tab" href="#appariemnt-variable">Appariement catalogue / variables études</a></li>
-                            <li class="<?= $class_insertion_data ? 'active' : ''; ?>"><a data-toggle="tab" href="#insertion-data-etude">Insertion des données</a></li>
+                            <li class="<?= $get_etape == 1 ? 'active' : null; ?>"><a href="./?<?= make_query_string(['etape' => 1]); ?>">Détails de l’étude</a></li>
+                            <li class="<?= $get_etape == 2 ? 'active' : null; ?>"><a href="./?<?= make_query_string(['etape' => 2]); ?>">Variables de l'étude</a></li>
+                            <li class="<?= $get_etape == 3 ? 'active' : null; ?>"><a href="./?<?= make_query_string(['etape' => 3]); ?>">Appariement catalogue / variables études</a></li>
+                            <li class="<?= $get_etape == 4 ? 'active' : null; ?>"><a href="./?<?= make_query_string(['etape' => 4]); ?>">Insertion des données</a></li>
                         </ul>
+
                     </div> 
+
                     <br/>
-                    <div class="panel-body">
-                        <div class="tab-content">
 
-
-                            <!-- DETAILS ETUDE -->
-                            <div class="tab-pane fade in <?= ($pg != 1) ? 'active' : '';  ?>" id='details-etude'>
-                                <!-- MODULE LECTURE DE FICHIER -->
-                                <?php
-                                if (!empty($etude)):
-                                    element($b_page . '/details-etude', [
+                    <div id="steps">
+                        <div id="step-<?= $get_etape; ?>">
+                            <?php
+                            switch ($get_etape) {
+                                case 1:
+                                    $id = 'details-etude';
+                                    $element = 'details-etude';
+                                    $element_vars = [
                                         'b_etude' => $etude,
                                         'b_nom_etude' => $nom_etude,
                                         'b_historique_data' => $historique_data,
@@ -36,117 +37,63 @@
                                         'b_id_etude' => $id_etude,
                                         'variables_etude' => $variables_etude,
                                         'b_format_date' => $format_date['format']
-                                    ]);
-                                endif;
-                                ?>
-                                <?php /* if (!empty($variables_etude)):
-                                  element($b_page . '/variables-cles', [
-                                  'b_format_fichier' => $format_fichier_data,
-                                  'variables_etude' => $variables_etude,
-                                  ]);
-                                  endif; */ ?>
-                            </div>
-
-                            <!-- MODULE INSERTION DES VARIABLES ETUDE -->
-                            <div class="<?= $class_insertion_variables ? $class_insertion_variables : 'tab-pane fade'; ?>" id='insertion-variables-etude'>
-
-
-                                <?php
-                                if (!empty($etude)):
-                                    element($b_page . '/information-historique', [
-                                        'b_etude' => $etude
-                                    ]);
-                                endif;
-                                ?>
-                                <br />
-
-                                <?php
-                                element($b_page . '/gestion-variables-etude', [
-                                    'b_page' => $b_page,
-                                    'liste_etudes' => $liste_etudes,
-                                    'id_projet' => $b_id_projet,
-                                    'b_nom_etude' => $nom_etude,
-                                    'variables_etude' => $variables_etude,
-                                ]);
-                                ?>
-                            </div>
-                            <!-- MODULE APPARIEMENT VARIABLES -->
-                            <div class="tab-pane fade  <?= ($class_insertion_variables || $class_insertion_data || $pg == 1) ? 'in active' : null; ?>" id='appariemnt-variable'>
-
-                                <!-- MODULE LECTURE DE FICHIER -->
-                                <?php
-                                if (!empty($variables_etude)):
-                                    if (!empty($etude)):
-                                        element($b_page . '/information-historique', [
-                                            'b_etude' => $etude
-                                        ]);
-                                    endif;
-                                    ?>
-                                    <br />
-                                    <?php
-                                    if (!empty($variables_etude)):
-                                        element($b_page . '/variables-cles', [
-                                            'b_format_fichier' => $format_fichier_data,
-                                            'variables_etude' => $variables_etude,
-                                        ]);
-                                    endif;
-                                    ?>
-
-                                    <!-- TABLEAU DE DONNEES -->
-                                    <?php
-                                    if (count($etude_data_final_tab) > 1):
-                                        element($b_page . '/table-data', [
-                                            'table_data' => $etude_data_final_tab,
-                                            'table_data_count' => $table_data_count,
-                                            'b_nom_etude' => $nom_etude,
-                                            'b_id_etude' => $id_etude,
-                                            'b_format_fichier' => $format_fichier_data,
-                                            'infos' => $infos,
-                                            'variables_etude' => $variables_etude,
-                                            'table_variables' => $table_variables,
-                                            'id_projet' => $b_id_projet,
-                                            'b_etude' => $etude
-                                        ]);
-                                    endif;
-                                    ?>
-                                    <!-- LISTE DE VARIABLES ETUDE -->
-                                    <?php
-                                    element($b_page . '/liste-variables-etude', ['table_variables' => $table_variables,]);
-                                else:
-                                    $infos['message'] = "Vous devez effectuer l’étape précédente <br> Veuillez insérer les variables de l'étude.";
-                                    ?>
-                                    <div><?php display_template_message('alert', $infos['message'], 'danger'); ?></div> 
-                                <?php endif; ?>
-                            </div>
-
-                            <!-- MODULE INSERTION DATA ETUDE -->
-                            <div class="<?= $class_insertion_data ? $class_insertion_data : 'tab-pane fade'; ?>" id='insertion-data-etude'>
-
-                                <?php
-                                if (!empty($historique_data)):
-                                    element($b_page . '/historique-insertion-data', [
+                                    ];
+                                    break;
+                                case 2:
+                                    $id = 'insertion-variables-etude';
+                                    $element = 'gestion-variables-etude';
+                                    $element_vars = [
+                                        'etude' => $etude,
+                                        'b_page' => $b_page,
+                                        'liste_etudes' => $liste_etudes,
+                                        'id_projet' => $b_id_projet,
+                                        'b_nom_etude' => $nom_etude,
+                                        'variables_etude' => $variables_etude,
+                                    ];
+                                    break;
+                                case 3:
+                                    $id = 'appariemnt-variable';
+                                    $element = 'table-data';
+                                    $element_vars = [
+                                        'b_page' => $b_page,
+                                        'etude' => $etude,
+                                        'format_fichier_data' => $format_fichier_data,
+                                        'table_data' => $etude_data_final_tab,
+                                        'table_data_count' => $table_data_count,
+                                        'b_nom_etude' => $nom_etude,
+                                        'b_id_etude' => $id_etude,
+                                        'b_format_fichier' => $format_fichier_data,
+                                        'infos' => $infos,
+                                        'variables_etude' => $variables_etude,
+                                        'table_variables' => $table_variables,
+                                        'id_projet' => $b_id_projet,
                                         'b_etude' => $etude,
-                                        'b_historique_data' => $historique_data
-                                    ]);
-                                endif;
-                                ?>
-                                <br />  
-
-                                <?php
-                                if ($var_id_patient):
-                                    element($b_page . '/insertion-data-etude', [
+                                    ];
+                                    break;
+                                case 4:
+                                    $id = 'insertion-data-etude';
+                                    $element = 'insertion-data-etude';
+                                    $element_vars = [
+                                        'etude' => $etude,
+                                        'historique_data' => $historique_data,
                                         'b_page' => $b_page,
                                         'b_nom_etude' => $nom_etude,
                                         'id_projet' => $b_id_projet,
                                         'b_id_etude' => $id_etude,
-                                    ]);
-                                else:
-                                    $infos['message'] = "Vous devez effectuer l’étape précédente <br> Veuillez selectionnez les variables clés";
-                                    ?>
-                                    <div><?php display_template_message('alert', $infos['message'], 'danger'); ?></div> 
-                                <?php endif; ?>
+                                    ];
+                                    break;
+                            }
+                            ?>
+
+                            <div class="container-fluid" id="<?= $id ?>">
+                                <?php element($b_page . '/' . $element, $element_vars); ?>   
                             </div>
                         </div>
+                    </div>
+
+
+
+                    <div class="panel-body">
 
 
                         <!-- POPIN_VERIFICATION ET MISE AJOUR VARIABLES ETUDE -->

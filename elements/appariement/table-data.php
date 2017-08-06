@@ -1,3 +1,13 @@
+<?php
+ element($b_page . '/information-historique', [
+                                            'b_etude' => $etude
+                                        ]);
+ element($b_page . '/variables-cles', [
+                                            'b_format_fichier' => $format_fichier_data,
+                                            'variables_etude' => $variables_etude,
+                                        ]);
+
+?>
 
 <br>
 <!-- AFFICHAGE DATA TABLE APPARIEMENT -->
@@ -84,4 +94,5 @@
 </tfoot>
 </table>
 
+<?php element($b_page . '/liste-variables-etude', ['table_variables' => $table_variables]); ?>
 

@@ -1,3 +1,10 @@
+<?php
+ element($b_page . '/historique-insertion-data', [
+                                        'b_etude' => $etude,
+                                        'b_historique_data' => $historique_data
+                                    ]);
+
+?>
 <div style class="row" id='file_reader'>
     <form enctype="multipart/form-data" action="" method="post" id="reader-form">
         <div class="data">

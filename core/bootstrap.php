@@ -95,6 +95,7 @@ $b_acces_interdit_page_name = 'acces-interdit';
 $b_acces_interdit_message = 'Vous n\'avez pas les droits nécessaires pour effectuer cette opération.';
 $b_ajax_connection_page = 'ajax_connexion_utilisateur';
 $b_ip = $_SERVER["REMOTE_ADDR"];
+$b_full_requested_url = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
 //configuration generale
 $b_page = filter_input(INPUT_GET, 'p', FILTER_SANITIZE_STRING);

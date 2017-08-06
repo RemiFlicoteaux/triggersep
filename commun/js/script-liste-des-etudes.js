@@ -32,7 +32,7 @@ $(document).ready(function () {
         var message = $('#ajout-etude-modal .message');
         if ($('#nom_etude').val() !== '') {
 
-            var _id_etude = $('#id_etude').text();
+            var _id_etude = $('#_id_etude').val();
             var _nom_etude = $('#nom_etude').val();
             var _description = $('#description').val();
             var _format = $('#format').val();

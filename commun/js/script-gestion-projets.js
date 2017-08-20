@@ -46,18 +46,13 @@ $(document).ready(function () {
               operation: _operation
           }, function(data) {
 
-              state = !data.error;
-              if (state !== true) {
-                  //alert('variable enregistré');
-                  //alert(data.message);
+              if (data.error) {
                   message.children()
                       .find('span.message')
                       .text(data.message);
                   message
                       .fadeOut(100)
                       .fadeIn(300);
-                location.reload();
-
               } else {
 
                   location.reload();

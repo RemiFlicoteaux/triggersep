@@ -190,20 +190,42 @@ if (isset($_POST['file_variables']) && $allowed_step[$get_etape]) {
 
 if (isset($_POST['file_data']) && $allowed_step[$get_etape]) {
     if (strlen($_FILES['file_data']['name']) > 1) {
-        $extension = pathinfo(PATH_DATA . $_FILES['file_data']['name'], PATHINFO_EXTENSION);
-        if (strtoupper($extension) === 'CSV') {
+        $extension = strtolower(pathinfo(PATH_DATA . $_FILES['file_data']['name'], PATHINFO_EXTENSION));
+        $allowed_extension = ['csv', 'xls', 'xlsx', 'txt'];
+
+        if (in_array($extension, $allowed_extension)) {
             $extension_fichier_data = true;
             $nom_etude = isset($_GET['nom_etude']) ? $_GET['nom_etude'] : $nom_etude;
             $etude = ORM::for_table($b_table_etudes)->where('nom_etude', $nom_etude)->where('id_projet', $b_id_projet)->find_one();
             $file = $_FILES['file_data']['name'];
             move_uploaded_file($_FILES['file_data']['tmp_name'], PATH_DATA . $_FILES['file_data']['name']);
+            $file_path = PATH_DATA . $file;
             $class_details_etude = 'tab-pane fade in active';
             $format_fichier_data = isset($_POST['format_fichier']) ? $_POST['format_fichier'] : "1";
             $nbr_lignes = 0;
             $nbr_colones = 0;
             $row = 0;
             $etude_variables_from_data_file = [];
-            if (($handle = fopen(PATH_DATA . $file, "r")) !== FALSE) {
+
+            switch ($extension) {
+                case 'xls':
+                case 'xlsx':
+                    $inputFileType = PHPExcel_IOFactory::identify($file_path);
+                    $objReader = PHPExcel_IOFactory::createReader($inputFileType);
+                    $objPHPExcel = $objReader->load($file_path);
+                    $objPHPExcel->setActiveSheetIndex('0');
+                    $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV');
+                    
+                    $tmp_filename = uniqid() . '.csv';
+                    $file_path = PATH_DATA . $tmp_filename;
+                    $objWriter->save($file_path);
+                    break;
+            }
+
+
+
+
+            if (($handle = fopen($file_path, "r")) !== FALSE) {
                 while (($data = fgetcsv($handle, 0, $separateur)) !== FALSE) {
                     if (0 === $row) {
                         $etude_variables_from_data_file = $data;
@@ -252,6 +274,9 @@ if (isset($_POST['file_data']) && $allowed_step[$get_etape]) {
                 $insert_file_data->login = $_SESSION['utilisateur']['login'];
                 $insert_file_data->save();
             }
+        } else {
+            $infos['message'] = "Type de fichier ($extension) non pris en charge.";
+            $infos['type'] = 'danger';
         }
 
         //header("Location: ./?p=appariement&nom_etude=$nom_etude");
@@ -261,6 +286,6 @@ if (isset($_POST['file_data']) && $allowed_step[$get_etape]) {
     }
 }
 
-if(false === $allowed_step[$get_etape]){
-    header('Location: ./?'. make_query_string(['etape' => 1]));
+if (false === $allowed_step[$get_etape]) {
+    header('Location: ./?' . make_query_string(['etape' => 1]));
 }

@@ -133,7 +133,7 @@
                 </div>
             </div>
             <?php if ($infos['message']) : ?>
-                <div class="message">
+                <div class="container-fluid">
                     <?php display_template_message('alert', $infos['message'], $infos['type']); ?>
                 </div> 
                 <?php

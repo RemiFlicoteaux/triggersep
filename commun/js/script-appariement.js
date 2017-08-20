@@ -425,7 +425,7 @@ jQuery(document).ready(function () {
 
     insertion_data_etude_loader.hide();
     Inserer.click(function () {
-        $(this).prop('disabled', true);
+        $(this).hide();
         insertion_data_etude_loader.show();
     });
 });

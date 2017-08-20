@@ -26,3 +26,14 @@ element($b_page . '/historique-insertion-data', [
 <div class="text-center" id="insertion-data-etude-loader">
     <img src="<?= PATH_IMG ?>loader.gif" alt="" />
 </div>
+<br />
+<?php if ($b_fichier_ok) : ?>
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-success"><?= count($table_vars_reconnus); ?> variables reconnues</li>
+        <li class="list-group-item list-group-item-danger"><?= count($table_vars_inconnus); ?> variables non reconnues</li>
+        <?php foreach ($table_vars_inconnus as $v) : ?>
+            <li class="list-group-item"><?= $v; ?></li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
+

@@ -80,6 +80,9 @@
                                         'b_nom_etude' => $nom_etude,
                                         'id_projet' => $b_id_projet,
                                         'b_id_etude' => $id_etude,
+                                        'table_vars_reconnus' => $table_vars_reconnus,
+                                        'table_vars_inconnus' => $table_vars_inconnus,
+                                        'b_fichier_ok' => $b_fichier_ok,
                                     ];
                                     break;
                             }

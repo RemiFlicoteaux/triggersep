@@ -5,7 +5,7 @@
                 <div id="msg-traitement">
                     <?php if ($b_extension == false): ?>
                         <div class="alert alert-danger" role="alert">
-                            L'extension de fichier est incorrecte (le fichier doit etre un fichier csv)
+                            L'extension de fichier est incorrecte (les types de fichiers supportés sont les suivants <?= implode(', ', $allowed_extension); ?>).
                         </div>
                     <?php else: ?>
                         <div class="alert alert-success" role="alert">

@@ -18,15 +18,15 @@
  * @return boolean
  */
 function display_template_message($tpl, $message, $type = null) {
-  $t_path = PATH_TEMPLATE . $tpl . '.tpl.php';
-  if (file_exists($t_path)) {
-    if (is_array($message)) {
-      extract($message);
+    $t_path = PATH_TEMPLATE . $tpl . '.tpl.php';
+    if (file_exists($t_path)) {
+        if (is_array($message)) {
+            extract($message);
+        }
+        include $t_path;
+        return true;
     }
-    include $t_path;
-    return true;
-  }
-  return false;
+    return false;
 }
 
 /**
@@ -34,11 +34,11 @@ function display_template_message($tpl, $message, $type = null) {
  * @return Array 
  */
 function get_list_projets() {
-  $projets =ORM::for_table('projets')->find_array();
-  if ($projets) {
-    return ($projets);
-  }
-  return null;
+    $projets = ORM::for_table('projets')->find_array();
+    if ($projets) {
+        return ($projets);
+    }
+    return null;
 }
 
 /**
@@ -48,14 +48,14 @@ function get_list_projets() {
  * @return String 
  */
 function get_code_pj($short_name) {
-  $short_name = strtoupper($short_name);
-  $list_hp = get_list_hp();
-  foreach ($list_hp as $code_hp => $data) {
-    if (is_array($data) && array_key_exists($short_name, $data)) {
-      return $code_pj;
+    $short_name = strtoupper($short_name);
+    $list_hp = get_list_hp();
+    foreach ($list_hp as $code_hp => $data) {
+        if (is_array($data) && array_key_exists($short_name, $data)) {
+            return $code_pj;
+        }
     }
-  }
-  return null;
+    return null;
 }
 
 /**
@@ -65,9 +65,9 @@ function get_code_pj($short_name) {
  * @return String 
  */
 function removeAccents($str) {
-  $a = array('À', 'Á', 'Â', 'Ã', 'Ä', 'Å', 'Æ', 'Ç', 'È', 'É', 'Ê', 'Ë', 'Ì', 'Í', 'Î', 'Ï', 'Ð', 'Ñ', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ø', 'Ù', 'Ú', 'Û', 'Ü', 'Ý', 'ß', 'à', 'á', 'â', 'ã', 'ä', 'å', 'æ', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', 'ø', 'ù', 'ú', 'û', 'ü', 'ý', 'ÿ', 'Ā', 'ā', 'Ă', 'ă', 'Ą', 'ą', 'Ć', 'ć', 'Ĉ', 'ĉ', 'Ċ', 'ċ', 'Č', 'č', 'Ď', 'ď', 'Đ', 'đ', 'Ē', 'ē', 'Ĕ', 'ĕ', 'Ė', 'ė', 'Ę', 'ę', 'Ě', 'ě', 'Ĝ', 'ĝ', 'Ğ', 'ğ', 'Ġ', 'ġ', 'Ģ', 'ģ', 'Ĥ', 'ĥ', 'Ħ', 'ħ', 'Ĩ', 'ĩ', 'Ī', 'ī', 'Ĭ', 'ĭ', 'Į', 'į', 'İ', 'ı', 'Ĳ', 'ĳ', 'Ĵ', 'ĵ', 'Ķ', 'ķ', 'Ĺ', 'ĺ', 'Ļ', 'ļ', 'Ľ', 'ľ', 'Ŀ', 'ŀ', 'Ł', 'ł', 'Ń', 'ń', 'Ņ', 'ņ', 'Ň', 'ň', 'ŉ', 'Ō', 'ō', 'Ŏ', 'ŏ', 'Ő', 'ő', 'Œ', 'œ', 'Ŕ', 'ŕ', 'Ŗ', 'ŗ', 'Ř', 'ř', 'Ś', 'ś', 'Ŝ', 'ŝ', 'Ş', 'ş', 'Š', 'š', 'Ţ', 'ţ', 'Ť', 'ť', 'Ŧ', 'ŧ', 'Ũ', 'ũ', 'Ū', 'ū', 'Ŭ', 'ŭ', 'Ů', 'ů', 'Ű', 'ű', 'Ų', 'ų', 'Ŵ', 'ŵ', 'Ŷ', 'ŷ', 'Ÿ', 'Ź', 'ź', 'Ż', 'ż', 'Ž', 'ž', 'ſ', 'ƒ', 'Ơ', 'ơ', 'Ư', 'ư', 'Ǎ', 'ǎ', 'Ǐ', 'ǐ', 'Ǒ', 'ǒ', 'Ǔ', 'ǔ', 'Ǖ', 'ǖ', 'Ǘ', 'ǘ', 'Ǚ', 'ǚ', 'Ǜ', 'ǜ', 'Ǻ', 'ǻ', 'Ǽ', 'ǽ', 'Ǿ', 'ǿ', 'Ά', 'ά', 'Έ', 'έ', 'Ό', 'ό', 'Ώ', 'ώ', 'Ί', 'ί', 'ϊ', 'ΐ', 'Ύ', 'ύ', 'ϋ', 'ΰ', 'Ή', 'ή');
-  $b = array('A', 'A', 'A', 'A', 'A', 'A', 'AE', 'C', 'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I', 'D', 'N', 'O', 'O', 'O', 'O', 'O', 'O', 'U', 'U', 'U', 'U', 'Y', 's', 'a', 'a', 'a', 'a', 'a', 'a', 'ae', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'n', 'o', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'y', 'y', 'A', 'a', 'A', 'a', 'A', 'a', 'C', 'c', 'C', 'c', 'C', 'c', 'C', 'c', 'D', 'd', 'D', 'd', 'E', 'e', 'E', 'e', 'E', 'e', 'E', 'e', 'E', 'e', 'G', 'g', 'G', 'g', 'G', 'g', 'G', 'g', 'H', 'h', 'H', 'h', 'I', 'i', 'I', 'i', 'I', 'i', 'I', 'i', 'I', 'i', 'IJ', 'ij', 'J', 'j', 'K', 'k', 'L', 'l', 'L', 'l', 'L', 'l', 'L', 'l', 'l', 'l', 'N', 'n', 'N', 'n', 'N', 'n', 'n', 'O', 'o', 'O', 'o', 'O', 'o', 'OE', 'oe', 'R', 'r', 'R', 'r', 'R', 'r', 'S', 's', 'S', 's', 'S', 's', 'S', 's', 'T', 't', 'T', 't', 'T', 't', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'W', 'w', 'Y', 'y', 'Y', 'Z', 'z', 'Z', 'z', 'Z', 'z', 's', 'f', 'O', 'o', 'U', 'u', 'A', 'a', 'I', 'i', 'O', 'o', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'A', 'a', 'AE', 'ae', 'O', 'o', 'Α', 'α', 'Ε', 'ε', 'Ο', 'ο', 'Ω', 'ω', 'Ι', 'ι', 'ι', 'ι', 'Υ', 'υ', 'υ', 'υ', 'Η', 'η');
-  return str_replace($a, $b, $str);
+    $a = array('À', 'Á', 'Â', 'Ã', 'Ä', 'Å', 'Æ', 'Ç', 'È', 'É', 'Ê', 'Ë', 'Ì', 'Í', 'Î', 'Ï', 'Ð', 'Ñ', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ø', 'Ù', 'Ú', 'Û', 'Ü', 'Ý', 'ß', 'à', 'á', 'â', 'ã', 'ä', 'å', 'æ', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', 'ø', 'ù', 'ú', 'û', 'ü', 'ý', 'ÿ', 'Ā', 'ā', 'Ă', 'ă', 'Ą', 'ą', 'Ć', 'ć', 'Ĉ', 'ĉ', 'Ċ', 'ċ', 'Č', 'č', 'Ď', 'ď', 'Đ', 'đ', 'Ē', 'ē', 'Ĕ', 'ĕ', 'Ė', 'ė', 'Ę', 'ę', 'Ě', 'ě', 'Ĝ', 'ĝ', 'Ğ', 'ğ', 'Ġ', 'ġ', 'Ģ', 'ģ', 'Ĥ', 'ĥ', 'Ħ', 'ħ', 'Ĩ', 'ĩ', 'Ī', 'ī', 'Ĭ', 'ĭ', 'Į', 'į', 'İ', 'ı', 'Ĳ', 'ĳ', 'Ĵ', 'ĵ', 'Ķ', 'ķ', 'Ĺ', 'ĺ', 'Ļ', 'ļ', 'Ľ', 'ľ', 'Ŀ', 'ŀ', 'Ł', 'ł', 'Ń', 'ń', 'Ņ', 'ņ', 'Ň', 'ň', 'ŉ', 'Ō', 'ō', 'Ŏ', 'ŏ', 'Ő', 'ő', 'Œ', 'œ', 'Ŕ', 'ŕ', 'Ŗ', 'ŗ', 'Ř', 'ř', 'Ś', 'ś', 'Ŝ', 'ŝ', 'Ş', 'ş', 'Š', 'š', 'Ţ', 'ţ', 'Ť', 'ť', 'Ŧ', 'ŧ', 'Ũ', 'ũ', 'Ū', 'ū', 'Ŭ', 'ŭ', 'Ů', 'ů', 'Ű', 'ű', 'Ų', 'ų', 'Ŵ', 'ŵ', 'Ŷ', 'ŷ', 'Ÿ', 'Ź', 'ź', 'Ż', 'ż', 'Ž', 'ž', 'ſ', 'ƒ', 'Ơ', 'ơ', 'Ư', 'ư', 'Ǎ', 'ǎ', 'Ǐ', 'ǐ', 'Ǒ', 'ǒ', 'Ǔ', 'ǔ', 'Ǖ', 'ǖ', 'Ǘ', 'ǘ', 'Ǚ', 'ǚ', 'Ǜ', 'ǜ', 'Ǻ', 'ǻ', 'Ǽ', 'ǽ', 'Ǿ', 'ǿ', 'Ά', 'ά', 'Έ', 'έ', 'Ό', 'ό', 'Ώ', 'ώ', 'Ί', 'ί', 'ϊ', 'ΐ', 'Ύ', 'ύ', 'ϋ', 'ΰ', 'Ή', 'ή');
+    $b = array('A', 'A', 'A', 'A', 'A', 'A', 'AE', 'C', 'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I', 'D', 'N', 'O', 'O', 'O', 'O', 'O', 'O', 'U', 'U', 'U', 'U', 'Y', 's', 'a', 'a', 'a', 'a', 'a', 'a', 'ae', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'n', 'o', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'y', 'y', 'A', 'a', 'A', 'a', 'A', 'a', 'C', 'c', 'C', 'c', 'C', 'c', 'C', 'c', 'D', 'd', 'D', 'd', 'E', 'e', 'E', 'e', 'E', 'e', 'E', 'e', 'E', 'e', 'G', 'g', 'G', 'g', 'G', 'g', 'G', 'g', 'H', 'h', 'H', 'h', 'I', 'i', 'I', 'i', 'I', 'i', 'I', 'i', 'I', 'i', 'IJ', 'ij', 'J', 'j', 'K', 'k', 'L', 'l', 'L', 'l', 'L', 'l', 'L', 'l', 'l', 'l', 'N', 'n', 'N', 'n', 'N', 'n', 'n', 'O', 'o', 'O', 'o', 'O', 'o', 'OE', 'oe', 'R', 'r', 'R', 'r', 'R', 'r', 'S', 's', 'S', 's', 'S', 's', 'S', 's', 'T', 't', 'T', 't', 'T', 't', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'W', 'w', 'Y', 'y', 'Y', 'Z', 'z', 'Z', 'z', 'Z', 'z', 's', 'f', 'O', 'o', 'U', 'u', 'A', 'a', 'I', 'i', 'O', 'o', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'A', 'a', 'AE', 'ae', 'O', 'o', 'Α', 'α', 'Ε', 'ε', 'Ο', 'ο', 'Ω', 'ω', 'Ι', 'ι', 'ι', 'ι', 'Υ', 'υ', 'υ', 'υ', 'Η', 'η');
+    return str_replace($a, $b, $str);
 }
 
 /**
@@ -77,20 +77,20 @@ function removeAccents($str) {
  * @return Array $final_tab ou null si une erreur se produit lors de l'ouverture du CSV
  */
 function csv_to_array($csv) {
-  if (file_exists($csv)) {
-    $final_tab = array();
-    $handle = fopen($csv, "r");
-    if ($handle) {
-      while (($line = fgets($handle)) !== false) {
-        $tab = explode(';', $line);
-        $final_tab[$tab[0]] = array($tab[1] => $tab[2]);
-      }
-      fclose($handle);
-    } else {
-      return null;
+    if (file_exists($csv)) {
+        $final_tab = array();
+        $handle = fopen($csv, "r");
+        if ($handle) {
+            while (($line = fgets($handle)) !== false) {
+                $tab = explode(';', $line);
+                $final_tab[$tab[0]] = array($tab[1] => $tab[2]);
+            }
+            fclose($handle);
+        } else {
+            return null;
+        }
+        return $final_tab;
     }
-    return $final_tab;
-  }
 }
 
 /**
@@ -100,18 +100,18 @@ function csv_to_array($csv) {
  * @return String le contenu du template modifié
  */
 function set_tpl_var($tpl, $tab_var) {
-  if (file_exists($tpl)) {
-    $tab_var_search = array();
-    $content = file_get_contents($tpl);
-    $tab_var_key = array_keys($tab_var);
-    foreach ($tab_var_key as $k => $v) {
-      $tab_var_search[$k] = "{{{$v}}}";
-    }
+    if (file_exists($tpl)) {
+        $tab_var_search = array();
+        $content = file_get_contents($tpl);
+        $tab_var_key = array_keys($tab_var);
+        foreach ($tab_var_key as $k => $v) {
+            $tab_var_search[$k] = "{{{$v}}}";
+        }
 
-    $content = str_replace($tab_var_search, $tab_var, $content);
-    return $content;
-  }
-  return null;
+        $content = str_replace($tab_var_search, $tab_var, $content);
+        return $content;
+    }
+    return null;
 }
 
 /**
@@ -121,10 +121,10 @@ function set_tpl_var($tpl, $tab_var) {
  * @return boolean
  */
 function selected($option1, $option2 = null) {
-  if (is_array($option2)) {
-    return in_array($option1, $option2);
-  }
-  return $option1 == $option2;
+    if (is_array($option2)) {
+        return in_array($option1, $option2);
+    }
+    return $option1 == $option2;
 }
 
 /**
@@ -136,21 +136,21 @@ function selected($option1, $option2 = null) {
  * @return boolean renvoie false si le dossier de destination n'existe pas
  */
 function move_file($from, $to) {
-  $files = scandir($from);
-  if (file_exists($to)) {
-    foreach ($files as $fname) {
-      $extension = pathinfo($fname);
-      if (file_exists($to . $fname)) {
-        @chmod('0755', $fname);
-        @unlink($to . $fname);
-      }
-      if ($fname != '.' && $fname != '..' && $extension['extension'] == 'php') {
-        rename($from . $fname, $to . $fname);
-      }
+    $files = scandir($from);
+    if (file_exists($to)) {
+        foreach ($files as $fname) {
+            $extension = pathinfo($fname);
+            if (file_exists($to . $fname)) {
+                @chmod('0755', $fname);
+                @unlink($to . $fname);
+            }
+            if ($fname != '.' && $fname != '..' && $extension['extension'] == 'php') {
+                rename($from . $fname, $to . $fname);
+            }
+        }
+        return true;
     }
-    return true;
-  }
-  return false;
+    return false;
 }
 
 /**
@@ -162,22 +162,21 @@ function move_file($from, $to) {
  * @return boolean
  */
 function element($element, Array $vars = null, $script = null) {
-  $e_path = PATH_ELEMENT . $element . '.php';
-  $s_path = PATH_JS . $script . '.js';
+    $e_path = PATH_ELEMENT . $element . '.php';
+    $s_path = PATH_JS . $script . '.js';
 
-  if (file_exists($e_path)) {
-    if ($vars) {
-      extract($vars);
+    if (file_exists($e_path)) {
+        if ($vars) {
+            extract($vars);
+        }
+        include $e_path;
+        if ($script) {
+            echo "<script class='rm' src='$s_path'></script>";
+        }
+        return true;
     }
-    include $e_path;
-    if ($script) {
-      echo "<script class='rm' src='$s_path'></script>";
-    }
-    return true;
-  }
-  return false;
+    return false;
 }
-
 
 /**
  * convertie une date en timestamp
@@ -186,7 +185,7 @@ function element($element, Array $vars = null, $script = null) {
  * @return type
  */
 function reg_date_to_timestamp($date) {
-  return strtotime(str_replace('/', '-', $date));
+    return strtotime(str_replace('/', '-', $date));
 }
 
 /**
@@ -196,7 +195,7 @@ function reg_date_to_timestamp($date) {
  * @param type $key
  */
 function encode_array_items_utf8(&$item, $key) {
-  $item = utf8_encode($item);
+    $item = utf8_encode($item);
 }
 
 /**
@@ -206,20 +205,20 @@ function encode_array_items_utf8(&$item, $key) {
  * @return String query
  */
 function make_query_string(Array $query_params = []) {
-  $tab = !empty($query_params);
-  $query_string = $_SERVER['QUERY_STRING'];
-  parse_str($query_string, $params);
-  if ($tab) {
-    foreach ($query_params as $k => $v) {
-      if (array_key_exists($k, $params)) {
-        $params[$k] = $query_params[$k];
-      } else {
-        $params[$k] = $v;
-      }
+    $tab = !empty($query_params);
+    $query_string = $_SERVER['QUERY_STRING'];
+    parse_str($query_string, $params);
+    if ($tab) {
+        foreach ($query_params as $k => $v) {
+            if (array_key_exists($k, $params)) {
+                $params[$k] = $query_params[$k];
+            } else {
+                $params[$k] = $v;
+            }
+        }
+        return http_build_query($params);
     }
-    return http_build_query($params);
-  }
-  return $query_string . ($tab ? '' : '&' . http_build_query($query_params));
+    return $query_string . ($tab ? '' : '&' . http_build_query($query_params));
 }
 
 /**
@@ -244,35 +243,35 @@ function make_query_string(Array $query_params = []) {
  * @return boolean retournera aussi false si l'utilisateur n'existe pas
  */
 function check_user_right(Array $rights, $user_type, $module = null) {
-  
-  $joker = '*';
-  $user_type = strtoupper($user_type);
 
-  if ($module === null) {
-    return true;
-  }
+    $joker = '*';
+    $user_type = strtoupper($user_type);
 
-  if (array_key_exists($joker, $rights)) {
-    if (isset($rights[$user_type])) {
-      if (in_array('*', $rights[$user_type]) === false) {
-        foreach ($rights[$joker] as $right) {
-          array_push($rights[$user_type], $right);
+    if ($module === null) {
+        return true;
+    }
+
+    if (array_key_exists($joker, $rights)) {
+        if (isset($rights[$user_type])) {
+            if (in_array('*', $rights[$user_type]) === false) {
+                foreach ($rights[$joker] as $right) {
+                    array_push($rights[$user_type], $right);
+                }
+            }
+        } else {
+
+            return in_array($module, $rights[$joker]);
         }
-      }
-    } else {
-      
-      return in_array($module, $rights[$joker]);
     }
-  }
 
-  if (array_key_exists($user_type, $rights)) {
-    if (in_array('*', $rights[$user_type])) {
-      return !in_array($module, $rights[$user_type]);
-    } else {
-      return in_array($module, $rights[$user_type]);
+    if (array_key_exists($user_type, $rights)) {
+        if (in_array('*', $rights[$user_type])) {
+            return !in_array($module, $rights[$user_type]);
+        } else {
+            return in_array($module, $rights[$user_type]);
+        }
     }
-  }
-  return false;
+    return false;
 }
 
 /**
@@ -282,20 +281,20 @@ function check_user_right(Array $rights, $user_type, $module = null) {
  * @return Array
  */
 function read_dir($dir) {
-  $dirs = [];
-  if (is_dir($dir)) {
-    if ($dh = opendir($dir)) {
-      while (($file = readdir($dh)) !== false) {
-        if ($file === '.' || $file === '..') {
-          continue;
+    $dirs = [];
+    if (is_dir($dir)) {
+        if ($dh = opendir($dir)) {
+            while (($file = readdir($dh)) !== false) {
+                if ($file === '.' || $file === '..') {
+                    continue;
+                }
+                $dirs[] = $file;
+            }
+            closedir($dh);
         }
-        $dirs[] = $file;
-      }
-      closedir($dh);
     }
-  }
 
-  return $dirs;
+    return $dirs;
 }
 
 /**
@@ -306,23 +305,23 @@ function read_dir($dir) {
  * @return String|null
  */
 function page_path($page_name) {
-  $root = PATH_PAGES;
-  
-  $all_files_iterator = new RecursiveDirectoryIterator($root, FilesystemIterator::SKIP_DOTS);
+    $root = PATH_PAGES;
 
-  foreach ($all_files_iterator as $file) {
-    $page = $file->getFilename();
-    $page_path = $root . $page . '/';
+    $all_files_iterator = new RecursiveDirectoryIterator($root, FilesystemIterator::SKIP_DOTS);
 
-    $views = $page_path . 'views/';
-    $view_name = $page_name . '.view.php';
+    foreach ($all_files_iterator as $file) {
+        $page = $file->getFilename();
+        $page_path = $root . $page . '/';
 
-    if (is_dir($views) && in_array($view_name, read_dir($views))) {
-      return $page_path;
+        $views = $page_path . 'views/';
+        $view_name = $page_name . '.view.php';
+
+        if (is_dir($views) && in_array($view_name, read_dir($views))) {
+            return $page_path;
+        }
     }
-  }
 
-  return null;
+    return null;
 }
 
 /**
@@ -330,84 +329,79 @@ function page_path($page_name) {
  * 
  *
  */
-function get_variable($variable,$params) {
-  $table= array();
-	$var_commun=Stringy::create($variable);
-	$var_commun=$var_commun->toUpperCase();
-  $var_commun=$var_commun->replace('_',' ');
-  foreach ($params as $key => $value) {
-    # code...
-  	for($i=0;$i<9;$i++)
-  	{
-  		if($var_commun->contains($value.$i))
-  		{
-  			$pos=$var_commun->indexOf($value.$i);
-  			$table['var_comm']=$var_commun->slice(0, $pos);
-  			$table['temps']=$var_commun->slice($pos);
-  		
-  		}	
-  	}
-  }
-if($table!=null)
-{
-return $table;
-}else{
-  $table['var_comm']=$variable;
-  $table['temps']='J0';
-  return $table;
-}
-  
+function get_variable($variable, $params) {
+    $table = array();
+    $var_commun = Stringy::create($variable);
+    $var_commun = $var_commun->toUpperCase();
+    $var_commun = $var_commun->replace('_', ' ');
+    foreach ($params as $key => $value) {
+        # code...
+        for ($i = 0; $i < 9; $i++) {
+            if ($var_commun->contains($value . $i)) {
+                $pos = $var_commun->indexOf($value . $i);
+                $table['var_comm'] = $var_commun->slice(0, $pos);
+                $table['temps'] = $var_commun->slice($pos);
+            }
+        }
+    }
+    if ($table != null) {
+        return $table;
+    } else {
+        $table['var_comm'] = $variable;
+        $table['temps'] = 'J0';
+        return $table;
+    }
 }
 
 function csvstring_to_array($string, $CSV_SEPARATOR = ';', $CSV_ENCLOSURE = '"', $CSV_LINEBREAK = "\r\n") {
     $array1 = array(); //va contenir les lignes
-    $array2= array(); //va contenir les champs ("zat" ou zaze ou """azer" ...)
-    $arrayfinal= array(); //va contenir nos champs, correctement traités, avec une dimension par ligne.
-     
-    $array1=preg_split('#'.$CSV_LINEBREAK.'#',$string);//on éclate la chaine par ligne en array (une ligne par ligne)
-    for($i=0;$i<count($array1);$i++){//pour chaque ligne de notre chaine
-        for($o=0;$o<strlen($array1[$i]);$o++){//pour chaque caractère de la ligne
-            if(preg_match('#^'.$CSV_ENCLOSURE.'#',substr($array1[$i],$o))){//si sa commence par un ENCLOSURE
+    $array2 = array(); //va contenir les champs ("zat" ou zaze ou """azer" ...)
+    $arrayfinal = array(); //va contenir nos champs, correctement traités, avec une dimension par ligne.
+
+    $array1 = preg_split('#' . $CSV_LINEBREAK . '#', $string); //on éclate la chaine par ligne en array (une ligne par ligne)
+    for ($i = 0; $i < count($array1); $i++) {//pour chaque ligne de notre chaine
+        for ($o = 0; $o < strlen($array1[$i]); $o++) {//pour chaque caractère de la ligne
+            if (preg_match('#^' . $CSV_ENCLOSURE . '#', substr($array1[$i], $o))) {//si sa commence par un ENCLOSURE
                 //on enregistre le mot jusqu'a qu'on trouve un seul ENCLOSURE suivie d'un SEPARATOR (donc qui commence pas par un ENCLOSURE)
-                if(!preg_match('#^"(([^'.$CSV_ENCLOSURE.']*('.$CSV_ENCLOSURE.$CSV_ENCLOSURE.')?[^'.$CSV_ENCLOSURE.']*)*)'.$CSV_ENCLOSURE.$CSV_SEPARATOR.'#i',substr($array1[$i],$o,strlen($array1[$i])),$mot)){
-                    $mot[1]=substr(substr($array1[$i],$o,strlen($array1[$i])),1,-1);
+                if (!preg_match('#^"(([^' . $CSV_ENCLOSURE . ']*(' . $CSV_ENCLOSURE . $CSV_ENCLOSURE . ')?[^' . $CSV_ENCLOSURE . ']*)*)' . $CSV_ENCLOSURE . $CSV_SEPARATOR . '#i', substr($array1[$i], $o, strlen($array1[$i])), $mot)) {
+                    $mot[1] = substr(substr($array1[$i], $o, strlen($array1[$i])), 1, -1);
                 }$o+=2;
-            }
-            else{//sinon ...
+            } else {//sinon ...
                 //on prend le mot (ne contenant pas SEPARATOR ou ENCLOSURE) jusqu'au prochain SEPARATOR
-                if(!preg_match('#^([^'.$CSV_ENCLOSURE.$CSV_SEPARATOR.']*)'.$CSV_SEPARATOR.'#i',substr($array1[$i],$o,strlen($array1[$i])),$mot)){
-                    $mot[1]=substr($array1[$i],$o,strlen($array1[$i]));
+                if (!preg_match('#^([^' . $CSV_ENCLOSURE . $CSV_SEPARATOR . ']*)' . $CSV_SEPARATOR . '#i', substr($array1[$i], $o, strlen($array1[$i])), $mot)) {
+                    $mot[1] = substr($array1[$i], $o, strlen($array1[$i]));
                 }
             }
-        $o=$o+strlen($mot[1]);//on avance dans la ligne jusqu'au prochain mot
-        $array2[$i][]=str_replace($CSV_ENCLOSURE.$CSV_ENCLOSURE,$CSV_ENCLOSURE,$mot[1]);//on transforme les double ENCLOSURE par des simple
+            $o = $o + strlen($mot[1]); //on avance dans la ligne jusqu'au prochain mot
+            $array2[$i][] = str_replace($CSV_ENCLOSURE . $CSV_ENCLOSURE, $CSV_ENCLOSURE, $mot[1]); //on transforme les double ENCLOSURE par des simple
         }
     }
-  return $array2;
-}/*
-function date_format_converter($date, $format) {
-    
-    switch ($format)
-     {
-      case 'JJ/MM/YYYY':
-        # code...
-        break;
-      case 'JJ-MM-YYYY':
-        # code...
-        break;
-      case 'JJMMYYYY':
-        # code...
-        break;
-      case 'JJMONTHYYYY':
-        # code...
-        break;
-      default:
-        # code...
-        break;
-    }
-  return $new_date;
-}*/
+    return $array2;
+}
 
+/*
+  function date_format_converter($date, $format) {
+
+  switch ($format)
+  {
+  case 'JJ/MM/YYYY':
+  # code...
+  break;
+  case 'JJ-MM-YYYY':
+  # code...
+  break;
+  case 'JJMMYYYY':
+  # code...
+  break;
+  case 'JJMONTHYYYY':
+  # code...
+  break;
+  default:
+  # code...
+  break;
+  }
+  return $new_date;
+  } */
 
 /**
  * calcule la difference en jour depuis deux dates
@@ -417,7 +411,7 @@ function date_format_converter($date, $format) {
  * @return Int
  */
 function date_diff_day($d1, $d2) {
-  return round(abs(strtotime($d1) - strtotime($d2)) / 86400);
+    return round(abs(strtotime($d1) - strtotime($d2)) / 86400);
 }
 
 /**
@@ -429,19 +423,19 @@ function date_diff_day($d1, $d2) {
  * @return string|Array
  */
 function post_value($post, $empty = true) {
-  if (isset($_POST[$post])) {
-    if (false === $empty && empty($_POST[$post])) {
-      return false;
+    if (isset($_POST[$post])) {
+        if (false === $empty && empty($_POST[$post])) {
+            return false;
+        }
+        if (is_array($_POST[$post])) {
+            foreach ($_POST[$post] as $k => &$v) {
+                trim(htmlspecialchars($v));
+            }
+            return $_POST[$post];
+        }
+        return trim(htmlspecialchars($_POST[$post]));
     }
-    if(is_array($_POST[$post])){
-      foreach ($_POST[$post] as $k => &$v){
-        trim(htmlspecialchars($v));
-      }
-      return $_POST[$post];
-    }
-    return  trim(htmlspecialchars($_POST[$post]));
-  }
-  return '';
+    return '';
 }
 
 /**
@@ -453,19 +447,19 @@ function post_value($post, $empty = true) {
  * @return string|Array
  */
 function get_value($get, $empty = true) {
-  if (isset($_GET[$get])) {
-    if (false === $empty && empty($_GET[$get])) {
-      return false;
+    if (isset($_GET[$get])) {
+        if (false === $empty && empty($_GET[$get])) {
+            return false;
+        }
+        if (is_array($_GET[$get])) {
+            foreach ($_GET[$get] as $k => &$v) {
+                trim(htmlspecialchars($v));
+            }
+            return $_GET[$get];
+        }
+        return trim(htmlspecialchars($_GET[$get]));
     }
-     if(is_array($_GET[$get])){
-      foreach ($_GET[$get] as $k => &$v){
-        trim(htmlspecialchars($v));
-      }
-      return $_GET[$get];
-    }
-    return trim(htmlspecialchars($_GET[$get]));
-  }
-  return '';
+    return '';
 }
 
 /**
@@ -475,15 +469,15 @@ function get_value($get, $empty = true) {
  * @return string
  */
 function generate_password($length) {
-  $mdp = "";
-  $numbers_letters = "12346789abcedfghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  $i = 0;
-  while ($i < $length) {
-    $caractere = substr($numbers_letters, mt_rand(0, strlen($numbers_letters) - 1), 1);
-      $mdp .= $caractere;
-      $i++;
-  }
-  return $mdp;
+    $mdp = "";
+    $numbers_letters = "12346789abcedfghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    $i = 0;
+    while ($i < $length) {
+        $caractere = substr($numbers_letters, mt_rand(0, strlen($numbers_letters) - 1), 1);
+        $mdp .= $caractere;
+        $i++;
+    }
+    return $mdp;
 }
 
 /**
@@ -494,17 +488,16 @@ function generate_password($length) {
  * @return String
  */
 function alphanumeric_only($data) {
-  $str = '';
-  if (is_array($data)) {
-    foreach ($data as $v) {
-      $str .= $v;
+    $str = '';
+    if (is_array($data)) {
+        foreach ($data as $v) {
+            $str .= $v;
+        }
+    } else {
+        $str = $data;
     }
-  } else {
-    $str = $data;
-  }
-  return preg_replace('/[\W_]/', '', $str);
+    return preg_replace('/[\W_]/', '', $str);
 }
-
 
 /**
  * retourne le trigramme d'un site a partir de son numéro
@@ -514,18 +507,17 @@ function alphanumeric_only($data) {
  */
 function get_projet_name_by_id($id) {
 
-  $id_projet = intval($id);
-  
-  if ($id_projet) {
+    $id_projet = intval($id);
 
-  $projet_infos =ORM::for_table('projets')->find_one($id_projet);
-      if ($projet_infos){
-        return ($projet_infos->nom_projet);
-      }
+    if ($id_projet) {
 
-  }
+        $projet_infos = ORM::for_table('projets')->find_one($id_projet);
+        if ($projet_infos) {
+            return ($projet_infos->nom_projet);
+        }
+    }
 
-  return false;
+    return false;
 }
 
 /**
@@ -535,44 +527,87 @@ function get_projet_name_by_id($id) {
  * @param type $element
  */
 function dump($element, $exit = false) {
-  echo '<pre>', print_r($element, 1), '</pre>';
-  if ($exit) {
-    exit;
-  }
+    echo '<pre>', print_r($element, 1), '</pre>';
+    if ($exit) {
+        exit;
+    }
 }
 
 // in_array Multidimension
-
 function in_array_r($needle, $haystack) {
     $found = false;
     foreach ($haystack as $item) {
-    if ($item === $needle) { 
-            $found = true; 
-            break; 
+        if ($item === $needle) {
+            $found = true;
+            break;
         } elseif (is_array($item)) {
-            $found = in_array_r($needle, $item); 
-            if($found) { 
-                break; 
-            } 
-        }    
+            $found = in_array_r($needle, $item);
+            if ($found) {
+                break;
+            }
+        }
     }
     return $found;
 }
 
+function get_liste_des_etudes($id) {
 
-//
+    $id_projet = intval($id);
 
-function get_liste_des_etudes($id){
+    if ($id_projet) {
 
-  $id_projet = intval($id);
-  
-  if ($id_projet) {
+        $liste_des_etudes = ORM::for_table('etudes')->where('id_projet', $id_projet)->find_array();
+        if ($liste_des_etudes) {
+            return $liste_des_etudes;
+        }
+    }
 
-  $liste_des_etudes =ORM::for_table('etudes')->where('id_projet',$id_projet)->find_array();
-      if ($liste_des_etudes){
-        return $liste_des_etudes;
-      }
-  }
+    return false;
+}
 
-  return false;
+/**
+ * Tentative de detection du delimiteur dans un fichier csv
+ * 
+ * @param strin $line
+ * @return type
+ */
+function try_detect_csv_delimiter($line) {
+    $line = str_replace(["'", '"'], '', $line);
+    $delimiter_choice = [];
+    $more_probable_delimiter = null;
+    $prefered_delimiter = [',', ';', '|'];
+
+    preg_match_all('/[^\w\s]/', $line, $matches);
+
+    foreach (current($matches) as $delimiter) {
+        if (isset($delimiter_choice[$delimiter])) {
+            $delimiter_choice[$delimiter] ++;
+        } else {
+            $delimiter_choice[$delimiter] = 1;
+        }
+    }
+
+    $delimiter_max_occurence = max($delimiter_choice);
+    $possible_delimiter = array_keys(array_filter($delimiter_choice, function($nb_occurence) use ($delimiter_max_occurence) {
+                if ($nb_occurence === $delimiter_max_occurence) {
+                    return true;
+                }
+            }));
+
+    $nb_items_with_delimiter = 0;
+    foreach ($possible_delimiter as $delimiter) {
+        $nb_items = count(array_filter(explode($delimiter, $line)));
+        if ($nb_items >= $nb_items_with_delimiter) {
+            $nb_items_with_delimiter = $nb_items;
+            if (null === $more_probable_delimiter) {
+                $more_probable_delimiter = $delimiter;
+            } else {
+                if (in_array($delimiter, $prefered_delimiter)) {
+                    return $delimiter;
+                }
+            }
+        }
+    }
+
+    return $more_probable_delimiter;
 }

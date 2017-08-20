@@ -113,7 +113,7 @@
 
                         <!-- POPIN_VERIFICATION ET MISE AJOUR DATA -->
                         <?php
-                        if ($extension_fichier_data):
+                        if ($file_data_was_uploaded):
                             element($b_page . '/popin-verification-fichier-data', [
                                 'b_extension' => $extension_fichier_data,
                                 'available_variables' => $available_variables,
@@ -123,6 +123,7 @@
                                 'nom_etude' => $nom_etude,
                                 'separateur' => $separateur,
                                 'b_etude' => $etude,
+                                'allowed_extension' => $allowed_extension,
                             ]);
                             ?>
                             <script>

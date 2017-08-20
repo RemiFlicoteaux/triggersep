@@ -45,6 +45,7 @@ $allowed_step = [
     3 => false,
     4 => false
 ];
+$file_data_was_uploaded = false;
 
 
 /**
@@ -192,6 +193,7 @@ if (isset($_POST['file_data']) && $allowed_step[$get_etape]) {
     if (strlen($_FILES['file_data']['name']) > 1) {
         $extension = strtolower(pathinfo(PATH_DATA . $_FILES['file_data']['name'], PATHINFO_EXTENSION));
         $allowed_extension = ['csv', 'xls', 'xlsx', 'txt'];
+        $file_data_was_uploaded = true;
 
         if (in_array($extension, $allowed_extension)) {
             $extension_fichier_data = true;
@@ -224,6 +226,11 @@ if (isset($_POST['file_data']) && $allowed_step[$get_etape]) {
             }
 
             if (($handle = fopen($file_path, "r")) !== FALSE) {
+                $line = fgets($handle);
+                $delimiter = try_detect_csv_delimiter($line);
+                $separateur = $delimiter ? $delimiter : $separateur;
+                
+                rewind ($handle);
                 while (($data = fgetcsv($handle, 0, $separateur)) !== FALSE) {
                     if (0 === $row) {
                         $etude_variables_from_data_file = $data;
@@ -279,7 +286,7 @@ if (isset($_POST['file_data']) && $allowed_step[$get_etape]) {
 
         //header("Location: ./?p=appariement&nom_etude=$nom_etude");
     } else {
-        $infos['message'] = 'Aucun fichier a été sélèctionné!';
+        $infos['message'] = "Aucun fichier n'a été sélectionné";
         $infos['type'] = 'danger';
     }
 }

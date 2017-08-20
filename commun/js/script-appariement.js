@@ -145,9 +145,9 @@ jQuery(document).ready(function () {
             var _temps = $(this).attr('temps');
             var _id_etude = $(this).attr('id_etude');
             var _id_var_cat = txtbox.attr('id');
-            
+
             txtbox.val('');
-           
+
             $.getJSON('./?p=ajax_insert_var_ref', {
                 id_var_catalogue: _id_var_cat,
                 id_var_etude: _id_var_etude,
@@ -331,7 +331,7 @@ jQuery(document).ready(function () {
             message
                     .fadeOut(100)
                     .fadeIn(300);
-            
+
             location.reload();
         });
     });
@@ -592,9 +592,7 @@ function popin_fichier_data(div, b_traitement, _format_fichier_data) {
         var myButtons = {
             Fermer: function () {
                 var _nom_etude = $("#nom_etude").val();
-                window.location.replace("./?p=appariement&nom_etude=" + _nom_etude);
-                $(this).dialog("close");
-                //$(location).attr('href', './?p=gestion_variables')
+                location.href = "./?p=appariement&nom_etude=" + _nom_etude;
             }
         };
     }

@@ -25,53 +25,6 @@ $(document).ready(function () {
      *
      *
      */
-  var form_etude = $('#nouveau-projet');
-  $('#valide').on('click', function() {
-
-      var message = $('#ajout-projet-modal .message');
-      if ($('#nom_etude').val() !== '') {
-
-          var _id_projet = $('#id_projet').val();
-          var _nom_projet = $('#nom_projet').val();
-          var _description = $('#description').val();
-          var form_data = form_etude.serialize();
-          if (_id_projet != '') {
-              var _operation = 'update';
-          } else {
-              var _operation = 'insert';
-          }
-
-          $.getJSON('./?p=ajax_gestion_projets', {
-              form_data: form_data,
-              operation: _operation
-          }, function(data) {
-
-              if (data.error) {
-                  message.children()
-                      .find('span.message')
-                      .text(data.message);
-                  message
-                      .fadeOut(100)
-                      .fadeIn(300);
-              } else {
-
-                  location.reload();
-
-              }
-          });
-
-      } else {
-          alert("Le nom du projet est obligatoire");
-      }
-
-  });
-
-$('#ajout-nouveau-projet').on('click', function() {
-        document.getElementById('nouveau-projet').reset();
-    });
-    $('#close').on('click', function() {
-        $("#ajout-projet-modal").modal('hide');
-    });
 
 $('tr').on('click','span',function (event) {
 

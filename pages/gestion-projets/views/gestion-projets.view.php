@@ -47,10 +47,5 @@
         </div>
       </div> 
     </div>
-    <!-- MODULE INSERTION NOUVELLE ETUDE -->
-            <?php element($b_page . '/nouveau-projet',[
-                'b_page' => $b_page,
-                ]); ?>
-            <br /> 
   </div>
 </div>

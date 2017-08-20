@@ -1,4 +1,4 @@
-<div  id="ajout-projet-modal" role="dialog" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" style="display: none;">
+<div id="ajout-projet-modal" role="dialog" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" >
     <div class="modal-dialog">
 	<div class="modal-content">
             <div class="modal-header" align="center">
@@ -29,8 +29,8 @@
                             </div>
                             <div class="modal-footer">
                                 <div>
-                                    <button id="valide" type="button" class="btn btn-primary">Validé</button>
-                                    <button id="close" type="button" class="btn btn-danger" onclick="">Annuler</button>
+                                    <button id="ajout-nouveau-projet-valide" type="button" class="btn btn-success">Valider</button>
+                                    <button id="ajout-nouveau-projet-close" type="button" class="btn btn-danger" onclick="">Annuler</button>
                                 </div>
                            </div>
                         </div>

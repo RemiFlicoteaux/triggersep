@@ -61,9 +61,8 @@
             $liste_projets=get_list_projets(); 
             element('utilisateur/changer-projet', ['projets' =>$liste_projets]); ?>
         </div>
-       <div class="hide">
-          <?php
-          element('utilisateur/ajouter-projet'); ?>
+       <div class="">
+          <?php element('gestion-projets/nouveau-projet'); ?>
       </div>
 
       <?php $b_display_html ? include 'footer.php' : null; ?>  

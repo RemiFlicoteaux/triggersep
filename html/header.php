@@ -95,7 +95,7 @@
                                 <?php if (check_user_right($b_user_rights, $b_session_utilisateur['profile'], 'ajouter-projet')) : ?>
                                     <li class="divider"></li>
                                     <li class="<?= selected($b_page, 'ajouter-projet') ? 'active' : ''; ?>" id="ajouter-projet-opener" >
-                                        <a href="./?p=ajouter-projet">
+                                        <a data-target="#ajout-projet-modal" data-toggle="modal" role="button" href='#'>
                                             Ajouter un projet
                                         </a>
                                     </li>

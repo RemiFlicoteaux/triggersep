@@ -6,9 +6,8 @@
  * @author : Elbaz Michael <elbazmichael92@gmail.com>
  * @date : 21 avril 2015
  */
-
 //headers
-header('x-ua-compatible: ie=edge'); 
+header('x-ua-compatible: ie=edge');
 
 /**
  * nom de l'application :
@@ -79,21 +78,21 @@ define('PATH_HELPERS', PATH_COMMON . 'helpers/');
  * 
  * @const PATH_FUNCTION
  */
-define('PATH_FUNCTION', PATH_COMMON.'functions/');
+define('PATH_FUNCTION', PATH_COMMON . 'functions/');
 
 /**
  * chemin du dossier commun  :
  * 
  * @const PATH_AJAX
  */
-define('PATH_AJAX', PATH_COMMON.'ajax/');
+define('PATH_AJAX', PATH_COMMON . 'ajax/');
 
 /**
  * chemin du dossier javascript  :
  * 
  * @const PATH_JS
  */
-define('PATH_JS', PATH_COMMON.'js/');
+define('PATH_JS', PATH_COMMON . 'js/');
 
 /**
  * Chemin du dossier swf  :
@@ -107,14 +106,14 @@ define('PATH_SWF', PATH_COMMON . 'swf/');
  * 
  * @const PATH_IMG
  */
-define('PATH_IMG', PATH_COMMON.'images/');
+define('PATH_IMG', PATH_COMMON . 'images/');
 
 /**
  * chemin du dossier css  :
  * 
  * @const PATH_CSS
  */
-define('PATH_CSS', PATH_COMMON.'styles/');
+define('PATH_CSS', PATH_COMMON . 'styles/');
 
 /**
  * chemin du dossier pages (modules)  :
@@ -135,14 +134,14 @@ define('PATH_ELEMENT', 'elements/');
  * 
  * @const PATH_TEMPLATE
  */
-define('PATH_TEMPLATE', PATH_COMMON.'templates/');
+define('PATH_TEMPLATE', PATH_COMMON . 'templates/');
 
 /**
  * chemin du dossier layout  :
  * 
  * @const PATH_LAYOUT
  */
-define('PATH_LAYOUT', PATH_COMMON.'layout/');
+define('PATH_LAYOUT', PATH_COMMON . 'layout/');
 
 
 /**
@@ -250,13 +249,17 @@ define('LIMIT_LENGTH_PASSWORD_MIN', 4);
  */
 define('LIMIT_LENGTH_PASSWORD_MAX', 6);
 
-
-
 /**
  * Nombre de résultats maximums retourné par les requêtes SQL de RIP
  * 
  * @const LIMIT_RESULT_SQL
  * 
  */
-
 define('LIMIT_RESULT_SQL', 100);
+
+/**
+ * Lien vers l'aide du projet
+ * 
+ * @const LINK_HELP
+ */
+define('LINK_HELP', 'https://docs.google.com/document/d/1puUbbVhxvRVzFQQsBeWcC5CZhDR6MeawFS5FhpLT9Vk/edit');

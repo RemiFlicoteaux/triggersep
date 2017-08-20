@@ -113,7 +113,7 @@
                     <?php endif; ?>
                     <!-- HELP -->
                     <li>
-                        <a href="https://docs.google.com/document/d/1puUbbVhxvRVzFQQsBeWcC5CZhDR6MeawFS5FhpLT9Vk/edit" target="_blank">
+                        <a href="<?= LINK_HELP; ?>" target="_blank">
                             Aide <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
                         </a>
                     </li>

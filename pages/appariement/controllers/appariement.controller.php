@@ -210,20 +210,18 @@ if (isset($_POST['file_data']) && $allowed_step[$get_etape]) {
             switch ($extension) {
                 case 'xls':
                 case 'xlsx':
+                    // transformation en fichier csv
                     $inputFileType = PHPExcel_IOFactory::identify($file_path);
                     $objReader = PHPExcel_IOFactory::createReader($inputFileType);
                     $objPHPExcel = $objReader->load($file_path);
                     $objPHPExcel->setActiveSheetIndex('0');
                     $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV');
-                    
+
                     $tmp_filename = uniqid() . '.csv';
                     $file_path = PATH_DATA . $tmp_filename;
                     $objWriter->save($file_path);
                     break;
             }
-
-
-
 
             if (($handle = fopen($file_path, "r")) !== FALSE) {
                 while (($data = fgetcsv($handle, 0, $separateur)) !== FALSE) {

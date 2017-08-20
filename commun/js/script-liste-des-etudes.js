@@ -58,7 +58,11 @@ $(document).ready(function () {
                             .fadeIn(300);
 
                 } else {
-                    location.reload();
+                    if (data.redirect) {
+                        location.href = data.redirect;
+                    } else {
+                        location.reload();
+                    }
                 }
             });
 

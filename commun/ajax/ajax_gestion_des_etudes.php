@@ -33,8 +33,10 @@ if ((isset($_GET['form_data']) && false === empty($_GET['form_data']) ) || $_GET
             $date = ORM::for_table('format_date')->create();
             $date->format = 'd/m/YYYY';
             $date->id_etude = $id_etude['id'];
-            $etude->save();
-            $_SESSION['utilisateur']['liste_des_etudes'] = ORM::for_table('etudes')->where('id_projet', $id_projet)->find_array();
+            if ($etude->save()) {
+                $_SESSION['utilisateur']['liste_des_etudes'] = ORM::for_table('etudes')->where('id_projet', $id_projet)->find_array();
+                $b_ajax['redirect'] = "./?p=appariement&nom_etude={$etude->nom_etude}";
+            }
         } else {
             error :
             $b_ajax['error'] = true;
@@ -42,7 +44,7 @@ if ((isset($_GET['form_data']) && false === empty($_GET['form_data']) ) || $_GET
         }
     } else if ($operation === 'update' && isset($form_data['id_etude'])) {
         $id = $form_data['id_etude'];
-       
+
         $id_projet = $form_data['id_projet'];
         $description = $form_data['description'];
         $etude = ORM::for_table('etudes')->find_one($id);
@@ -70,10 +72,10 @@ if ((isset($_GET['form_data']) && false === empty($_GET['form_data']) ) || $_GET
             "nom_etude" => $_GET['nom_etude']
         ));
         $_SESSION['utilisateur']['liste_des_etudes'] = ORM::for_table('etudes')->where('id_projet', $id_projet)->find_array();
-        
-        
-        
-        
+
+
+
+
         $b_ajax['error'] = false;
         $b_ajax['message'] = "Etude supprimée";
     }

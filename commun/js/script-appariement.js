@@ -422,10 +422,12 @@ jQuery(document).ready(function () {
 
     var insertion_data_etude_loader = $('#insertion-data-etude-loader');
     var Inserer = $('.appariement button[name="Inserer"]');
+    var user_output_message = $('.appariement .user-output-message');
 
     insertion_data_etude_loader.hide();
     Inserer.click(function () {
         $(this).hide();
+        user_output_message.hide();
         insertion_data_etude_loader.show();
     });
 });

@@ -7,7 +7,7 @@
 						<br><br>
 					</div>
 					<div>
-						<p style="text-align: center;"><button type="submit" style="text-align: center;" value="Upload" name="Upload" class="btn btn-success">Upload</button></p>
+						<p style="text-align: center;"><button type="submit" style="text-align: center;" value="Upload" name="Upload" class="btn btn-success">Envoyer</button></p>
 					</div>
 				</div>
 		</div>

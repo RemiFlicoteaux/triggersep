@@ -201,7 +201,7 @@ function pop(div,b_traitement) {
                  .fadeIn(300);
           });   
         },
-        "Mèttre a jour": function() {
+        "Mettre à jour": function() {
             
          var _file_name=$("#file_name").val();
          message=$('#popin .message');

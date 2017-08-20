@@ -50,7 +50,7 @@ if (isset($_POST['Upload'])) {
 		$b_format_fichier = true;
 		$table_data = ORM::for_table('catalogue')->where('id_projet', $b_id_projet)->order_by_asc('nom_variable')->find_array();
 		if (empty($table_data)) {
-			$infos['message'] = 'Aucun données dans cataloque.';
+			$infos['message'] = 'Aucun données dans le cataloque.';
 			$infos['type'] = 'danger';
 		}
 	}
@@ -64,7 +64,7 @@ else {
 	$details_projet = ORM::for_table('projets')->where('id', $b_id_projet)->find_one();
 	$table_data = ORM::for_table('catalogue')->where('id_projet', $b_id_projet)->order_by_asc('nom_variable')->find_array();
 	if (empty($table_data)) {
-		$infos['message'] = 'Aucun données dans cataloque.';
+		$infos['message'] = 'Aucun données dans le cataloque.';
 		$infos['type'] = 'danger';
 	}
 }

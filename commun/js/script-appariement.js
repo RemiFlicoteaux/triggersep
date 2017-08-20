@@ -418,6 +418,16 @@ jQuery(document).ready(function () {
         });
     });
     //e format fichier des données
+
+
+    var insertion_data_etude_loader = $('#insertion-data-etude-loader');
+    var Inserer = $('.appariement button[name="Inserer"]');
+
+    insertion_data_etude_loader.hide();
+    Inserer.click(function () {
+        $(this).prop('disabled', true);
+        insertion_data_etude_loader.show();
+    });
 });
 
 function popin_fichier_variables(div, b_traitement, _format_fichier_data, _nom_etude) {

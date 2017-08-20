@@ -47,7 +47,6 @@ $allowed_step = [
 ];
 $file_data_was_uploaded = false;
 
-
 /**
  * Lecture du Fichier Excel et enregistrement des données dans la base Mysql
  * Affichage des données dans un tableau
@@ -58,35 +57,56 @@ if (isset($_POST['Inserer'])) {
     if (strlen($historique_data['fichier']) > 1 && $_POST['etude']) {
         $nom_etude = $_POST['etude'];
         $class_insertion_data = 'tab-pane fade in active';
-        $extension = pathinfo(PATH_DATA . $historique_data['fichier'], PATHINFO_EXTENSION);
-        if (strtoupper($extension) === 'CSV') {
-            $extension_fichier_data = true;
-            $separateur = !empty($_POST['separateur']) ? $_POST['separateur'] : ';';
-            $etude = ORM::for_table('etudes')->select('id')->select('nom_etude')->select('format')->where('nom_etude', $_POST['etude'])->where('id_projet', $b_id_projet)->find_one();
-            $id_patients = ORM::for_table('variables')->where('id_etude', $etude->id)->where('cle', 'ID_PATIENT')->find_one();
-            $date_j0 = ORM::for_table('variables')->where('id_etude', $etude->id)->where('cle', 'J0')->find_one();
-            $variables_etude = ORM::for_table('variables')->raw_query('SELECT * FROM variables where id_etude = "' . $etude->id . '"')->find_array();
-            $file_name_destination = pathinfo($historique_data['fichier'], PATHINFO_FILENAME) . '.' . $extension;
-            //move_uploaded_file($_FILES['file']['tmp_name'], PATH_DATA . $_FILES['file']['name']);
-            $ref = array();
-            $row = 0;
-            if (($handle = fopen(PATH_DATA . $historique_data['fichier'], "r")) !== FALSE) {
-                while (($data = fgetcsv($handle, 0, $separateur)) !== FALSE) {
-                    $num = count($data);
-                    if ($row == 0) {
-                        for ($c = 0; $c < $num; $c++) {
-                            if (in_array_r($data[$c], $variables_etude)) {
-                                $table_vars_reconnus[] = $data[$c];
-                            } else {
-                                $table_vars_inconnus[] = $data[$c];
-                            }
+        $file_path = PATH_DATA . $historique_data['fichier'];
+        $extension = pathinfo($file_path, PATHINFO_EXTENSION);
+
+        switch ($extension) {
+            case 'xls':
+            case 'xlsx':
+                // transformation en fichier csv
+                $inputFileType = PHPExcel_IOFactory::identify($file_path);
+                $objReader = PHPExcel_IOFactory::createReader($inputFileType);
+                $objPHPExcel = $objReader->load($file_path);
+                $objPHPExcel->setActiveSheetIndex('0');
+                $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV');
+
+                $tmp_filename = uniqid() . '.csv';
+                $file_path = PATH_DATA . $tmp_filename;
+                $objWriter->save($file_path);
+                break;
+        }
+
+        $extension_fichier_data = true;
+        $separateur = !empty($_POST['separateur']) ? $_POST['separateur'] : ';';
+        $etude = ORM::for_table('etudes')->select('id')->select('nom_etude')->select('format')->where('nom_etude', $_POST['etude'])->where('id_projet', $b_id_projet)->find_one();
+        $id_patients = ORM::for_table('variables')->where('id_etude', $etude->id)->where('cle', 'ID_PATIENT')->find_one();
+        $date_j0 = ORM::for_table('variables')->where('id_etude', $etude->id)->where('cle', 'J0')->find_one();
+        $variables_etude = ORM::for_table('variables')->raw_query('SELECT * FROM variables where id_etude = "' . $etude->id . '"')->find_array();
+        $file_name_destination = pathinfo($historique_data['fichier'], PATHINFO_FILENAME) . '.' . $extension;
+        //move_uploaded_file($_FILES['file']['tmp_name'], PATH_DATA . $_FILES['file']['name']);
+        $ref = array();
+        $row = 0;
+        if (($handle = fopen($file_path, "r")) !== FALSE) {
+            $line = fgets($handle);
+            $delimiter = try_detect_csv_delimiter($line);
+            $separateur = $delimiter ? $delimiter : $separateur;
+
+            rewind($handle);
+            while (($data = fgetcsv($handle, 0, $separateur)) !== FALSE) {
+                $num = count($data);
+                if ($row == 0) {
+                    for ($c = 0; $c < $num; $c++) {
+                        if (in_array_r($data[$c], $variables_etude)) {
+                            $table_vars_reconnus[] = $data[$c];
+                        } else {
+                            $table_vars_inconnus[] = $data[$c];
                         }
                     }
-                    $row++;
                 }
-                $b_fichier_ok = true;
-                fclose($handle);
+                $row++;
             }
+            $b_fichier_ok = true;
+            fclose($handle);
         }
     }
 }
@@ -229,8 +249,8 @@ if (isset($_POST['file_data']) && $allowed_step[$get_etape]) {
                 $line = fgets($handle);
                 $delimiter = try_detect_csv_delimiter($line);
                 $separateur = $delimiter ? $delimiter : $separateur;
-                
-                rewind ($handle);
+
+                rewind($handle);
                 while (($data = fgetcsv($handle, 0, $separateur)) !== FALSE) {
                     if (0 === $row) {
                         $etude_variables_from_data_file = $data;

@@ -3,6 +3,17 @@
         <form enctype="multipart/form-data" action="./?p=appariement" method="post" id="reader-form">
             <div class="data">
                 <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="encodage">Format des fichiers (Encodage)</label>
+                            <select id_etude="<?= $b_id_etude ?>" class="form-control" name="encodage" id="encodage">
+                                <option <?= selected($b_etude['encodage'], "ISO-8859-1") || null == $b_etude['nom_etude'] ? "selected" : null ?> value="ISO-8859-1" >Windows (ISO)</option>
+                                <option <?= selected($b_etude['encodage'], "UTF-8") ? "selected" : null ?> value="UTF-8">Linux (UTF-8)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-12 one">
                         <label > Selectionner le fichier de variables :</label>
                         <input class="btn btn-default" name="file" type="file" >
@@ -110,9 +121,9 @@
                 <div class="row">
                     <div class="col-md-12">
                         <label >Format du fichier des donneés de l'étude :</label>
-                        <label style="margin-left: 0%"><input type="radio" name="format_fichier" id_etude="<?= $b_etude['id']; ?>" value="1" <?= ($b_etude['format'] == '1') ? 'checked' : ''; ?>><a href="<?= PATH_DATA . 'format_fichier/format1.xlsx'; ?>" target="_blank"> Format 1</a></label> 
-                        <label style="margin-left: 0%"><input type="radio" name="format_fichier" id_etude="<?= $b_etude['id']; ?>" value="2" <?= ($b_etude['format'] == '2') ? 'checked' : ''; ?>><a href="<?= PATH_DATA . 'format_fichier/format2.xlsx'; ?>" target="_blank"> Format 2</a></label>
-                        <label style="margin-left: 0%"><input type="radio" name="format_fichier" id_etude="<?= $b_etude['id']; ?>" value="3" <?= ($b_etude['format'] == '3') ? 'checked' : ''; ?>><a href="<?= PATH_DATA . 'format_fichier/format3.xlsx'; ?>" target="_blank">Format3</a></label> 
+                        <label style="margin-left: 0%"><input type="radio" name="format_fichier" id_etude="<?= $b_etude['id']; ?>" value="1" <?= ($b_etude['format'] == '1') ? 'checked' : ''; ?>> Format 1</label> 
+                        <label style="margin-left: 0%"><input type="radio" name="format_fichier" id_etude="<?= $b_etude['id']; ?>" value="2" <?= ($b_etude['format'] == '2') ? 'checked' : ''; ?>>Format 2</label>
+                        <label style="margin-left: 0%"><input type="radio" name="format_fichier" id_etude="<?= $b_etude['id']; ?>" value="3" <?= ($b_etude['format'] == '3') ? 'checked' : ''; ?>>Format3</label> 
                     </div>
                 </div>
                 <div class="row">

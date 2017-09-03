@@ -10,12 +10,15 @@ element($b_page . '/historique-insertion-data', [
             <div class="row">
                 <div class="col-md-12 one">
 
-                    <input style="display: none;" name='id_etude' value="<?= $b_id_etude ?>"/>
+                    <input style="display: none;" id="id_etude" name='id_etude' value="<?= $etude['id'] ?>"/>
+                    <input style="display: none;" id="id_projet" name='id_projet' value="<?= $etude['id_projet'] ?>"/>
+                    <input style="display: none;" id="file_name" name='file_name' value="<?= $historique_data['fichier'] ?>"/>
+
                 </div>
                 <div>
                     <input style="display: none;" name='etude' value="<?= $b_nom_etude ?>"/>
                     <p style="text-align: center;">
-                        <button type="submit"  style="text-align: center;" value="Inserer" name="Inserer" class="btn btn-primary">Inserer</button>
+                        <button type="submit"  style="text-align: center;" id="Verifier" value="Verifier" name="Verifier" class="btn btn-primary">Verifier</button>
                     </p>
                 </div>
             </div>
@@ -32,11 +35,18 @@ element($b_page . '/historique-insertion-data', [
     <?php if ($b_fichier_ok) : ?>
         <ul class="list-group">
             <li class="list-group-item list-group-item-success"><?= count($table_vars_reconnus); ?> variables reconnues</li>
-            <li class="list-group-item list-group-item-danger"><?= count($table_vars_inconnus); ?> variables non reconnues</li>
-            <?php foreach ($table_vars_inconnus as $v) : ?>
-                <li class="list-group-item"><?= $v; ?></li>
+            <li class="list-group-item list-group-item-danger"><?= count($table_vars_inconnus); ?>
+                variables non reconnues <br>
+                <?php foreach ($table_vars_inconnus as $v) : ?>
+                    - <?= $v; ?>  <br>
                 <?php endforeach; ?>
+            </li>
         </ul>
+        <div class="text-center">
+            <button type="submit"  id="Inserer" value="Inserer" name="Inserer" class="btn btn-primary">Inserer</button>
+        </div>
+        <br />
+        <div id="message-info" class="alert alert-info hide"></div>
     <?php endif; ?>
 </div>
 

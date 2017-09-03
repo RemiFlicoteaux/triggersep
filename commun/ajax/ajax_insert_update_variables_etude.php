@@ -40,6 +40,13 @@ if (isset($_GET['file_name'])) {
 
                 $variable = $objWorksheet->getCellByColumnAndRow(0, $row)->getValue();
                 $libelle = $objWorksheet->getCellByColumnAndRow(1, $row)->getValue();
+            
+                if ($etude['encodage'] == null || $etude['encodage'] === 'ISO-8859-1') {
+                    $variable = utf8_encode($variable);
+                    $libelle = utf8_encode($libelle);
+                }
+
+
                 $variable_commun = get_variable($variable, $lettres);
 
                 if ($variable or $libelle) {
@@ -107,6 +114,11 @@ if (isset($_GET['file_name'])) {
             $variable = $objWorksheet->getCellByColumnAndRow(0, $row)->getValue();
             $libelle = $objWorksheet->getCellByColumnAndRow(1, $row)->getValue();
             $variable_commun = get_variable($variable, $lettres);
+
+            if ($etude['encodage'] == null || $etude['encodage'] === 'ISO-8859-1') {
+                $variable = utf8_encode($variable);
+                $libelle = utf8_encode($libelle);
+            }
 
             if ($variable or $libelle) {
 

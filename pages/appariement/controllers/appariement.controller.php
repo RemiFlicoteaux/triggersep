@@ -46,12 +46,13 @@ $allowed_step = [
     4 => false
 ];
 $file_data_was_uploaded = false;
+$first_line_tab = [];
 
 /**
  * Lecture du Fichier Excel et enregistrement des données dans la base Mysql
  * Affichage des données dans un tableau
  */
-if (isset($_POST['Inserer'])) {
+if (isset($_POST['Verifier'])) {
     $id_etude = $_POST['id_etude'];
     $historique_data = ORM::for_table('historique_data')->where('id_etude', $id_etude)->find_one();
     if (strlen($historique_data['fichier']) > 1 && $_POST['etude']) {
@@ -78,7 +79,7 @@ if (isset($_POST['Inserer'])) {
 
         $extension_fichier_data = true;
         $separateur = !empty($_POST['separateur']) ? $_POST['separateur'] : ';';
-        $etude = ORM::for_table('etudes')->select('id')->select('nom_etude')->select('format')->where('nom_etude', $_POST['etude'])->where('id_projet', $b_id_projet)->find_one();
+        $etude = ORM::for_table('etudes')->select('id')->select('nom_etude')->select('encodage')->select('format')->where('nom_etude', $_POST['etude'])->where('id_projet', $b_id_projet)->find_one();
         $id_patients = ORM::for_table('variables')->where('id_etude', $etude->id)->where('cle', 'ID_PATIENT')->find_one();
         $date_j0 = ORM::for_table('variables')->where('id_etude', $etude->id)->where('cle', 'J0')->find_one();
         $variables_etude = ORM::for_table('variables')->raw_query('SELECT * FROM variables where id_etude = "' . $etude->id . '"')->find_array();
@@ -90,22 +91,37 @@ if (isset($_POST['Inserer'])) {
             $line = fgets($handle);
             $delimiter = try_detect_csv_delimiter($line);
             $separateur = $delimiter ? $delimiter : $separateur;
+            $variables_etude_to_compare = [];
 
+            foreach ($variables_etude as $variable) {
+                $variables_etude_to_compare[$variable['variable']] = $variable['variable'];
+            }
             rewind($handle);
-            while (($data = fgetcsv($handle, 0, $separateur)) !== FALSE) {
+            while (($data_line = fgets($handle)) !== FALSE) {
+                if (null == $etude['encodage'] || $etude['encodage'] === 'ISO-8859-1') {
+                    $data_line = utf8_encode($data_line);
+                }
+                $data = explode($separateur, $data_line);
+
                 $num = count($data);
-                if ($row == 0) {
+                //format 1
+                if ($row == 0 || 2 == $etude['format'] || 3 == $etude['format']) {
                     for ($c = 0; $c < $num; $c++) {
-                        if (in_array_r($data[$c], $variables_etude)) {
-                            $table_vars_reconnus[] = $data[$c];
-                        } else {
-                            $table_vars_inconnus[] = $data[$c];
+                        if (isset($variables_etude_to_compare[$data[$c]])) {
+                            $table_vars_reconnus[$data[$c]] = $data[$c];
                         }
                     }
                 }
+
                 $row++;
             }
+           
+            $table_vars_inconnus = array_diff($variables_etude_to_compare, $table_vars_reconnus);
             $b_fichier_ok = true;
+
+            //$variables_etude
+
+
             fclose($handle);
         }
     }
@@ -145,6 +161,36 @@ if (isset($_GET['nom_etude']) || (isset($_POST['Upload']) || isset($_POST['Envoy
                 ->raw_query('SELECT * FROM variables WHERE variables.id_etude="' . $id_etude . '" AND variables.id_var_catalogue is NULL ORDER BY variable ASC')
                 ->find_array();
         $format_date = ORM::for_table('format_date')->where('id', $id_etude)->find_one();
+
+
+        $file_path = PATH_DATA . $historique_data['fichier'];
+        $extension = pathinfo($historique_data['fichier'], PATHINFO_EXTENSION);
+
+
+        switch ($extension) {
+            case 'xls':
+            case 'xlsx':
+                // transformation en fichier csv
+                $inputFileType = PHPExcel_IOFactory::identify($file_path);
+                $objReader = PHPExcel_IOFactory::createReader($inputFileType);
+                $objPHPExcel = $objReader->load($file_path);
+                $objPHPExcel->setActiveSheetIndex('0');
+                $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV');
+
+                $tmp_filename = uniqid() . '.csv';
+                $file_path = PATH_DATA . $tmp_filename;
+                $objWriter->save($file_path);
+                break;
+        }
+
+
+        if (($handle = fopen($file_path, "r")) !== FALSE) {
+            $line = fgets($handle);
+            $delimiter = try_detect_csv_delimiter($line);
+            $separateur = $delimiter ? $delimiter : $separateur;
+            $first_line_tab = array_flip(explode($separateur, $line));
+        }
+
 
         $id = null;
         foreach ($data_etude as $key => $data) {

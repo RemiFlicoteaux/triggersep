@@ -32,7 +32,9 @@
                      <select id='id_patient' >
                        <option>Selectionez un identifiant</option>
                        <?php foreach ($variables_etude as $variables) :?>
-                           <option id="<?=$variables['id'];?>" <?= selected($variables['cle'],'ID_PATIENT')?'selected':'';?>><?=$variables['variable'];?></option>   
+                             <?php if(isset($first_line_tab[$variables['variable']])) :?>
+                           <option id="<?=$variables['id'];?>" <?= selected($variables['cle'],'ID_PATIENT')?'selected':'';?>><?=$variables['variable'];?></option> 
+                           <?php endif ;?>
                        <?php endforeach;?>
                      </select>  
                 </div>
@@ -43,7 +45,10 @@
                      <select id='date_j0'>
                        <option>Selectionez variable de la date J0</option>
                        <?php foreach ($variables_etude as $variables) :?>
-                           <option id="<?=$variables['id'];?>" <?= selected($variables['cle'],'J0')?'selected':'';?>><?=$variables['variable'];?></option>   
+                        <?php if(isset($first_line_tab[$variables['variable']])) :?>
+                            <option id="<?=$variables['id'];?>" <?= selected($variables['cle'],'J0')?'selected':'';?>><?=$variables['variable'];?></option>   
+                           <?php endif ;?>
+                           
                        <?php endforeach;?>
                      </select>
                </div>
@@ -54,7 +59,9 @@
                      <select id='indicateur_repetition' >
                        <option>Selectionez un variable</option>
                        <?php foreach ($variables_etude as $variables) :?>
-                           <option id="<?=$variables['id'];?>" <?= selected($variables['cle'],'IR')?'selected':'';?>><?=$variables['variable'];?></option>   
+                            <?php if(isset($first_line_tab[$variables['variable']])) :?>
+                             <option id="<?=$variables['id'];?>" <?= selected($variables['cle'],'IR')?'selected':'';?>><?=$variables['variable'];?></option>   
+                           <?php endif ;?>
                        <?php endforeach;?>
                      </select>                 
               </div>
@@ -64,9 +71,12 @@
                      <label for="cles">Variables non répétées :</label></div>
                      <select class="form-control input-sm" id="cles" name="cles[]" multiple>
                        <?php foreach ($variables_etude as $variables) : ?>
-                         <option  id="cle_<?= $variables['id']; ?>" <?= selected($variables['cle'],'CLE')?'selected':'';?> value="<?= $variables['variable']; ?>">
-                           <?= $variables['variable']; ?>
-                         </option>        
+                            <?php if(isset($first_line_tab[$variables['variable']])) :?>
+                            <option  id="cle_<?= $variables['id']; ?>" <?= selected($variables['cle'],'CLE')?'selected':'';?> value="<?= $variables['variable']; ?>">
+                                <?= $variables['variable']; ?>
+                              </option>  
+                           <?php endif ;?>
+                              
                        <?php endforeach; ?>
                      </select>                  
               </div>    

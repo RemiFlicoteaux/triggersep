@@ -55,6 +55,7 @@
                                     $id = 'appariemnt-variable';
                                     $element = 'table-data';
                                     $element_vars = [
+                                        'first_line_tab' => $first_line_tab,
                                         'b_page' => $b_page,
                                         'etude' => $etude,
                                         'format_fichier_data' => $format_fichier_data,

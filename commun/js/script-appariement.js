@@ -216,8 +216,9 @@ jQuery(document).ready(function () {
     var variable = cles.find('option');
 
     cles.multiselect({
-        numberDisplayed: 1,
         includeSelectAllOption: false,
+        selectAllText: "Tout sélectionner",
+        numberDisplayed: 1,
         enableFiltering: true,
         enableCaseInsensitiveFiltering: true,
         buttonContainer: '<div id="select-multiple-cles" />',
@@ -421,14 +422,60 @@ jQuery(document).ready(function () {
 
 
     var insertion_data_etude_loader = $('#insertion-data-etude-loader');
-    var Inserer = $('.appariement button[name="Inserer"]');
+    var Verifier = $('.appariement button[name="Verifier"]');
     var user_output_message = $('.appariement .user-output-message');
 
     insertion_data_etude_loader.hide();
-    Inserer.click(function () {
+    Verifier.click(function () {
         $(this).hide();
         user_output_message.hide();
         insertion_data_etude_loader.show();
+    });
+
+
+    //encodage
+    var select_encodage = $('select#encodage');
+
+    select_encodage.change(function () {
+        var _id_etude = $(this).attr('id_etude');
+        var encodage = $(this).val();
+
+        $.getJSON('./?p=ajax_update_format', {
+            encodage: encodage,
+            id_etude: _id_etude
+        }, function (data) {
+            if (data.error === false) {
+                location.reload();
+            }
+        });
+    });
+
+    //Inserer
+
+
+    $('#Inserer').click(function (e) {
+        e.preventDefault();
+
+        var id_etude = $("#id_etude").val();
+        var id_projet = $("#id_projet").val();
+        var file_name = $("#file_name").val();
+        var message_info = $("#message-info");
+
+        $.getJSON('./?p=ajax_insert_update_data_etude', {
+            file_name: file_name,
+            id_etude: id_etude,
+            id_projet: id_projet
+        }, function (data) {
+
+            if (data.error) {
+                alert(data.error);
+            } else {
+                message_info.removeClass('hide');
+                message_info.text("Nombre de lignes insérées: " + data.results.nbr_lignes_inserees + " Nombre de lignes rejetées: " + data.results.nbr_lignes_rejetees);
+            }
+
+
+        });
     });
 });
 
@@ -545,54 +592,7 @@ function popin_fichier_data(div, b_traitement, _format_fichier_data) {
     });
     var myButtons = {
         "Inserer et Mettre à jour les données": function () {
-            var _file_name = $("#file_name").val();
-            var _id_projet = $("#id_projet").val();
-            var _nom_etude = $("#nom_etude").val();
-            //var _separateur = $("#separateur").val();
-            var _encodage = $("#encodage").val();
-            $.getJSON('./?p=ajax_insert_update_data_etude', {
-                file_name: _file_name,
-                nom_etude: _nom_etude,
-                id_projet: _id_projet,
-                //separateur: _separateur,
-                encodage: _encodage
-            }, function (data) {
 
-                if (data.error === false) {
-                    /*message_success.children()
-                     .removeClass('alert-danger')
-                     .addClass('alert-success');*/
-                    message_success.children()
-                            .find('span.message')
-                            .html('Nombres des lignes inserées : ' + data.results.nbr_lignes_inserees);
-                    message_danger.children()
-                            .find('span.message')
-                            .html('Nombres des lignes rejetées : ' + data.results.nbr_lignes_rejetees);
-                    message_success
-                            .fadeOut(100)
-                            .fadeIn(300);
-                    message_danger
-                            .fadeOut(100)
-                            .fadeIn(300);
-                } else {
-                    message_success.children()
-                            .removeClass('alert-success')
-                            .addClass('alert-danger');
-                    message_success.children()
-                            .find('span.message')
-                            .html(data.message);
-                }
-                var myButtons = {
-                    Fermer: function () {
-                        window.location.replace("./?p=appariement&nom_etude=" + _nom_etude);
-                        $(this).dialog("close");
-                        //$(location).attr('href', './?p=appariement')
-                    }
-                };
-                $("#" + div).dialog('option', 'buttons', myButtons);
-                document.getElementById(msg_traitement).style.display = 'none';
-
-            });
         },
         Annuler: function () {
             window.location.replace("./?p=appariement&nom_etude=" + _nom_etude);

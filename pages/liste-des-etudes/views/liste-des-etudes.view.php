@@ -46,13 +46,6 @@
                 </div>
             </div>
         </div>
-        <!-- MODULE INSERTION NOUVELLE ETUDE -->
-        <?php
-        element($b_page . '/ajout-nouvelle-etude', [
-            'b_page' => $b_page,
-            'id_projet' => $b_id_projet,
-        ]);
-        ?>
         <br />  
     </div>
 </div>

@@ -30,8 +30,8 @@
                             </div>
                             <div class="modal-footer">
                                 <div>
-                                    <button id="valide" type="button" class="btn btn-success">Valider</button>
-                                    <button id="close" type="button" class="btn btn-danger" onclick="">Annuler</button>
+                                    <button id="nouvelle-etude-valide" type="button" class="btn btn-success">Valider</button>
+                                    <button id="nouvelle-etude-close" type="button" class="btn btn-danger" onclick="">Annuler</button>
                                 </div>
                            </div>
                         </div>

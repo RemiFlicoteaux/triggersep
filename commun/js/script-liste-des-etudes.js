@@ -20,65 +20,7 @@ $(document).ready(function () {
         popup.focus();
     });
 
-    /*
-     *
-     * Ajout une nouvelle etude
-     *
-     *
-     */
-    var form_etude = $('#nouvelle-etude');
-    $('#valide').on('click', function () {
-
-        var message = $('#ajout-etude-modal .message');
-        if ($('#nom_etude').val() !== '') {
-
-            var _id_etude = $('#_id_etude').val();
-            var _nom_etude = $('#nom_etude').val();
-            var _description = $('#description').val();
-            var _format = $('#format').val();
-            var _id_projet = $('#id_projet').val();
-            var form_data = form_etude.serialize();
-            var _operation = 'insert';
-
-            if (_id_etude) {
-                _operation = 'update';
-            }
-
-            $.getJSON('./?p=ajax_gestion_des_etudes', {
-                form_data: form_data,
-                operation: _operation
-            }, function (data) {
-
-                if (data.error) {
-                    message.children()
-                            .find('span.message')
-                            .text(data.message);
-                    message
-                            .fadeOut(100)
-                            .fadeIn(300);
-
-                } else {
-                    if (data.redirect) {
-                        location.href = data.redirect;
-                    } else {
-                        location.reload();
-                    }
-                }
-            });
-
-        } else {
-            alert("Le champ 'nom de l'étude' est obligatoire.");
-        }
-
-    });
-
-    $('#nouvelle_etude').on('click', function () {
-        document.getElementById('nouvelle-etude').reset();
-        document.getElementById("nom_etude").readOnly = false;
-    });
-    $('#close').on('click', function () {
-        $("#ajout-etude-modal").modal('hide');
-    });
+    
 
 
     /**

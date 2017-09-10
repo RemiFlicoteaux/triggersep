@@ -67,5 +67,12 @@
 
       <?php $b_display_html ? include 'footer.php' : null; ?>  
 
+      <!-- MODULE INSERTION NOUVELLE ETUDE -->
+        <?php
+        element('liste-des-etudes/ajout-nouvelle-etude', [
+            'b_page' => $b_page,
+            'id_projet' => $b_id_projet,
+        ]);
+        ?>
   </body>
 </html>

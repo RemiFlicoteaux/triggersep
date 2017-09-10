@@ -1,4 +1,4 @@
-<?php //DEV & LOCAL ? element('mode_developpement',['db_name' => $b_db_name, 'session_utilisateur' => $b_session_utilisateur]) : '';             ?>
+<?php //DEV & LOCAL ? element('mode_developpement',['db_name' => $b_db_name, 'session_utilisateur' => $b_session_utilisateur]) : '';              ?>
 <div id="header">
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
@@ -35,10 +35,12 @@
                             <?php endif; ?>
                             <?php if (check_user_right($b_user_rights, $b_session_utilisateur['profile'], 'liste-des-etudes')) : ?>
                                 <li class="<?= selected($b_page, 'liste-des-etudes') ? 'active' : ''; ?>"><a href="./?p=liste-des-etudes">Liste des études</a></li>
+                                <li><a href="#" id="nouvelle_etude" data-target="#ajout-etude-modal" data-toggle="modal" role="button" >Ajouter une nouvelle étude</a></li>
                             <?php endif; ?>
+
                             <!--
                             <?php if (check_user_right($b_user_rights, $b_session_utilisateur['profile'], 'nouvelle_etude')) : ?>
-                                              <li class="<?= selected($b_page, 'nouvelle-etude') ? 'active' : ''; ?>"><a href="./?p=nouvelle-etude">Ajouter une étude</a></li>
+                                                  <li class="<?= selected($b_page, 'nouvelle-etude') ? 'active' : ''; ?>"><a href="./?p=nouvelle-etude">Ajouter une étude</a></li>
                             <?php endif; ?> -->
 
                             <?php if ($b_liste_des_etudes) : ?>
@@ -87,7 +89,7 @@
                             </a>
                             <ul class="dropdown-menu" role="menu">               
                                 <!--<?php if (check_user_right($b_user_rights, $b_session_utilisateur['profile'], 'utilisateurs')) : ?>
-                                                    <li class="<?= selected($b_page, 'utilisateurs') ? 'active' : ''; ?>"><a href="./?p=utilisateurs">Gestion Des utilisateurs</a></li>  
+                                                        <li class="<?= selected($b_page, 'utilisateurs') ? 'active' : ''; ?>"><a href="./?p=utilisateurs">Gestion Des utilisateurs</a></li>  
                                 <?php endif; ?> -->
                                 <?php if (check_user_right($b_user_rights, $b_session_utilisateur['profile'], 'gestion-projets')) : ?>
                                     <li class="<?= selected($b_page, 'gestion-projets') ? 'active' : ''; ?>"><a href="./?p=gestion-projets">Gestion des projets</a></li> 

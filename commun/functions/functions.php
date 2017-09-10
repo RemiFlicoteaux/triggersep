@@ -572,7 +572,7 @@ function get_liste_des_etudes($id) {
  * @return type
  */
 function try_detect_csv_delimiter($line) {
-    if(false === is_string($line)){
+    if(empty($line)){
         return false;
     }
     

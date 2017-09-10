@@ -46,22 +46,23 @@ if (strlen($_GET['file_name']) > 1 && isset($_GET['id_etude']) && isset($_GET['i
     $row = 0;
     $nbr_lignes_inserees = 0;
     $nbr_lignes_rejetees = 0;
-    
-    if(pathinfo( PATH_DATA . $_GET['file_name'], PATHINFO_EXTENSION)=='xls'||
-            pathinfo(PATH_DATA . $_GET['file_name'], PATHINFO_EXTENSION)=='xlsx')
-           $_GET['file_name']= pathinfo(PATH_DATA . $_GET['file_name'], PATHINFO_FILENAME) . '.csv';
-  
-  dump($_GET['file_name'],true);
+
+
+    if (pathinfo(PATH_DATA . $_GET['file_name'], PATHINFO_EXTENSION) == 'xls' ||
+            pathinfo(PATH_DATA . $_GET['file_name'], PATHINFO_EXTENSION) == 'xlsx') {
+        $_GET['file_name'] = pathinfo(PATH_DATA . $_GET['file_name'], PATHINFO_FILENAME) . '.csv';
+        $separateur = ',';
+    }
+
     if (($handle = fopen(PATH_DATA . $_GET['file_name'], "r")) !== FALSE) {
         while (($data = fgetcsv($handle, 0, $separateur)) !== FALSE) {
             $num = count($data);
 
             if ($row == 0) {
                 for ($c = 0; $c < $num; $c++) {
-                    $colum[$data[$c]] = $c;
+                    $colum[str_replace('"', '', $data[$c])] = $c;
                 }
             } else {
-
                 if ($num === count($colum)) {
                     foreach ($colum as $nomcol => $c) {
 

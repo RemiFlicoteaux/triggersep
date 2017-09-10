@@ -42,8 +42,9 @@ element($b_page . '/historique-insertion-data', [
                 <?php endforeach; ?>
             </li>
         </ul>
-        <div class="text-center">
+        <div class="text-center Inserer">
             <button type="submit"  id="Inserer" value="Inserer" name="Inserer" class="btn btn-primary">Inserer</button>
+            <br />
         </div>
         <br />
         <div id="message-info" class="alert alert-info hide"></div>

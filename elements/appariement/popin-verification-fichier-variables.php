@@ -3,9 +3,6 @@
 	<div class="modal-content">
                 <div id="popin" title="Vérification de Fichier">
                     <div id="msg-traitement"> 
-                    <?php if($etude==false): ?>
-                      <div class="alert alert-danger" role="alert">Veuillez vérifier la première colonne (Doit contenir le nom de l'étude)</div>  
-                     <?php endif;?>
                     <?php if($b_extension==false): ?>
                         <div class="alert alert-danger" role="alert">L'extension de fichier est incorrecte (l'extension de fichier doit etre xlsx ou xls)</div>
                     <?php else: ?>
@@ -22,6 +19,7 @@
                     <?php display_template_message('alert', '', 'success'); ?>
                   </div>
                   <input id='file_name' type='text' value='<?=$file_name_destination;?>' hidden>               
+                  <input id='nom_etude' type='text' value='<?= $_nom_etude; ?>' hidden>  
                 </div>
         </div>
     </div>

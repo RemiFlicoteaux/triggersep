@@ -16,7 +16,7 @@ if (isset($_GET['file_name'])) {
     $objWorksheet = $objPHPExcel->getActiveSheet();
 
     $highestRow = $objWorksheet->getHighestRow();
-    $nom_etude = $objWorksheet->getCellByColumnAndRow(0, 1)->getValue();
+    $nom_etude = $_GET['nom_etude'];
 
     $etude = ORM::for_table('etudes')
             ->where_equal('nom_etude', $nom_etude)

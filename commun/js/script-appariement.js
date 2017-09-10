@@ -452,9 +452,14 @@ jQuery(document).ready(function () {
 
     //Inserer
 
+    var Inserer = $('#Inserer');
+    var div_Inserer = $('div.Inserer');
 
-    $('#Inserer').click(function (e) {
+    Inserer.click(function (e) {
         e.preventDefault();
+        insertion_data_etude_loader.insertAfter(div_Inserer);
+        div_Inserer.hide();
+        insertion_data_etude_loader.show();
 
         var id_etude = $("#id_etude").val();
         var id_projet = $("#id_projet").val();
@@ -472,6 +477,9 @@ jQuery(document).ready(function () {
             } else {
                 message_info.removeClass('hide');
                 message_info.text("Nombre de lignes insérées: " + data.results.nbr_lignes_inserees + " Nombre de lignes rejetées: " + data.results.nbr_lignes_rejetees);
+                insertion_data_etude_loader.fadeOut(300, function () {
+                    div_Inserer.show();
+                });
             }
 
 
@@ -497,6 +505,7 @@ function popin_fichier_variables(div, b_traitement, _format_fichier_data, _nom_e
             $.getJSON('./?p=ajax_insert_update_variables_etude', {
                 boutton: 'update',
                 file_name: _file_name,
+                nom_etude: nom_etude,
                 format_fichier_data: _format_fichier_data
             }, function (data) {
 
@@ -528,10 +537,12 @@ function popin_fichier_variables(div, b_traitement, _format_fichier_data, _nom_e
         },
         "Suppression et Insertion": function () {
             var _file_name = $("#file_name").val();
+            var nom_etude = $("#nom_etude").val();
 
             $.getJSON('./?p=ajax_insert_update_variables_etude', {
                 boutton: 'delete',
                 file_name: _file_name,
+                nom_etude: nom_etude,
                 format_fichier_data: _format_fichier_data
             }, function (data) {
 

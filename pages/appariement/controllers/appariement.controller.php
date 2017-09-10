@@ -97,7 +97,7 @@ if (isset($_POST['Verifier'])) {
                 $variables_etude_to_compare[$variable['variable']] = $variable['variable'];
             }
             rewind($handle);
-            
+
             while (($data_line = fgets($handle)) !== FALSE) {
                 if (null == $etude['encodage'] || $etude['encodage'] === 'ISO-8859-1') {
                     $data_line = utf8_encode($data_line);
@@ -107,7 +107,7 @@ if (isset($_POST['Verifier'])) {
                 $num = count($data);
                 //format 1
                 if ($row == 0 || 2 == $etude['format'] || 3 == $etude['format']) {
-                    $data = str_replace('"', '',$data);
+                    $data = str_replace('"', '', $data);
                     for ($c = 0; $c < $num; $c++) {
                         if (isset($variables_etude_to_compare[$data[$c]])) {
                             $table_vars_reconnus[$data[$c]] = $data[$c];
@@ -117,7 +117,7 @@ if (isset($_POST['Verifier'])) {
 
                 $row++;
             }
-           
+
             $table_vars_inconnus = array_diff($variables_etude_to_compare, $table_vars_reconnus);
             $b_fichier_ok = true;
 
@@ -165,32 +165,34 @@ if (isset($_GET['nom_etude']) || (isset($_POST['Upload']) || isset($_POST['Envoy
         $format_date = ORM::for_table('format_date')->where('id', $id_etude)->find_one();
 
 
-        $file_path = PATH_DATA . $historique_data['fichier'];
-        $extension = pathinfo($historique_data['fichier'], PATHINFO_EXTENSION);
-        
-
-        switch ($extension) {
-            case 'xls':
-            case 'xlsx':
-                // transformation en fichier csv
-                $inputFileType = PHPExcel_IOFactory::identify($file_path);
-                $objReader = PHPExcel_IOFactory::createReader($inputFileType);
-                $objPHPExcel = $objReader->load($file_path);
-                $objPHPExcel->setActiveSheetIndex('0');
-                $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV');
-
-                $tmp_filename =pathinfo($historique_data['fichier'], PATHINFO_FILENAME) . '.csv';
-                $file_path = PATH_DATA . $tmp_filename;
-                $objWriter->save($file_path);
-                break;
-        }
+        if ((isset($_POST['Upload']) || isset($_POST['Envoyer'])) || (isset($_POST['file_variables'])) || (isset($_POST['file_data']))) {
+            $file_path = PATH_DATA . $historique_data['fichier'];
+            $extension = pathinfo($historique_data['fichier'], PATHINFO_EXTENSION);
 
 
-        if (($handle = fopen($file_path, "r")) !== FALSE) {
-            $line = fgets($handle);
-            $delimiter = try_detect_csv_delimiter($line);
-            $separateur = $delimiter ? $delimiter : $separateur;
-            $first_line_tab = array_flip(explode($separateur, $line));
+            switch ($extension) {
+                case 'xls':
+                case 'xlsx':
+                    // transformation en fichier csv
+                    $inputFileType = PHPExcel_IOFactory::identify($file_path);
+                    $objReader = PHPExcel_IOFactory::createReader($inputFileType);
+                    $objPHPExcel = $objReader->load($file_path);
+                    $objPHPExcel->setActiveSheetIndex('0');
+                    $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV');
+
+                    $tmp_filename = pathinfo($historique_data['fichier'], PATHINFO_FILENAME) . '.csv';
+                    $file_path = PATH_DATA . $tmp_filename;
+                    $objWriter->save($file_path);
+                    break;
+            }
+
+
+            if (($handle = fopen($file_path, "r")) !== FALSE) {
+                $line = fgets($handle);
+                $delimiter = try_detect_csv_delimiter($line);
+                $separateur = $delimiter ? $delimiter : $separateur;
+                $first_line_tab = array_flip(explode($separateur, $line));
+            }
         }
 
 
@@ -229,12 +231,8 @@ if (isset($_POST['file_variables']) && $allowed_step[$get_etape]) {
             $objPHPExcel->setActiveSheetIndex('0');
             $objWorksheet = $objPHPExcel->getActiveSheet();
             $highestRow = $objWorksheet->getHighestRow();
-            $nom_etude = $objWorksheet->getCellByColumnAndRow(0, 1)->getValue();
-            if (strlen($nom_etude)) {
-                $etude = ORM::for_table('etudes')->where_equal('nom_etude', $nom_etude)->where('id_projet', $b_id_projet)->find_one();
-            } else {
-                $etude = false;
-            }
+            $etude = ORM::for_table('etudes')->where_equal('nom_etude', $_nom_etude)->where('id_projet', $b_id_projet)->find_one();
+           
 
             $colone1 = $objWorksheet->getCellByColumnAndRow(0, 2)->getValue();
             $colone2 = $objWorksheet->getCellByColumnAndRow(1, 2)->getValue();
@@ -253,8 +251,8 @@ if (isset($_POST['file_variables']) && $allowed_step[$get_etape]) {
         $infos['message'] = 'Aucun fichier a été sélèctionné!';
         $infos['type'] = 'danger';
     }
-    $variables_etude = ORM::for_table('variables')->where('nom_etude', $nom_etude)->find_array();
-    //header("Location: " . "?p=appariement&nom_etude=$nom_etude");
+    $variables_etude = ORM::for_table('variables')->where('nom_etude', $_nom_etude)->find_array();
+    //header("Location: " . "?p=appariement&nom_etude=$_nom_etude");
 }
 
 if (isset($_POST['file_data']) && $allowed_step[$get_etape]) {

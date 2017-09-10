@@ -107,6 +107,7 @@
                                 'b_extension' => $extension,
                                 'b_noms_colones' => $b_noms_colones,
                                 'etude' => $etude,
+                                '_nom_etude' => $_nom_etude,
                                 'file_name_destination' => $file_name_destination
                             ]);
                             ?>

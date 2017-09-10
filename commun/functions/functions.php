@@ -572,6 +572,10 @@ function get_liste_des_etudes($id) {
  * @return type
  */
 function try_detect_csv_delimiter($line) {
+    if(false === is_string($line)){
+        return false;
+    }
+    
     $line = str_replace(["'", '"'], '', $line);
     $delimiter_choice = [];
     $more_probable_delimiter = null;

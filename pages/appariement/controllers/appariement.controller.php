@@ -165,10 +165,9 @@ if (isset($_GET['nom_etude']) || (isset($_POST['Upload']) || isset($_POST['Envoy
         $format_date = ORM::for_table('format_date')->where('id', $id_etude)->find_one();
 
 
+        $file_path = PATH_DATA . $historique_data['fichier'];
+        $extension = pathinfo($historique_data['fichier'], PATHINFO_EXTENSION);
         if ((isset($_POST['Upload']) || isset($_POST['Envoyer'])) || (isset($_POST['file_variables'])) || (isset($_POST['file_data']))) {
-            $file_path = PATH_DATA . $historique_data['fichier'];
-            $extension = pathinfo($historique_data['fichier'], PATHINFO_EXTENSION);
-
 
             switch ($extension) {
                 case 'xls':
@@ -185,16 +184,19 @@ if (isset($_GET['nom_etude']) || (isset($_POST['Upload']) || isset($_POST['Envoy
                     $objWriter->save($file_path);
                     break;
             }
-
-
-            if (($handle = fopen($file_path, "r")) !== FALSE) {
-                $line = fgets($handle);
-                $delimiter = try_detect_csv_delimiter($line);
-                $separateur = $delimiter ? $delimiter : $separateur;
-                $first_line_tab = array_flip(explode($separateur, $line));
-            }
         }
 
+
+        if (in_array($extension, ['xls', 'xlsx'])) {
+            $tmp_filename = pathinfo($historique_data['fichier'], PATHINFO_FILENAME) . '.csv';
+            $file_path = PATH_DATA . $tmp_filename;
+        }
+        if (($handle = fopen($file_path, "r")) !== FALSE) {
+            $line = str_replace('"', '', fgets($handle));
+            $delimiter = try_detect_csv_delimiter($line);
+            $separateur = $delimiter ? $delimiter : $separateur;
+            $first_line_tab = array_flip(explode($separateur, $line));
+        }
 
         $id = null;
         foreach ($data_etude as $key => $data) {
@@ -232,7 +234,7 @@ if (isset($_POST['file_variables']) && $allowed_step[$get_etape]) {
             $objWorksheet = $objPHPExcel->getActiveSheet();
             $highestRow = $objWorksheet->getHighestRow();
             $etude = ORM::for_table('etudes')->where_equal('nom_etude', $_nom_etude)->where('id_projet', $b_id_projet)->find_one();
-           
+
 
             $colone1 = $objWorksheet->getCellByColumnAndRow(0, 2)->getValue();
             $colone2 = $objWorksheet->getCellByColumnAndRow(1, 2)->getValue();

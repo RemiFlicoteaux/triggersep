@@ -12,14 +12,18 @@
                      <select id='id_patient'>
                        <option>Selectionez un identifiant</option>
                        <?php foreach ($variables_etude as $variables) :?>
-                           <option id="<?=$variables['id'];?>" <?= selected($variables['cle'],'ID_PATIENT')?'selected':'';?>><?=$variables['variable'];?></option>   
+                            <?php if(isset($first_line_tab[$variables['variable']])) :?>
+                                <option id="<?=$variables['id'];?>" <?= selected($variables['cle'],'ID_PATIENT')?'selected':'';?>><?=$variables['variable'];?></option>   
+                            <?php endif;?>
                        <?php endforeach;?>
                      </select>
                    <label>Date J0 : </label>
                      <select id='date_j0'>
                        <option>Selectionez variable de la date J0</option>
                        <?php foreach ($variables_etude as $variables) :?>
-                           <option id="<?=$variables['id'];?>" <?= selected($variables['cle'],'J0')?'selected':'';?>><?=$variables['variable'];?></option>   
+                           <?php if(isset($first_line_tab[$variables['variable']])) :?>
+                               <option id="<?=$variables['id'];?>" <?= selected($variables['cle'],'J0')?'selected':'';?>><?=$variables['variable'];?></option>   
+                           <?php endif;?>
                        <?php endforeach;?>
                      </select>
                    </div>

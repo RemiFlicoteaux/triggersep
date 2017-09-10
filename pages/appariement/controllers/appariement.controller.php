@@ -71,7 +71,7 @@ if (isset($_POST['Verifier'])) {
                 $objPHPExcel->setActiveSheetIndex('0');
                 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV');
 
-                $tmp_filename = uniqid() . '.csv';
+                $tmp_filename = pathinfo($historique_data['fichier'], PATHINFO_FILENAME) . '.csv';
                 $file_path = PATH_DATA . $tmp_filename;
                 $objWriter->save($file_path);
                 break;
@@ -97,6 +97,7 @@ if (isset($_POST['Verifier'])) {
                 $variables_etude_to_compare[$variable['variable']] = $variable['variable'];
             }
             rewind($handle);
+            
             while (($data_line = fgets($handle)) !== FALSE) {
                 if (null == $etude['encodage'] || $etude['encodage'] === 'ISO-8859-1') {
                     $data_line = utf8_encode($data_line);
@@ -106,6 +107,7 @@ if (isset($_POST['Verifier'])) {
                 $num = count($data);
                 //format 1
                 if ($row == 0 || 2 == $etude['format'] || 3 == $etude['format']) {
+                    $data = str_replace('"', '',$data);
                     for ($c = 0; $c < $num; $c++) {
                         if (isset($variables_etude_to_compare[$data[$c]])) {
                             $table_vars_reconnus[$data[$c]] = $data[$c];
@@ -165,7 +167,7 @@ if (isset($_GET['nom_etude']) || (isset($_POST['Upload']) || isset($_POST['Envoy
 
         $file_path = PATH_DATA . $historique_data['fichier'];
         $extension = pathinfo($historique_data['fichier'], PATHINFO_EXTENSION);
-
+        
 
         switch ($extension) {
             case 'xls':
@@ -177,7 +179,7 @@ if (isset($_GET['nom_etude']) || (isset($_POST['Upload']) || isset($_POST['Envoy
                 $objPHPExcel->setActiveSheetIndex('0');
                 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV');
 
-                $tmp_filename = uniqid() . '.csv';
+                $tmp_filename =pathinfo($historique_data['fichier'], PATHINFO_FILENAME) . '.csv';
                 $file_path = PATH_DATA . $tmp_filename;
                 $objWriter->save($file_path);
                 break;

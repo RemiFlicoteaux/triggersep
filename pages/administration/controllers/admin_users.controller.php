@@ -53,7 +53,7 @@ if (post_value('active')) {
         ->set_expr('active', '!active')
         ->save();
 
-    $new_statut = ORM::for_table($b_table_utilisateur)
+    //$new_statut = ORM::for_table($b_table_utilisateur)
   }
 }
 

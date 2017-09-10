@@ -1,7 +1,7 @@
 <div id="triggersep">
   <div class="container-fluid">
     <div class="title">
-      <h3>Gestion du projet <?php echo $b_name_projet; ?></h3>
+      <h3>Gestion du projet  <?php echo $b_name_projet; ?></h3>
     </div>
     <div>
       <div class="info">
@@ -56,8 +56,10 @@
                     'b_noms_colones' => $b_noms_colones,
                     'file_name_destination' => $file_name_destination 
                       ]); ?>
+              
+              
               <script>
-               pop('popin',<?=$b_fichier_ok ? 1 : 0;?>);
+               pop('popin',<?=$b_fichier_ok ? 1 : 0;?>, <?= $no_data ? 1 : 0 ?>);
               </script>
               <?php endif; ?>
                </div> 

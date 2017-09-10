@@ -32,7 +32,7 @@ if(strlen($_FILES['file']['name'])>1 )
     $table_data = ORM::for_table('catalogue')->where('id_projet',$b_id_projet)->order_by_asc('nom_variable')->find_array(); 
     if(empty($table_data))
     {
-            $infos['message'] = 'Aucun données dans le cataloque.' ;
+            $infos['message'] = 'Aucune donnée dans le catalogue.' ;
         $infos['type'] = 'danger';
     }		
 }else{

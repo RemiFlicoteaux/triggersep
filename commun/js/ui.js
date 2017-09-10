@@ -221,7 +221,7 @@ jQuery(document).ready(function () {
     $('#ajout-nouveau-projet-valide').on('click', function () {
 
         var message = $('#ajout-projet-modal .message');
-        if ($('#nom_etude').val() !== '') {
+        if ($('#nom_projet').val() !== '') {
 
             var _id_projet = $('#id_projet').val();
             var _nom_projet = $('#nom_projet').val();

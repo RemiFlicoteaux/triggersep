@@ -15,6 +15,7 @@ if (strlen($_GET['file_name']) > 1 && isset($_GET['id_etude']) && isset($_GET['i
     
     foreach ($p as $val) {
         $parametre[$val['variable']]['type'] = $val['type'];
+        $parametre[$val['variable']]['unite'] = $val['unite'];
         $parametre[$val['variable']]['temps'] = $val['temps'];
         $parametre['__cle'] = array();
         if ($val['cle'] == 'CLE')
@@ -104,6 +105,17 @@ if (strlen($_GET['file_name']) > 1 && isset($_GET['id_etude']) && isset($_GET['i
                                 break;
                             //format 1 et 2
                             default:
+                                if(isset($parametre[$nomcol])){
+                                    if($parametre[$nomcol]['type']==='date'){
+                                       $dd= DateTime::createFromFormat(isset($format_date->format) ? $format_date->format : 'd/m/Y',$data[$c]);
+                                       
+                                       
+                                     if(!empty($dd)) {
+                                         $data[$c]=$dd->format('Y-m-d');
+                                     
+                                     }
+                                    }
+                                }
                                 if ($encodage == 'UTF-8')
                                     $tab['valeur'] = $data[$c];
                                 else

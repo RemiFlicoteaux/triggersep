@@ -128,36 +128,33 @@ if($format_export==='Export_ligne')
                exit(0);
 }else
   {
-    $req_main = ORM::for_table('')
-                ->raw_query("SELECT cat.id,var.temps,CONCAT( cat.nom_variable, var.temps) as var_ref
-                            FROM catalogue cat, `variables` var
-                            WHERE id_var_catalogue = cat.id and id_etude='".$etudes[$i]['id']."' and id_projet='$b_id_projet'
-                            GROUP BY cat.id,var_ref");
-           $var_rows=$req_main->find_array(); 
-
-    ob_clean();
-     $csv_rows_raw[1]='Nom_etude'; 
-      
+    $TabNomEtudes='';
     for($i=0;$i<count($etudes);$i++){
-  
-        $Ref=[];
-      for ($j=0;$j<count($var_rows);$j++)$Ref[$var_rows[$j]['var_ref']]='';  
-        //recuperer les variables de l'etude i
-              $req_main = ORM::for_table('')
-                ->raw_query(" SELECT variable, concat( cat.nom_variable, var.temps ) AS ref
+        $TabNomEtudes.=$etudes[$i]['id'].',';
+        
+    }
+    
+      $Ref=[];
+      $req_main = ORM::for_table('')
+                ->raw_query(" SELECT variable, concat( cat.nom_variable, var.temps ) AS ref, nom_etude
                                 FROM variables var, catalogue cat
-                                WHERE var.id_var_catalogue = cat.id and var.id_etude='".$etudes[$i]['id']."' and cat.id_projet='". $b_id_projet."'");
-           $var_et=$req_main->find_array(); 
-           //dump($var_et,true);
-            for ($j=0;$j<count($var_et);$j++)$Ref[$var_et[$j]['ref']]=$var_et[$j]['variable'];  
-      
+                                WHERE var.id_var_catalogue = cat.id and var.id_etude in (".substr($TabNomEtudes,0,-1).") and cat.id_projet='". $b_id_projet."'");
+      $var_et=$req_main->find_array(); 
+      //dump($var_et,true);
+      for ($j=0;$j<count($var_et);$j++){
+          $Ref[$var_et[$j]['ref']][$var_et[$j]['nom_etude']]=$var_et[$j]['variable']; 
+          }
+    ob_clean();
+    $csv_rows_raw[1]='Nom_etude'; 
+           
+    for($i=0;$i<count($etudes);$i++){
+   
         $j=2;
         foreach ($Ref as $key => $var)
         {
-            $csv_rows_raw[$j] =$var;
+            $csv_rows_raw[$j] =$key;
             $j++;
-            $csv_rows_raw[$j] ='Date';
-            $j++;
+
         }
         $csv_rows = array_map('utf8_decode', $csv_rows_raw);
         $csv_name = 'export-données-patients';
@@ -172,7 +169,7 @@ if($format_export==='Export_ligne')
         $db=$cn->selectDB("bd_patients");
         $collection=$db->selectCollection('Patients');
         $data= $collection->find(array('nom_etude' =>$etudes[$i]['nom_etude']));
-        
+         
         //export les données des patients dans mongoDB 
         $tab_data_export = [];
          if(!empty($data)):  
@@ -181,19 +178,22 @@ if($format_export==='Export_ligne')
              array_push($tab_data_export,$etudes[$i]['nom_etude']);
 
               foreach($Ref as $key => $var){
-                 if(isset($vars[$var])):
-                          if(isset($vars[$var][0]['valeur'])):
-                            array_push($tab_data_export,$vars[$var][0]['valeur']);
-                            if(isset($vars[$var][0]['date'])):
-                              array_push($tab_data_export,$vars[$var][0]['date']);
-                            else:
-                              array_push($tab_data_export,'');
-                            endif;
-                          else:
-                            array_push($tab_data_export,$vars[$var]);
-                            array_push($tab_data_export,'');
-                          endif;
+                 if(isset($var[$etudes[$i]['nom_etude']])):
+                    $variable_etude=$var[$etudes[$i]['nom_etude']];
+                    if(isset($vars[$variable_etude])):
+                             if(isset($vars[$variable_etude][0]['valeur'])):
+                               array_push($tab_data_export,$vars[$variable_etude][0]['valeur']);
+                             else:
+                               array_push($tab_data_export,$vars[$variable_etude]);
+
+                             endif;
+                   else:
+                       array_push($tab_data_export,'');
+                   endif;
+                else:
+                       array_push($tab_data_export,'');
                 endif;
+                
                }
                if (!empty($tab_data_export)):
 

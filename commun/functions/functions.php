@@ -348,7 +348,7 @@ function get_variable($variable, $params) {
         return $table;
     } else {
         $table['var_comm'] = $variable;
-        $table['temps'] = 'J0';
+        $table['temps'] = '';
         return $table;
     }
 }

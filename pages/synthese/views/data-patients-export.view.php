@@ -20,7 +20,7 @@
             <option  value="Export_ligne" >
               Export en ligne
               </option>
-            <option  value="Export_colone" >
+            <option  value="Export_colonne" >
               Export en colone
               </option>
             </select>

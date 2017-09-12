@@ -229,6 +229,7 @@ if (isset($_POST['file_variables']) && $allowed_step[$get_etape]) {
             move_uploaded_file($_FILES['file']['tmp_name'], PATH_DATA . $file_name_destination);
             $inputFileType = PHPExcel_IOFactory::identify(PATH_DATA . $file_name_destination);
             $objReader = PHPExcel_IOFactory::createReader($inputFileType);
+            $objReader -> setReadDataOnly(false);
             $objPHPExcel = $objReader->load(PATH_DATA . $file_name_destination);
             $objPHPExcel->setActiveSheetIndex('0');
             $objWorksheet = $objPHPExcel->getActiveSheet();
@@ -283,11 +284,13 @@ if (isset($_POST['file_data']) && $allowed_step[$get_etape]) {
                     // transformation en fichier csv
                     $inputFileType = PHPExcel_IOFactory::identify($file_path);
                     $objReader = PHPExcel_IOFactory::createReader($inputFileType);
+                    $objReader -> setReadDataOnly(false);
                     $objPHPExcel = $objReader->load($file_path);
+                    
                     $objPHPExcel->setActiveSheetIndex('0');
                     $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV');
-
-                    $tmp_filename = uniqid() . '.csv';
+                    $tmp_filename = pathinfo($file, PATHINFO_FILENAME) . '.csv';
+                   // $tmp_filename = uniqid() . '.csv';
                     $file_path = PATH_DATA . $tmp_filename;
                     $objWriter->save($file_path);
                     break;

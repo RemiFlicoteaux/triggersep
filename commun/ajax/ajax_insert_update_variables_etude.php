@@ -40,6 +40,8 @@ if (isset($_GET['file_name'])) {
 
                 $variable = $objWorksheet->getCellByColumnAndRow(0, $row)->getValue();
                 $libelle = $objWorksheet->getCellByColumnAndRow(1, $row)->getValue();
+                $unite = $objWorksheet->getCellByColumnAndRow(2, $row)->getValue();
+                $type = $objWorksheet->getCellByColumnAndRow(3, $row)->getValue();
             
                 if ($etude['encodage'] == null || $etude['encodage'] === 'ISO-8859-1') {
                     $variable = utf8_encode($variable);
@@ -59,6 +61,8 @@ if (isset($_GET['file_name'])) {
 
                         $var->variable = $variable;
                         $var->libelle = $libelle;
+                        $var->type = $type;
+                        $var->unite = $unite;
                         $var->save();
                         $nombre_variables_updated++;
                     } else {
@@ -68,6 +72,8 @@ if (isset($_GET['file_name'])) {
                         $var->id_etude = $etude->id;
                         $var->variable = $variable;
                         $var->libelle = $libelle;
+                        $var->type = $type;
+                        $var->unite = $unite;
                         $var->variable_commun = $variable_commun['var_comm'];
                         if ($format_fichier_data == "1") {
                             $var->temps = $variable_commun['temps'];
@@ -113,6 +119,8 @@ if (isset($_GET['file_name'])) {
 
             $variable = $objWorksheet->getCellByColumnAndRow(0, $row)->getValue();
             $libelle = $objWorksheet->getCellByColumnAndRow(1, $row)->getValue();
+            $unite = $objWorksheet->getCellByColumnAndRow(2, $row)->getValue();
+            $type = $objWorksheet->getCellByColumnAndRow(3, $row)->getValue();
             $variable_commun = get_variable($variable, $lettres);
 
             if ($etude['encodage'] == null || $etude['encodage'] === 'ISO-8859-1') {
@@ -130,6 +138,8 @@ if (isset($_GET['file_name'])) {
 
                     $var->variable = $variable;
                     $var->libelle = $libelle;
+                    $var->type = $type;
+                    $var->unite = $unite;
                     $var->save();
                     $nombre_variables_updated++;
                 } else {
@@ -139,6 +149,8 @@ if (isset($_GET['file_name'])) {
                     $var->id_etude = $etude->id;
                     $var->variable = $variable;
                     $var->libelle = $libelle;
+                    $var->type = $type;
+                    $var->unite = $unite;
                     $var->variable_commun = $variable_commun['var_comm'];
                     if ($format_fichier_data == "1") {
                         $var->temps = $variable_commun['temps'];

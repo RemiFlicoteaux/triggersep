@@ -12,6 +12,7 @@ if (strlen($_GET['file_name']) > 1 && isset($_GET['id_etude']) && isset($_GET['i
     $collection->remove(array(
         "nom_etude" => $etude['nom_etude']
     ));
+    
     foreach ($p as $val) {
         $parametre[$val['variable']]['type'] = $val['type'];
         $parametre[$val['variable']]['temps'] = $val['temps'];

@@ -431,6 +431,15 @@ jQuery(document).ready(function () {
         user_output_message.hide();
         insertion_data_etude_loader.show();
     });
+    
+    
+   
+
+    
+    button.click(function () {
+        $(this).hide();
+        
+    });
 
 
     //encodage
@@ -492,6 +501,10 @@ function popin_fichier_variables(div, b_traitement, _format_fichier_data, _nom_e
     var message = $('#popin .message');
     var msg_traitement = 'msg-traitement';
     var nom_etude = _nom_etude;
+    var insertion_variables_etude_loader = $('#insertion-variables-etude-loader');
+    var user_output_message = $('.modal #msg-traitement');
+    insertion_variables_etude_loader.hide();
+    
     $("#" + div).dialog({
         resizable: false,
         height: "auto",
@@ -501,7 +514,9 @@ function popin_fichier_variables(div, b_traitement, _format_fichier_data, _nom_e
     var myButtons = {
         "Insertion et Mise à jour": function () {
             var _file_name = $("#file_name").val();
-
+            user_output_message.hide();
+            insertion_variables_etude_loader.show();
+            
             $.getJSON('./?p=ajax_insert_update_variables_etude', {
                 boutton: 'update',
                 file_name: _file_name,
@@ -533,12 +548,15 @@ function popin_fichier_variables(div, b_traitement, _format_fichier_data, _nom_e
                 message
                         .fadeOut(100)
                         .fadeIn(300);
+                insertion_variables_etude_loader.hide();
             });
         },
         "Suppression et Insertion": function () {
             var _file_name = $("#file_name").val();
             var nom_etude = $("#nom_etude").val();
-
+            user_output_message.hide();
+            insertion_variables_etude_loader.show();
+            
             $.getJSON('./?p=ajax_insert_update_variables_etude', {
                 boutton: 'delete',
                 file_name: _file_name,
@@ -568,6 +586,7 @@ function popin_fichier_variables(div, b_traitement, _format_fichier_data, _nom_e
                 message
                         .fadeOut(100)
                         .fadeIn(300);
+                insertion_variables_etude_loader.hide();
             });
         },
         Annuler: function () {

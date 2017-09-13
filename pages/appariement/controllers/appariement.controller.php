@@ -61,13 +61,22 @@ if (isset($_POST['Verifier'])) {
         $file_path = PATH_DATA . $historique_data['fichier'];
         $extension = pathinfo($file_path, PATHINFO_EXTENSION);
 
+        $etude = ORM::for_table('etudes')->select('id')->select('nom_etude')->select('encodage')->select('format')->where('nom_etude', $_POST['etude'])->where('id_projet', $b_id_projet)->find_one();
+        $id_patients = ORM::for_table('variables')->where('id_etude', $etude->id)->where('cle', 'ID_PATIENT')->find_one();
+        $date_j0 = ORM::for_table('variables')->where('id_etude', $etude->id)->where('cle', 'J0')->find_one();
+        $variables_etude = ORM::for_table('variables')->raw_query('SELECT * FROM variables where id_etude = "' . $etude->id . '"')->find_array();
+      
+        
+        
         switch ($extension) {
             case 'xls':
             case 'xlsx':
                 // transformation en fichier csv
                 $inputFileType = PHPExcel_IOFactory::identify($file_path);
                 $objReader = PHPExcel_IOFactory::createReader($inputFileType);
+                $objReader -> setReadDataOnly(false);
                 $objPHPExcel = $objReader->load($file_path);
+                
                 $objPHPExcel->setActiveSheetIndex('0');
                 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV');
 
@@ -79,10 +88,6 @@ if (isset($_POST['Verifier'])) {
 
         $extension_fichier_data = true;
         $separateur = !empty($_POST['separateur']) ? $_POST['separateur'] : ';';
-        $etude = ORM::for_table('etudes')->select('id')->select('nom_etude')->select('encodage')->select('format')->where('nom_etude', $_POST['etude'])->where('id_projet', $b_id_projet)->find_one();
-        $id_patients = ORM::for_table('variables')->where('id_etude', $etude->id)->where('cle', 'ID_PATIENT')->find_one();
-        $date_j0 = ORM::for_table('variables')->where('id_etude', $etude->id)->where('cle', 'J0')->find_one();
-        $variables_etude = ORM::for_table('variables')->raw_query('SELECT * FROM variables where id_etude = "' . $etude->id . '"')->find_array();
         $file_name_destination = pathinfo($historique_data['fichier'], PATHINFO_FILENAME) . '.' . $extension;
         //move_uploaded_file($_FILES['file']['tmp_name'], PATH_DATA . $_FILES['file']['name']);
         $ref = array();

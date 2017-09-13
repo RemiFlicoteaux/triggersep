@@ -6,6 +6,7 @@
             <tr class="info"> 
                 <th class="sorting_asc">Variable</th>
                 <th >Description</th> 
+                <th >Unite</th>
                 <th >Type</th>
                 <th>Répétition</th> 
                 <!--<th>Modif/Supp</th> -->
@@ -17,16 +18,19 @@
                 ?>
                 <tr id="tr<?= $variables_etude[$i]["id"] ?>">
                     <td >
-                        <input id="var<?= $variables_etude[$i]["id"] ?>" style="border:0px; width:100%" value="<?= $variables_etude[$i]['variable']; ?>" readonly/>
+                       <?= $variables_etude[$i]['variable']; ?>
                     </td>
                     <td >
-                        <input id="desc<?= $variables_etude[$i]["id"] ?>" style="border:0px; width:100%" value="<?= $variables_etude[$i]['libelle']; ?>" readonly/>
+                        <?= $variables_etude[$i]['libelle']; ?>
                     </td>
                     <td >
-                        <input id="unite<?= $variables_etude[$i]["id"] ?>" style="border:0px; width:100%" value="<?= $variables_etude[$i]['type']; ?>" readonly/>
+                        <?= $variables_etude[$i]['unite']; ?>
+                    </td>
+                    <td >
+                        <?= $variables_etude[$i]['type']; ?>
                     </td>
                     <td>
-                        <input id="type<?= $variables_etude[$i]["id"] ?>" style="border:0px; width:100%" value="<?= $variables_etude[$i]['temps']; ?>" readonly/>
+                        <?= $variables_etude[$i]['temps']; ?>
                     </td>
                     <!--<td><span id="modif<?= $variables_etude[$i]["id"] ?>" id_var="<?= $variables_etude[$i]["id"] ?>" class="glyphicon glyphicon-pencil" ></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a><span id="supp<?= $variables_etude[$i]["id"] ?>" id_var="<?= $variables_etude[$i]["id"] ?>" class="glyphicon glyphicon-trash" ></span></a></td>-->
                 </tr>

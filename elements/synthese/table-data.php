@@ -119,8 +119,8 @@ endif;
               <option  value="Export_ligne">
               Export en ligne
               </option>
-            <option  value="Export_colone" >
-              Export en colone
+            <option  value="Export_colonne" >
+              Export en colonne
               </option>
             </select>
           </div>

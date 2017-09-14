@@ -161,8 +161,9 @@ if($format_export==='Export_ligne')
         $csv_name .=  date('d-m-Y') . '.csv';
         $exporter = new ExportDataCSV('browser', $csv_name);
         $exporter->initialize();
-        $exporter->addRow($csv_rows);
-       
+        if ($i==0){
+           $exporter->addRow($csv_rows);
+        }
         //recuperation les données des patients dans mongoDB 
         
        $cn=new MongoClient();
